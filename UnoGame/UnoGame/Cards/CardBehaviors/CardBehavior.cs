@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UnoGame.Enum;
+using UnoGame.Cards;
 
-namespace UnoGame.Card.CardBehaviors
+namespace UnoGame.Cards.CardBehaviors
 {
     public abstract class CardBehavior:BasicCard
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UnoGame.Enum
+namespace UnoGame.Enums
 {
     public enum CardColor
     {

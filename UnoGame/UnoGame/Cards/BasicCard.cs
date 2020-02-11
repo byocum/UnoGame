@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UnoGame.Enum;
+using UnoGame.Enums;
 
-namespace UnoGame.Card
+namespace UnoGame.Cards
 {
     public abstract class BasicCard
     {
-        private Nullable<CardColor> color;
+        private Nullable<CardColor> color = null;
         private CardType type;
         private PerformCardAction performCardAction;
 

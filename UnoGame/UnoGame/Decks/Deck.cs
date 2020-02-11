@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UnoGame.Card;
+using UnoGame.Cards;
 
-namespace UnoGame.Deck
+namespace UnoGame.Decks
 {
     public abstract class Deck
     {

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UnoGame.Cards;
 
-namespace UnoGame.Card.CardBehaviors
+namespace UnoGame.Cards.CardBehaviors
 {
-    public class Draw:CardBehavior
+    public class NextTurn:CardBehavior
     {
-        public Draw(BasicCard card)
+        public NextTurn(BasicCard card)
         {
             this.BasicCard = card;
             Color = BasicCard.Color;
@@ -16,7 +17,7 @@ namespace UnoGame.Card.CardBehaviors
 
         public override void playCard()
         {
-            PerformCardAction.DrawCard();
+            PerformCardAction.NextTurn();
             BasicCard.playCard();
 
         }

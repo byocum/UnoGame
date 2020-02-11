@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UnoGame.Card
+namespace UnoGame.Cards
 {
     public class PerformCardAction
     {

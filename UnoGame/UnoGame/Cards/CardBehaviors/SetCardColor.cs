@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UnoGame.Enum;
+using UnoGame.Enums;
+using UnoGame.Cards;
 
-namespace UnoGame.Card.CardBehaviors
+namespace UnoGame.Cards.CardBehaviors
 {
     public class SetCardColor:CardBehavior
     {
