@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 using UnoGame.Enums;
 
 namespace UnoGame.Cards
 {
-    public abstract class BasicCard
+    public abstract class BasicCard:IComparable
     {
         private Nullable<CardColor> color = null;
         private CardType type;
@@ -34,6 +34,61 @@ namespace UnoGame.Cards
             get { return performCardAction; }
             set { performCardAction = value; }
         }
+
+        public int CompareTo(object otherObject) 
+        {
+            BasicCard otherCard = (BasicCard)otherObject;
+
+            int thisCardType = Convert.ToInt32(this.Type);
+            int otherCardType = Convert.ToInt32(otherCard.Type);
+
+            if (this.Color < otherCard.Color)
+            {
+                return -1;
+            }
+            else if (this.Color == otherCard.Color && thisCardType < otherCardType)
+            {
+                return -1;
+            }
+            else if (this.Color != null && otherCard.Color == null)
+            {
+                return -1;
+            }
+            else if(this.Color == null && otherCard.Color == null && thisCardType < otherCardType)
+            {
+                return -1;
+            }
+            else if (this.Color == otherCard.Color && thisCardType == otherCardType)
+            {
+                return 0;
+            }
+            else if (this.Color == null && otherCard.Color == null && thisCardType == otherCardType)
+            {
+                return 0;
+            }
+            else if (this.Color > otherCard.Color)
+            {
+                return 1;
+            }
+            else if (this.Color == otherCard.Color && thisCardType > otherCardType)
+            {
+                return 1;
+            }
+
+            else if (this.Color == null && otherCard.Color != null)
+            {
+                return 1;
+            }
+            else if (this.Color == null && otherCard.Color == null && thisCardType > otherCardType)
+            {
+                return 1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        
 
         public void showCard()
         {

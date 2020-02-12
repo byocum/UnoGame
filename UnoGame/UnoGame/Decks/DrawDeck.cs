@@ -14,6 +14,8 @@ namespace UnoGame.Decks
             this.CardDeck = new List<BasicCard>();
             this.CardFactory = cardFactory;
             createDeck();
+            shuffle();
+            
         }
 
         private void createDeck()
@@ -37,10 +39,8 @@ namespace UnoGame.Decks
                             CardDeck.Add(CardFactory.CreateCard(color, type));
                         }
                     }
-                }
-                
+                }                
             }
-
         }
     }
 }
