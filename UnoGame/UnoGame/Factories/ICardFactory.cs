@@ -6,8 +6,10 @@ using UnoGame.Enums;
 
 namespace UnoGame.Factories
 {
-    interface ICardFactory
+    public interface ICardFactory
     {
         public BasicCard CreateCard(CardColor color, CardType type);
+
+        public BasicCard CreateCard(CardType type);
     }
 }

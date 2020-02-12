@@ -7,7 +7,7 @@ using UnoGame.Enums;
 
 namespace UnoGame.Factories
 {
-    public class CardFactory
+    public class CardFactory:ICardFactory
     {
         private PerformCardAction performCardAction;
 
@@ -38,12 +38,31 @@ namespace UnoGame.Factories
                     break;
 
                 case CardType.Wild:
-                    card = new Card(type, this.performCardAction);
-                    card = new SetCardColor(card);
+                    card = CreateCard(type);
                     break;
 
                 case CardType.WildDrawFour:
-                    card = new Card(type, this.performCardAction);
+                    card = CreateCard(type);
+                    break;
+
+                default:
+                    card = new Card(color, type, this.performCardAction);
+                    break;
+            }
+
+            return card;
+        }
+
+        //Makes sure card gets a color except the Wild cards.  If I allowed passing null to the above method I would be relying more on the
+        //setter to keep thier color from being set to null.
+        public BasicCard CreateCard(CardType type)
+        {
+            BasicCard card;
+
+            switch (type)
+            {
+                case CardType.WildDrawFour:
+                    card = new Card(CardType.WildDrawFour, this.performCardAction);
                     card = new Draw(card);
                     card = new Draw(card);
                     card = new Draw(card);
@@ -52,9 +71,11 @@ namespace UnoGame.Factories
                     break;
 
                 default:
-                    card = new Card(color, type, this.performCardAction);
+                    card = new Card(CardType.Wild, this.performCardAction);
+                    card = new SetCardColor(card);
                     break;
             }
+
             return card;
         }
     }
