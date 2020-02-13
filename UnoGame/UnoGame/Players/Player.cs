@@ -15,10 +15,10 @@ namespace UnoGame.Players
         public string Name
         {
             get { return name; }
-            set { name = value; }
         }
-        public Player(PlayerHand hand, DiscardDeck discardDeck)
+        public Player(string name, PlayerHand hand, DiscardDeck discardDeck)
         {
+            this.name = name;
             this.hand = hand;
             this.discardDeck = discardDeck;
         }

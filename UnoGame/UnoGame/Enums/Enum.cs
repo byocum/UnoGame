@@ -30,4 +30,10 @@ namespace UnoGame.Enums
         Wild = 13,
         WildDrawFour = 14
     }
+
+    public enum TurnDirection
+    {
+        Ascending = 0,
+        Decending = 1
+    }
 }
