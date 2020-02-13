@@ -14,7 +14,7 @@ namespace UnoGame
             Console.WriteLine("-------------Deck First Created----------------------");
             drawDeck.lookAtDeck();
             Console.WriteLine("-------------Deck Ordered----------------------");
-            drawDeck.order();
+            drawDeck.sort();
             drawDeck.lookAtDeck();
 
         }

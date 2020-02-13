@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnoGame.Cards;
+using UnoGame.Enums;
 
 namespace UnoGame.Decks
 {
@@ -12,5 +13,23 @@ namespace UnoGame.Decks
             this.CardDeck = new List<BasicCard>(); 
         }
 
+        public bool isCardPlayable(BasicCard cardToPlay)
+        {
+            bool isPlayable = false;
+            BasicCard discardDeckTopCard = CardDeck[CardDeck.Count - 1];
+
+            if (cardToPlay.Color == null)
+            {
+                isPlayable = true;
+            }
+            else if (discardDeckTopCard.Color == cardToPlay.Color)
+            {
+                if(discardDeckTopCard.Type == cardToPlay.Type || discardDeckTopCard.Type == CardType.Wild || discardDeckTopCard.Type == CardType.WildDrawFour)
+                {
+                    isPlayable = true;
+                }
+            }
+            return isPlayable;
+        }
     }
 }

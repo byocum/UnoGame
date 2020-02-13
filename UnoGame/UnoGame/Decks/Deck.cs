@@ -8,14 +8,14 @@ namespace UnoGame.Decks
 {
     public abstract class Deck
     {
-        List<BasicCard> cardDeck;
-        ICardFactory cardFactory;
-        Random random = new Random();
+        private List<BasicCard> cardDeck;
+        private ICardFactory cardFactory;
+        private Random random = new Random();
 
-        protected List<BasicCard> CardDeck
+        public List<BasicCard> CardDeck
         {
             get { return cardDeck; }
-            set { cardDeck = value; }
+            protected set { cardDeck = value; }
         }
 
         protected ICardFactory CardFactory
@@ -29,9 +29,11 @@ namespace UnoGame.Decks
             CardDeck.Add(card);
         }
 
-        public void removeCard(BasicCard card)
+        public BasicCard removeCard(int cardIndex)
         {
-            CardDeck.Remove(card);
+            BasicCard cardRemoved = CardDeck[cardIndex];
+            CardDeck.RemoveAt(cardIndex);
+            return cardRemoved;
         }
         
         //Modern version of Fishers and Yates' alogrithm
@@ -46,9 +48,9 @@ namespace UnoGame.Decks
             }
         }
 
-        public void order()
+        public void sort()
         {
-            cardDeck.Sort();
+            CardDeck.Sort();
         }
 
         public void lookAtDeck()
