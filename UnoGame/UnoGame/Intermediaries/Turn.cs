@@ -44,43 +44,54 @@ namespace UnoGame.Intermediaries
             }
         }
 
-        public void nextTurn()
+        public void goToNextTurn()
         {
             if (turnDirection == TurnDirection.Ascending)
             {
-                nextTurnAscending();
+                turn = getNextTurnAscendingIndex();
             }
             else
             {
-                nextTurnDescending();
-            }  
+                turn = getNextTurnDescendingIndex();
+            }
+        }
+        public int getNextTurnIndex()
+        {
+            if (turnDirection == TurnDirection.Ascending)
+            {
+                return getNextTurnAscendingIndex();
+            }
+            else
+            {
+                return getNextTurnDescendingIndex();
+            }
         }
 
-        private void nextTurnAscending()
+        private int getNextTurnAscendingIndex()
         {
             int turnOfLastPlayer = players.Count - 1;
 
-            if(turn >= 0 && turn < turnOfLastPlayer)
+            if (turn >= 0 && turn < turnOfLastPlayer)
             {
-                turn++;
+                return turn + 1;
             }
             else
             {
-                turn = 0;
+                return 0;
             }
         }
 
-        private void nextTurnDescending()
+        private int getNextTurnDescendingIndex()
         {
             int turnOfLastPlayer = players.Count - 1;
 
             if (turn > 0 && turn <= turnOfLastPlayer)
             {
-                turn--;
+                return turn - 1;
             }
             else
             {
-                turn = turnOfLastPlayer;
+                return turnOfLastPlayer;
             }
         }
     }

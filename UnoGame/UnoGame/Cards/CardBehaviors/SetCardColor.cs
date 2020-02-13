@@ -12,15 +12,19 @@ namespace UnoGame.Cards.CardBehaviors
         public SetCardColor(BasicCard card)
         {
             this.BasicCard = card;
-            Color = BasicCard.Color;
+            setColor(BasicCard.Color);
             Type = BasicCard.Type;
             PerformCardAction = BasicCard.PerformCardAction;
         }
 
-        public override Nullable<CardColor> Color
+        //public override Nullable<CardColor> Color
+        //{
+        //    get { return color; }
+        //}
+
+        public override void setColor(CardColor? color)
         {
-            get { return color; }
-            set { color = value; }
+            this.color = color;
         }
 
         public override void playCard()

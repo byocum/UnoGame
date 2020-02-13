@@ -29,11 +29,10 @@ namespace UnoGame.Decks
             CardDeck.Add(card);
         }
 
-        public BasicCard removeCard(int cardIndex)
+        public void removeCard(int cardIndex)
         {
             BasicCard cardRemoved = CardDeck[cardIndex];
             CardDeck.RemoveAt(cardIndex);
-            return cardRemoved;
         }
         
         //Modern version of Fishers and Yates' alogrithm

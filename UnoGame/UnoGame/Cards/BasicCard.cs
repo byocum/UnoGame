@@ -14,15 +14,15 @@ namespace UnoGame.Cards
         public virtual Nullable<CardColor> Color
         {
             get { return color; }
-            set
-            {
-                if (value != null)
-                {
-                    color = value;
-                }
-            }
         }
 
+        public virtual void setColor(Nullable<CardColor> color)
+        {
+                if (color != null)
+                {
+                    this.color = color;
+                }
+        }
         public CardType Type
         {
             get { return type; }
