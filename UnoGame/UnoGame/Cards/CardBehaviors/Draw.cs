@@ -10,7 +10,7 @@ namespace UnoGame.Cards.CardBehaviors
         public Draw(BasicCard card)
         {
             this.BasicCard = card;
-            Color = BasicCard.Color;
+            setColor(card.Color);
             Type = BasicCard.Type;
             PerformCardAction = BasicCard.PerformCardAction;
         }

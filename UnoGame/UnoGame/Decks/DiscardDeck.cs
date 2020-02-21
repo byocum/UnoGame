@@ -31,5 +31,12 @@ namespace UnoGame.Decks
             }
             return isPlayable;
         }
+
+        public void lookAtTopCard()
+        {
+            int topCardIndex = CardDeck.Count - 1;
+            Console.WriteLine("The top card on the discard deck is: " + CardDeck[topCardIndex].Color + " " + CardDeck[topCardIndex].Type);
+
+        }
     }
 }

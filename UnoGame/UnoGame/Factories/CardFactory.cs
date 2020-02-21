@@ -11,9 +11,9 @@ namespace UnoGame.Factories
     {
         private PerformCardAction performCardAction;
 
-        public CardFactory()
+        public CardFactory(PerformCardAction performCardAction)
         {
-            performCardAction = new PerformCardAction(); 
+            this.performCardAction = performCardAction; 
         }
         public BasicCard CreateCard(CardColor color, CardType type)
         {
@@ -38,11 +38,11 @@ namespace UnoGame.Factories
                     break;
 
                 case CardType.Wild:
-                    card = CreateCard(type);
+                    card = CreateWildCard(type);
                     break;
 
                 case CardType.WildDrawFour:
-                    card = CreateCard(type);
+                    card = CreateWildCard(type);
                     break;
 
                 default:
@@ -55,7 +55,7 @@ namespace UnoGame.Factories
 
         //Makes sure card gets a color except the Wild cards.  If I allowed passing null to the above method I would be relying more on the
         //setter to keep thier color from being set to null.
-        public BasicCard CreateCard(CardType type)
+        public BasicCard CreateWildCard(CardType type)
         {
             BasicCard card;
 

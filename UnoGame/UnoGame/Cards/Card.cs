@@ -14,7 +14,7 @@ namespace UnoGame.Cards
         }
         public Card(CardColor color, CardType type, PerformCardAction performCardAction)
         {
-            Color = color;
+            this.setColor(color);
             Type = type;
             PerformCardAction = performCardAction;
         }

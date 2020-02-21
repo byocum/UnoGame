@@ -4,6 +4,7 @@ using System.Text;
 using UnoGame.Decks;
 using UnoGame.Intermediaries;
 using UnoGame.Enums;
+using UnoGame.Players;
 
 namespace UnoGame.Cards
 {
@@ -27,24 +28,17 @@ namespace UnoGame.Cards
         public void DrawCard()
         {
             int nextPlayerIndex = turn.getNextTurnIndex();
+            Player nextPlayer = turn.Players[nextPlayerIndex];
             int cardDrawnIndex = drawDeck.CardDeck.Count - 1;
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
             drawDeck.removeCard(cardDrawnIndex);
-            turn.Players[nextPlayerIndex].addCardToHand(cardDrawn);
-
-        }
-
-        public void SetCardColor(CardColor color)
-        {
-            BasicCard cardToChangeColor = discardDeck.CardDeck[discardDeck.CardDeck.Count - 1];
-            cardToChangeColor.setColor(color);
+            nextPlayer.addCardToHand(cardDrawn);
         }
 
         public void NextTurn()
         {
             turn.goToNextTurn();
-
         }
     }
 }

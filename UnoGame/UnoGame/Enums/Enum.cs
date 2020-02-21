@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UnoGame.Enums
+﻿namespace UnoGame.Enums
 {
     public enum CardColor
     {
@@ -35,5 +31,12 @@ namespace UnoGame.Enums
     {
         Ascending = 0,
         Decending = 1
+    }
+
+    public enum PlayerAction
+    {
+        Rules = 0,
+        Draw = 1,
+        Uno = 2
     }
 }

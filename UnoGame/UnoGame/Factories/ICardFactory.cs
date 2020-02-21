@@ -10,6 +10,6 @@ namespace UnoGame.Factories
     {
         public BasicCard CreateCard(CardColor color, CardType type);
 
-        public BasicCard CreateCard(CardType type);
+        public BasicCard CreateWildCard(CardType type);
     }
 }

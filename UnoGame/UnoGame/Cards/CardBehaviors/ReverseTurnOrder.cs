@@ -10,7 +10,7 @@ namespace UnoGame.Cards.CardBehaviors
         public ReverseTurnOrder(BasicCard card)
         {
             this.BasicCard = card;
-            Color = BasicCard.Color;
+            setColor(BasicCard.Color);
             Type = BasicCard.Type;
             PerformCardAction = BasicCard.PerformCardAction;
         }

@@ -22,6 +22,8 @@ namespace UnoGame.Cards
                 {
                     this.color = color;
                 }
+
+                //ToDo: Some kind of error handling needs to happen when you set the color to null and cannot.
         }
         public CardType Type
         {
@@ -96,7 +98,5 @@ namespace UnoGame.Cards
         }
 
         public abstract void playCard();
-
-
     }
 }

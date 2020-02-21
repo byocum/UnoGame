@@ -9,21 +9,19 @@ namespace UnoGame.Decks
 {
     public class DrawDeck:Deck
     {
-        public DrawDeck(ICardFactory cardFactory)
+        public DrawDeck()
         {
             this.CardDeck = new List<BasicCard>();
-            this.CardFactory = cardFactory;
-            createDeck();
-            shuffle();
-            
         }
 
-        private void createDeck()
+        public void createCardsForDeck(ICardFactory cardFactory)
         {
+            this.CardFactory = cardFactory;
+
             for(int i = 0; i < 4; i++)
             {
-                CardDeck.Add(CardFactory.CreateCard(CardType.Wild));
-                CardDeck.Add(CardFactory.CreateCard(CardType.WildDrawFour));
+                CardDeck.Add(CardFactory.CreateWildCard(CardType.Wild));
+                CardDeck.Add(CardFactory.CreateWildCard(CardType.WildDrawFour));
             }
 
             foreach(CardColor color in Enum.GetValues(typeof(CardColor)))

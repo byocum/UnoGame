@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnoGame.Enums;
 using UnoGame.Cards;
+using UnoGame.Functions;
 
 namespace UnoGame.Cards.CardBehaviors
 {
@@ -22,14 +23,19 @@ namespace UnoGame.Cards.CardBehaviors
         //    get { return color; }
         //}
 
-        public override void setColor(CardColor? color)
+        public override void setColor(Nullable<CardColor> color)
         {
             this.color = color;
         }
 
         public override void playCard()
         {
-            PerformCardAction.SetCardColor();
+            Console.WriteLine("What color would you like the " + this.Type + " card to be?");
+            string playerInput = Console.ReadLine().Trim().ToLower();
+            playerInput = Function.titleCase(playerInput);
+            //ToDo: Need exception handling here.
+            CardColor color = (CardColor)Enum.Parse(typeof(CardColor), playerInput, true);
+            setColor(color);
             BasicCard.playCard();
 
         }
