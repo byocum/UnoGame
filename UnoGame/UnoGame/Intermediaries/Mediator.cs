@@ -31,9 +31,8 @@ namespace UnoGame.Intermediaries
             drawDeck.createCardsForDeck(cardFactory); 
             drawDeck.shuffle();
             determinePlayers();
+            
             dealCards();
-            moveCardFromDrawDeckToDiscardDeck();
-            discardDeck.lookAtTopCard();
         }
 
         private void determinePlayers()
@@ -64,7 +63,7 @@ namespace UnoGame.Intermediaries
 
             for(int numCardsEachPersonHas = 0; numCardsEachPersonHas < 7; numCardsEachPersonHas++)
             {
-                for(int player = 1; player < turn.Players.Count; player++)
+                for(int player = 0; player < turn.Players.Count; player++)
                 {
                     int drawDeckTopCardIndex = drawDeck.CardDeck.Count - 1;
                     BasicCard cardDealing = drawDeck.CardDeck[drawDeckTopCardIndex];
@@ -79,39 +78,107 @@ namespace UnoGame.Intermediaries
         {
             int topCardDrawDeckIndex = drawDeck.CardDeck.Count - 1;
             BasicCard topCardDrawDeck = drawDeck.CardDeck[topCardDrawDeckIndex];
+
             drawDeck.removeCard(topCardDrawDeckIndex);
             discardDeck.addCard(topCardDrawDeck);
         }
 
         public void startGame()
-        {
+        {    
             Console.WriteLine("Starting Game...");
-        }
+            //bool playerActionCompleted = false;
+            Console.WriteLine("Putting the top card on the draw pile on the discard deck...");
+            moveCardFromDrawDeckToDiscardDeck();
 
-        private void performPlayerAction(string[] playerAction)
-        {
-            Enum.TryParse<PlayerAction>(playerAction[0], out PlayerAction action);
+            int topCardOnDiscardDeckIndex = discardDeck.CardDeck.Count - 1;
+            BasicCard discardDeckTopCard = discardDeck.CardDeck[topCardOnDiscardDeckIndex];
 
-            switch (action)
+            while (discardDeckTopCard.Type == CardType.WildDrawFour)
             {
-                case PlayerAction.Rules:
-                    displayRules();
-                    break;
-                case PlayerAction.Draw:
-                    playerActionDrawCard();
-                    break;
-                case PlayerAction.Uno:
-
-                    break;
-                default:
-                    Console.WriteLine(playerAction[0] + " is not a possible action.  Possible actions are: ");
-                    foreach (string possibleAction in Enum.GetNames(typeof(PlayerAction)))
-                    {
-                        Console.WriteLine(possibleAction);
-                    }
-                    break;
+                discardDeck.removeCard(discardDeck.CardDeck.Count - 1);
+                drawDeck.addCardRandomlyToDeck(discardDeckTopCard);
+                moveCardFromDrawDeckToDiscardDeck();
             }
 
+            discardDeck.lookAtTopCard();
+            
+
+            if(discardDeckTopCard.CardWithNoActions == false)
+            {
+                Console.WriteLine("This card plays when it is turned up at the beginning of the game.");
+                Console.WriteLine("Playing card...");
+
+                discardDeckTopCard.playCard();
+            }
+
+
+            bool gameOver = false;
+            do
+            {
+                Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+
+                Console.WriteLine(currentPlayer.Name + "'s turn.");
+                discardDeck.lookAtTopCard();
+                Console.WriteLine("Your hand is: ");
+
+                currentPlayer.lookAtHand();
+                string[] action = currentPlayer.pickAction();
+                performPlayerAction(action);
+            }
+            while (gameOver == false);
+            //while (playerActionCompleted == false);
+        }
+
+        private bool performPlayerAction(string[] playerAction)
+        {
+            Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+            bool intConverted = int.TryParse(playerAction[0], out int cardIndex);
+            bool enumConverted = Enum.TryParse<PlayerAction>(playerAction[0], out PlayerAction action);
+            bool playerActionCompleted = false;
+
+            if (intConverted && cardIndex < currentPlayer.numCardsInHand() && cardIndex >= 0)
+            {
+                currentPlayer.playCard(cardIndex);
+                playerActionCompleted = true;
+
+            }else if (enumConverted)
+            {            
+                    switch (action)
+                {
+                    case PlayerAction.Rules:
+                        displayRules();
+                        break;
+                    case PlayerAction.Draw:
+                        playerActionDrawCard();
+                        playerActionCompleted = true;
+                        break;
+                    case PlayerAction.Uno:
+
+                        break;
+                    default:
+                        actionErrorMessage(playerAction);
+                        break;
+                }
+
+            }
+            else
+            {
+                actionErrorMessage(playerAction);
+
+            }
+
+            return playerActionCompleted;
+        }
+
+        private void actionErrorMessage(string[] playerAction)
+        {
+            Console.WriteLine(playerAction[0] + " is not a possible action.  Possible actions are: ");
+            foreach (string possibleAction in Enum.GetNames(typeof(PlayerAction)))
+            {
+                Console.WriteLine(possibleAction);
+            }
+
+            Console.WriteLine("or the number of the card you would like to play.");
         }
 
         private void displayRules()

@@ -13,6 +13,8 @@ namespace UnoGame.Cards.CardBehaviors
             setColor(BasicCard.Color);
             Type = BasicCard.Type;
             PerformCardAction = BasicCard.PerformCardAction;
+            CardWithNoActions = false;
+            card.CardWithNoActions = false;
         }
 
         public override void playCard()

@@ -11,12 +11,14 @@ namespace UnoGame.Cards
         {
             Type = type;
             PerformCardAction = performCardAction;
+            CardWithNoActions = true;
         }
         public Card(CardColor color, CardType type, PerformCardAction performCardAction)
         {
             this.setColor(color);
             Type = type;
             PerformCardAction = performCardAction;
+            CardWithNoActions = true;
         }
         public override void playCard()
         {

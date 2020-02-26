@@ -22,12 +22,13 @@ namespace UnoGame.Decks
             {
                 isPlayable = true;
             }
-            else if (discardDeckTopCard.Color == cardToPlay.Color)
+            else if (discardDeckTopCard.Color == cardToPlay.Color || discardDeckTopCard.Type == cardToPlay.Type)
             {
-                if(discardDeckTopCard.Type == cardToPlay.Type || discardDeckTopCard.Type == CardType.Wild || discardDeckTopCard.Type == CardType.WildDrawFour)
-                {
-                    isPlayable = true;
-                }
+                isPlayable = true;
+            }
+            else if (cardToPlay.Type == CardType.Wild || cardToPlay.Type == CardType.WildDrawFour)
+            {
+                isPlayable = true;
             }
             return isPlayable;
         }

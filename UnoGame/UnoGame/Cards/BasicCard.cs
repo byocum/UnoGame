@@ -5,25 +5,22 @@ using UnoGame.Enums;
 
 namespace UnoGame.Cards
 {
-    public abstract class BasicCard:IComparable
+    public abstract class BasicCard : IComparable
     {
         private Nullable<CardColor> color = null;
         private CardType type;
         private PerformCardAction performCardAction;
+        private bool cardWithNoActions;
 
         public virtual Nullable<CardColor> Color
         {
             get { return color; }
+            protected set { color = value; }
         }
 
         public virtual void setColor(Nullable<CardColor> color)
         {
-                if (color != null)
-                {
-                    this.color = color;
-                }
-
-                //ToDo: Some kind of error handling needs to happen when you set the color to null and cannot.
+            this.color = color;
         }
         public CardType Type
         {
@@ -31,10 +28,21 @@ namespace UnoGame.Cards
             set { type = value; }
         }
 
+        public bool CardWithNoActions
+        {
+            get { return cardWithNoActions; }
+            set { cardWithNoActions = value; }
+        }
+
         public PerformCardAction PerformCardAction
         {
             get { return performCardAction; }
             set { performCardAction = value; }
+        }
+
+        public void lookAtCard()
+        {
+            Console.Write(Color + " " + Type);
         }
 
         public int CompareTo(object otherObject) 

@@ -22,7 +22,20 @@ namespace UnoGame.Cards
 
         public void ReverseTurnOrder()
         {
-            turn.reverseTurnDirection();
+            if (turn.Players.Count == 2)
+            {
+                ReverseTurnDirectionTwoPlayers();
+            }
+            else
+            {
+                turn.reverseTurnDirection();
+            }  
+        }
+
+        public void ReverseTurnDirectionTwoPlayers()
+        {
+                turn.reverseTurnDirection();
+                turn.goToNextTurn();
         }
 
         public void DrawCard()

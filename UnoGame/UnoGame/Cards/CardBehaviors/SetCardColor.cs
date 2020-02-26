@@ -16,18 +16,9 @@ namespace UnoGame.Cards.CardBehaviors
             setColor(BasicCard.Color);
             Type = BasicCard.Type;
             PerformCardAction = BasicCard.PerformCardAction;
+            CardWithNoActions = false;
+            card.CardWithNoActions = false;
         }
-
-        //public override Nullable<CardColor> Color
-        //{
-        //    get { return color; }
-        //}
-
-        public override void setColor(Nullable<CardColor> color)
-        {
-            this.color = color;
-        }
-
         public override void playCard()
         {
             Console.WriteLine("What color would you like the " + this.Type + " card to be?");

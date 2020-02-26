@@ -61,5 +61,11 @@ namespace UnoGame.Decks
             }
 
         }
+
+        public void addCardRandomlyToDeck(BasicCard card)
+        {
+            int index = random.Next(0, CardDeck.Count - 1);
+            CardDeck.Insert(index, card);
+        }
     }
 }
