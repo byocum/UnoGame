@@ -45,8 +45,7 @@ namespace UnoGame.Players
             }
             else
             {
-                cardToBePlayed.lookAtCard();
-                Console.WriteLine(" is not playable.");
+                Console.WriteLine(cardToBePlayed.lookAtCard() + " is not playable.");
             }
         }
 
@@ -65,14 +64,13 @@ namespace UnoGame.Players
         {
             bool playedCard = false;
 
-            Console.Write("You drew a ");
-            cardDrawn.showCard();
+            Console.WriteLine("You drew a " + cardDrawn.lookAtCard() + ".");
 
             if (discardDeck.isCardPlayable(cardDrawn))
             {
                 string playCardDrawn;
 
-                Console.WriteLine(". The card you drew is playable.");
+                Console.WriteLine("The card you drew is playable.");
                 Console.WriteLine("Would you like to play this card?");
                 Console.WriteLine("Enter y for yes or another character for no");
                 playCardDrawn = Console.ReadLine().Trim().ToLower();

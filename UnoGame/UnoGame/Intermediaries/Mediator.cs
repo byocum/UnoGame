@@ -100,7 +100,7 @@ namespace UnoGame.Intermediaries
                 moveCardFromDrawDeckToDiscardDeck();
             }
 
-            discardDeck.lookAtTopCard();
+            discardDeck.displayTopCard();
             
 
             if(discardDeckTopCard.CardWithNoActions == false)
@@ -115,15 +115,22 @@ namespace UnoGame.Intermediaries
             bool gameOver = false;
             do
             {
+                int currentPlayerIndex = turn.CurrentPlayerIndex;
                 Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
 
                 Console.WriteLine(currentPlayer.Name + "'s turn.");
-                discardDeck.lookAtTopCard();
+                discardDeck.displayTopCard();
                 Console.WriteLine("Your hand is: ");
 
                 currentPlayer.lookAtHand();
                 string[] action = currentPlayer.pickAction();
                 performPlayerAction(action);
+
+                if (currentPlayerIndex != turn.CurrentPlayerIndex)
+                {
+                    Console.Clear();
+                }
+
             }
             while (gameOver == false);
             //while (playerActionCompleted == false);

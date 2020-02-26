@@ -40,9 +40,9 @@ namespace UnoGame.Cards
             set { performCardAction = value; }
         }
 
-        public void lookAtCard()
+        public string lookAtCard()
         {
-            Console.Write(Color + " " + Type);
+            return Color + " " + Type;
         }
 
         public int CompareTo(object otherObject) 
@@ -97,12 +97,6 @@ namespace UnoGame.Cards
             {
                 return 1;
             }
-        }
-        
-
-        public void showCard()
-        {
-            Console.Write(Color + " " + Type);
         }
 
         public abstract void playCard();

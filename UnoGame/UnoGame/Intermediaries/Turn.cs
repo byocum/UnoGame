@@ -4,6 +4,7 @@ using System.Text;
 using UnoGame.Players;
 using UnoGame.Enums;
 using UnoGame.Decks;
+using UnoGame.Functions;
 
 namespace UnoGame.Intermediaries
 {
@@ -33,6 +34,8 @@ namespace UnoGame.Intermediaries
 
         public void addPlayer(string name, DiscardDeck discardDeck)
         {
+            name = Function.titleCase(name);
+
             Player player = new Player(name, discardDeck);
             players.Add(player);
         }
