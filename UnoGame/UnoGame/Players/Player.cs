@@ -20,6 +20,10 @@ namespace UnoGame.Players
             get { return name; }
         }
 
+        public bool SaidUno
+        {
+            get { return saidUno; }
+        }
         public Player(string name, DiscardDeck discardDeck)
         {
             this.name = name;
@@ -81,16 +85,21 @@ namespace UnoGame.Players
                 }
                 else
                 {
-                    addCardToHand(cardDrawn);
+                    putCardInHand(cardDrawn);
                 }
 
             }
             else
             {
-                addCardToHand(cardDrawn);
+                putCardInHand(cardDrawn);
             }
             
             return playedCard;
+        }
+
+        public void putCardInHand(BasicCard cardDrawn)
+        {
+            addCardToHand(cardDrawn);
         }
 
         public string[] pickAction()

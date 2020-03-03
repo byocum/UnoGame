@@ -55,7 +55,6 @@ namespace UnoGame.Intermediaries
 
                 count++;
             }
-
         }
         private void dealCards()
         {
@@ -160,7 +159,7 @@ namespace UnoGame.Intermediaries
                         playerActionCompleted = true;
                         break;
                     case PlayerAction.Uno:
-
+                        playerActionUno();
                         break;
                     default:
                         actionErrorMessage(playerAction);
@@ -207,6 +206,16 @@ namespace UnoGame.Intermediaries
             }
         }
 
+        private void playerActionDrawCard(int playerIndex)
+        {
+            Player playerToDraw = turn.Players[playerIndex];
+            int cardDrawnIndex = drawDeck.CardDeck.Count - 1;
+            BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
+
+            drawDeck.removeCard(cardDrawnIndex, discardDeck);
+            playerToDraw.putCardInHand(cardDrawn);
+        }
+
         private void playerActionUno()
         {
             string response;
@@ -217,24 +226,33 @@ namespace UnoGame.Intermediaries
             do
             {
                 Console.WriteLine("Which player did not say Uno? Please enter the player number.");
-                turn.showPlayers();
+                turn.showAllPlayersExceptOne(currentPlayerIndex);
 
                 response = currentPlayer.playerEntryTitleCase();
 
                 if (int.TryParse(response, out numPlayerEntered))
                 {
-                    if (numPlayerEntered < turn.Players.Count || numPlayerEntered >= 0)
+                    if ((numPlayerEntered < turn.Players.Count || numPlayerEntered >= 0) && numPlayerEntered != currentPlayerIndex)
                     {
-                        penaltyForNotSayingUno(numPlayerEntered);
+                        hasPlayerPickedPlayer = true;
+                        Player playerPicked = turn.Players[numPlayerEntered];
+                        if(playerPicked.numCardsInHand() == 1 && playerPicked.SaidUno == false)
+                        {
+                            penaltyForNotSayingUno(numPlayerEntered);
+                        }
+                        else
+                        {
+                            Console.WriteLine(playerPicked.Name + " Said Uno or did not have only one card in their hand.");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("That is not the number of a player.  The players are: ");
+                        Console.WriteLine("That is not the number of a player. Please select a player number.");
                     }
                 }
                 else
                 {
-                    Console.Write("That is not the number. Please select the number of a player. The players are: ");
+                    Console.Write("That is not the number. Please select a player number.");
                 }
 
             } while (hasPlayerPickedPlayer == false);
@@ -243,7 +261,10 @@ namespace UnoGame.Intermediaries
 
         private void penaltyForNotSayingUno(int indexOfPlayerPicked)
         {
+            playerActionDrawCard(indexOfPlayerPicked);
+            playerActionDrawCard(indexOfPlayerPicked);
 
+            Console.WriteLine(turn.Players[indexOfPlayerPicked].Name + " drew two cards for having only one card in their hand and not saying uno.");
         }
     }
 }

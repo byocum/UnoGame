@@ -40,11 +40,15 @@ namespace UnoGame.Intermediaries
             players.Add(player);
         }
 
-        public void showPlayers()
+        public void showAllPlayersExceptOne(int currentPlayerIndex)
         {
             for (int i = 0; i < Players.Count; i++)
             {
-                Console.WriteLine(i + " " + Players[i].Name);
+                if(i != currentPlayerIndex)
+                {
+                    Console.WriteLine(i + " " + Players[i].Name);
+                }
+                
             }
         }
 
