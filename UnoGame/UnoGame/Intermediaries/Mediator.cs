@@ -68,7 +68,7 @@ namespace UnoGame.Intermediaries
                     int drawDeckTopCardIndex = drawDeck.CardDeck.Count - 1;
                     BasicCard cardDealing = drawDeck.CardDeck[drawDeckTopCardIndex];
 
-                    drawDeck.removeCard(drawDeckTopCardIndex);
+                    drawDeck.removeCard(drawDeckTopCardIndex, discardDeck);
                     turn.Players[player].addCardToHand(cardDealing);
                 }
             }
@@ -79,7 +79,7 @@ namespace UnoGame.Intermediaries
             int topCardDrawDeckIndex = drawDeck.CardDeck.Count - 1;
             BasicCard topCardDrawDeck = drawDeck.CardDeck[topCardDrawDeckIndex];
 
-            drawDeck.removeCard(topCardDrawDeckIndex);
+            drawDeck.removeCard(topCardDrawDeckIndex, discardDeck);
             discardDeck.addCard(topCardDrawDeck);
         }
 
@@ -200,7 +200,7 @@ namespace UnoGame.Intermediaries
             int cardDrawnIndex = drawDeck.CardDeck.Count - 1;
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
-            drawDeck.removeCard(cardDrawnIndex);
+            drawDeck.removeCard(cardDrawnIndex, discardDeck);
             if (!currentPlayer.playDrawnCard(cardDrawn))
             {
                 turn.goToNextTurn();

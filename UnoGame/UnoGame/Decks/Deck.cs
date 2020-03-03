@@ -30,12 +30,12 @@ namespace UnoGame.Decks
             CardDeck.Add(card);
         }
 
-        public void removeCard(int cardIndex)
+        protected virtual void errorNoCardsInDeck()
         {
-            BasicCard cardRemoved = CardDeck[cardIndex];
-            CardDeck.RemoveAt(cardIndex);
+            Console.WriteLine("The card cannot be removed because the deck does not have any cards.");
         }
-        
+
+
         //Modern version of Fishers and Yates' alogrithm
         public void shuffle()
         {

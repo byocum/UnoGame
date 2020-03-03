@@ -13,6 +13,22 @@ namespace UnoGame.Decks
             this.CardDeck = new List<BasicCard>(); 
         }
 
+        public int removeCard(int cardIndex)
+        {
+            int cardsLeftInDeck = this.CardDeck.Count;
+            if (cardsLeftInDeck > 0)
+            {
+                CardDeck.RemoveAt(cardIndex);
+                cardsLeftInDeck--;
+            }
+            else
+            {
+                errorNoCardsInDeck();
+            }
+
+            return cardsLeftInDeck;
+        }
+
         public bool isCardPlayable(BasicCard cardToPlay)
         {
             bool isPlayable = false;

@@ -9,7 +9,6 @@ namespace UnoGame.Cards.CardBehaviors
 {
     public class SetCardColor:CardBehavior
     {
-        private Nullable<CardColor> color;
         public SetCardColor(BasicCard card)
         {
             this.BasicCard = card;
@@ -21,13 +20,33 @@ namespace UnoGame.Cards.CardBehaviors
         }
         public override void playCard()
         {
-            Console.WriteLine("What color would you like the " + this.Type + " card to be?");
-            string playerInput = Console.ReadLine().Trim().ToLower();
-            playerInput = Function.titleCase(playerInput);
-            //ToDo: Need exception handling here.
-            CardColor color = (CardColor)Enum.Parse(typeof(CardColor), playerInput, true);
-            setColor(color);
-            BasicCard.playCard();
+            bool playerInputValid = false;
+
+            do
+            {
+                object cardColor;
+                string playerInput;
+
+                Console.WriteLine("What color would you like the " + this.Type + " card to be?");
+
+                playerInput = Console.ReadLine().Trim().ToLower();
+                playerInput = Function.titleCase(playerInput);
+                
+                playerInputValid = Enum.TryParse(typeof(CardColor), playerInput, true, out cardColor);
+                if (playerInputValid)
+                {
+                    setColor((CardColor)cardColor);
+                    BasicCard.playCard();
+                }
+                else
+                {
+                    Console.WriteLine(playerInput + " is not a color option. Color options are: ");
+
+                }
+
+            } while (!playerInputValid);
+
+
 
         }
     }

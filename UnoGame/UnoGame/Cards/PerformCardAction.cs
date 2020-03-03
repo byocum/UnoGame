@@ -45,7 +45,7 @@ namespace UnoGame.Cards
             int cardDrawnIndex = drawDeck.CardDeck.Count - 1;
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
-            drawDeck.removeCard(cardDrawnIndex);
+            drawDeck.removeCard(cardDrawnIndex, discardDeck);
             nextPlayer.addCardToHand(cardDrawn);
         }
 
