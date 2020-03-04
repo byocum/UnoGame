@@ -37,6 +37,7 @@
     {
         Rules = 0,
         Draw = 1,
-        Uno = 2
+        Uno = 2,
+        Confront = 3
     }
 }

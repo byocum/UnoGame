@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnoGame.Players;
 using UnoGame.Enums;
 using UnoGame.Decks;
@@ -24,7 +23,6 @@ namespace UnoGame.Intermediaries
             get { return currentPlayerIndex; }
         }
 
-
         public Turn()
         {
             players = new List<Player>();
@@ -40,16 +38,44 @@ namespace UnoGame.Intermediaries
             players.Add(player);
         }
 
-        public void showAllPlayersExceptOne(int currentPlayerIndex)
+        public void listOtherPlayers()
         {
             for (int i = 0; i < Players.Count; i++)
             {
                 if(i != currentPlayerIndex)
                 {
                     Console.WriteLine(i + " " + Players[i].Name);
-                }
-                
+                }   
             }
+        }
+
+        public int pickAPlayer()
+        {
+            Player currentPlayer = Players[CurrentPlayerIndex];
+
+            bool validPlayerPicked = false;
+            int playerPickedIndex;
+
+            do
+            {
+                Console.WriteLine("Pick the number of one of the following players: ");
+                listOtherPlayers();
+
+                string response = currentPlayer.playerEntryTitleCase();
+                bool isNumber = int.TryParse(response, out playerPickedIndex);
+
+                if (isNumber && playerPickedIndex >= 0 && playerPickedIndex < Players.Count && playerPickedIndex != CurrentPlayerIndex)
+                {
+                    validPlayerPicked = true;
+                }
+                else
+                {
+                    Console.WriteLine("That is not the number of one of the players.");
+                }
+
+            } while (validPlayerPicked == false);
+
+            return playerPickedIndex;
         }
 
         public void reverseTurnDirection()

@@ -108,7 +108,7 @@ namespace UnoGame.Players
             string[] playerActionParts;
             Console.WriteLine("What would you like to do?");
             playerAction = playerEntryTitleCase();
-            playerActionParts = playerAction.Split(',');
+            playerActionParts = playerAction.Split(' ');
             
             return playerActionParts;
         }
@@ -124,6 +124,16 @@ namespace UnoGame.Players
         public void lookAtHand()
         {
             hand.lookAtDeck();
+        }
+
+        public void sayUno()
+        {
+            saidUno = true;
+        }
+
+        public void resetUnoField()
+        {
+            saidUno = false;
         }
     }
 }

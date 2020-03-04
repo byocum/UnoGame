@@ -158,13 +158,15 @@ namespace UnoGame.Intermediaries
                         playerActionCompleted = true;
                         break;
                     case PlayerAction.Uno:
-                        playerActionUno();
+                        currentPlayer.sayUno();
+                        break;
+                    case PlayerAction.Confront:
+                        confrontOtherPlayer(playerAction[1]);
                         break;
                     default:
                         actionErrorMessage(playerAction);
                         break;
                 }
-
             }
             else
             {
@@ -209,46 +211,35 @@ namespace UnoGame.Intermediaries
             playerToDraw.putCardInHand(cardDrawn);
         }
 
-        private void playerActionUno()
+        private void confrontOtherPlayer(string playerActionSecondPart)
         {
-            string response;
-            int numPlayerEntered;
+            bool enumConverted = Enum.TryParse<PlayerAction>(playerActionSecondPart, out PlayerAction action);
+            if (enumConverted)
+            {
+                if(action == PlayerAction.Uno)
+                {
+                    didPlayerSayUno();
+                }
+            }
+        }
+
+        private void didPlayerSayUno()
+        {
             int currentPlayerIndex = turn.CurrentPlayerIndex;
             Player currentPlayer = turn.Players[currentPlayerIndex];
-            bool hasPlayerPickedPlayer = false;
-            do
+            int playerPickedIndex;
+
+            playerPickedIndex = turn.pickAPlayer();
+            Player playerPicked = turn.Players[playerPickedIndex];
+
+            if(playerPicked.numCardsInHand() == 1 && playerPicked.SaidUno == false)
             {
-                Console.WriteLine("Which player did not say Uno? Please enter the player number.");
-                turn.showAllPlayersExceptOne(currentPlayerIndex);
-
-                response = currentPlayer.playerEntryTitleCase();
-
-                if (int.TryParse(response, out numPlayerEntered))
-                {
-                    if ((numPlayerEntered < turn.Players.Count || numPlayerEntered >= 0) && numPlayerEntered != currentPlayerIndex)
-                    {
-                        hasPlayerPickedPlayer = true;
-                        Player playerPicked = turn.Players[numPlayerEntered];
-                        if(playerPicked.numCardsInHand() == 1 && playerPicked.SaidUno == false)
-                        {
-                            penaltyForNotSayingUno(numPlayerEntered);
-                        }
-                        else
-                        {
-                            Console.WriteLine(playerPicked.Name + " Said Uno or did not have only one card in their hand.");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("That is not the number of a player. Please select a player number.");
-                    }
-                }
-                else
-                {
-                    Console.Write("That is not the number. Please select a player number.");
-                }
-
-            } while (hasPlayerPickedPlayer == false);
+                penaltyForNotSayingUno(playerPickedIndex);
+            }
+            else
+            {
+                Console.WriteLine(playerPicked.Name + " Said Uno or did not have only one card in their hand.");
+            }
         }
 
         private void penaltyForNotSayingUno(int indexOfPlayerPicked)
