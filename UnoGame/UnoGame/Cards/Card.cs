@@ -23,6 +23,7 @@ namespace UnoGame.Cards
         public override void playCard()
         {
             PerformCardAction.NextTurn();
+            Console.WriteLine(lookAtCard() + " was played.");
         }
     }
 }

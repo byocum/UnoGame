@@ -40,4 +40,9 @@
         Uno = 2,
         Confront = 3
     }
+
+    public enum PlayerActionConfront
+    {
+        Uno = 0
+    }
 }

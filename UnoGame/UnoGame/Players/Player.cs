@@ -35,6 +35,11 @@ namespace UnoGame.Players
         public void addCardToHand(BasicCard card)
         {
             hand.addCard(card);
+
+            if(hand.CardDeck.Count > 1)
+            {
+                resetSaidUnoField();
+            }
         }
 
         public void playCard(int cardIndex)
@@ -109,6 +114,8 @@ namespace UnoGame.Players
             Console.WriteLine("What would you like to do?");
             playerAction = playerEntryTitleCase();
             playerActionParts = playerAction.Split(' ');
+
+            Console.WriteLine();
             
             return playerActionParts;
         }
@@ -128,10 +135,18 @@ namespace UnoGame.Players
 
         public void sayUno()
         {
-            saidUno = true;
+            if(hand.CardDeck.Count == 1)
+            {
+                saidUno = true;
+            }
+            else
+            {
+                Console.WriteLine("You can only say Uno if you have only one card in your hand.");
+                Console.WriteLine("You currently have " + hand.CardDeck.Count + " cards in your hand.");
+            }
         }
 
-        public void resetUnoField()
+        public void resetSaidUnoField()
         {
             saidUno = false;
         }

@@ -27,7 +27,6 @@ namespace UnoGame.Intermediaries
         public void setupGame()
         {            
             gameRules();
-            //ToDo: Display the instructions for the game
             drawDeck.createCardsForDeck(cardFactory); 
             drawDeck.shuffle();
             determinePlayers();
@@ -115,6 +114,7 @@ namespace UnoGame.Intermediaries
                 int currentPlayerIndex = turn.CurrentPlayerIndex;
                 currentPlayer = turn.Players[turn.CurrentPlayerIndex];
 
+                Console.WriteLine();
                 Console.WriteLine(currentPlayer.Name + "'s turn.");
                 discardDeck.displayTopCard();
                 Console.WriteLine("Your hand is: ");
@@ -125,6 +125,8 @@ namespace UnoGame.Intermediaries
 
                 if (currentPlayerIndex != turn.CurrentPlayerIndex)
                 {
+                    Console.WriteLine("Press enter to go to the next players turn.");
+                    Console.ReadLine();
                     Console.Clear();
                 }
 
@@ -137,16 +139,16 @@ namespace UnoGame.Intermediaries
         private bool performPlayerAction(string[] playerAction)
         {
             Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-            bool intConverted = int.TryParse(playerAction[0], out int cardIndex);
-            bool enumConverted = Enum.TryParse<PlayerAction>(playerAction[0], out PlayerAction action);
+            bool isInt = int.TryParse(playerAction[0], out int cardIndex);
+            bool isPlayerActionEnum = Enum.TryParse<PlayerAction>(playerAction[0], out PlayerAction action);
             bool playerActionCompleted = false;
 
-            if (intConverted && cardIndex < currentPlayer.numCardsInHand() && cardIndex >= 0)
+            if (isInt && cardIndex < currentPlayer.numCardsInHand() && cardIndex >= 0)
             {
                 currentPlayer.playCard(cardIndex);
                 playerActionCompleted = true;
 
-            }else if (enumConverted)
+            }else if (isPlayerActionEnum)
             {            
                     switch (action)
                 {
@@ -158,10 +160,28 @@ namespace UnoGame.Intermediaries
                         playerActionCompleted = true;
                         break;
                     case PlayerAction.Uno:
-                        currentPlayer.sayUno();
+                        if(playerAction.Length > 1)
+                        {
+                            currentPlayer.sayUno();
+                            isInt = int.TryParse(playerAction[1], out cardIndex);
+                            currentPlayer.playCard(cardIndex);
+                        }
+                        else
+                        {
+                            Console.WriteLine("The action 'Uno' needs the number of the card you want to play after it.");
+                        }
+                        
                         break;
                     case PlayerAction.Confront:
-                        confrontOtherPlayer(playerAction[1]);
+                        if(playerAction.Length > 1)
+                        {
+                            playerActionCompleted = confrontOtherPlayer(playerAction[1]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("The action 'Confront' needs a second word. Possible Confront actions are:");
+                            possibleConfrontActions();
+                        }
                         break;
                     default:
                         actionErrorMessage(playerAction);
@@ -177,6 +197,13 @@ namespace UnoGame.Intermediaries
             return playerActionCompleted;
         }
 
+        private void possibleConfrontActions()
+        {
+            foreach (string possibleAction in Enum.GetNames(typeof(PlayerActionConfront)))
+            {
+                Console.WriteLine(PlayerAction.Confront.ToString() + " " +  possibleAction);
+            }
+        }
         private void actionErrorMessage(string[] playerAction)
         {
             Console.WriteLine(playerAction[0] + " is not a possible action.  Possible actions are: ");
@@ -211,16 +238,25 @@ namespace UnoGame.Intermediaries
             playerToDraw.putCardInHand(cardDrawn);
         }
 
-        private void confrontOtherPlayer(string playerActionSecondPart)
+        private bool confrontOtherPlayer(string playerActionSecondPart)
         {
+            bool playerActionCompleted = false;
+
             bool enumConverted = Enum.TryParse<PlayerAction>(playerActionSecondPart, out PlayerAction action);
             if (enumConverted)
             {
                 if(action == PlayerAction.Uno)
                 {
                     didPlayerSayUno();
+                    playerActionCompleted = true;
+                }
+                else
+                {
+                    Console.WriteLine(playerActionSecondPart + " is not a valid confront action.");
                 }
             }
+
+            return playerActionCompleted;
         }
 
         private void didPlayerSayUno()
@@ -259,9 +295,6 @@ namespace UnoGame.Intermediaries
             Console.WriteLine("When playing a card type in the number to the left of the card.");
             Console.Write("For Example: If the card displays as: \"3 Green Draw 2\" type in \"3\".\n");
 
-            //ToDo: I want to make sure the user does not have to do this.
-            Console.WriteLine("When writing two actions on one line put a comma between the two actions.\n See examples below.\n");
-
             //ToDo: Write functionality for declaring uno. Then rewrite the directions.
             Console.WriteLine("SAY UNO\n");
             Console.WriteLine("In order to say UNO when playing your second to last card, type in \"UNO\"");
@@ -294,7 +327,7 @@ namespace UnoGame.Intermediaries
 
         private void endGame(Player winner)
         {
-            Console.WriteLine(winner.Name + " you won!");
+            Console.WriteLine(winner.Name + " won!");
         }
     }
 }
