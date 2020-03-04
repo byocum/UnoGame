@@ -49,6 +49,10 @@ namespace UnoGame.Intermediaries
                 {
                     Console.WriteLine("Would you like to add another player? Enter y for yes another character for no.");
                     addAnotherPlayer =  Console.ReadLine().Trim().ToLower();
+                    if(addAnotherPlayer.Length == 0)
+                    {
+                        addAnotherPlayer = "n";
+                    }
                 }
 
                 count++;

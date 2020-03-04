@@ -26,7 +26,7 @@ namespace UnoGame.Players
         }
         public Player(string name, DiscardDeck discardDeck)
         {
-            this.name = name;
+            this.name = Function.titleCase(name);
             this.hand = new PlayerHand();
             this.discardDeck = discardDeck;
             this.saidUno = false;
