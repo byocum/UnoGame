@@ -32,7 +32,7 @@ namespace UnoGame.Decks
         public bool isCardPlayable(BasicCard cardToPlay)
         {
             bool isPlayable = false;
-            BasicCard discardDeckTopCard = CardDeck[CardDeck.Count - 1];
+            BasicCard discardDeckTopCard = CardDeck[topCardIndex()];
 
             if (cardToPlay.Color == null)
             {
@@ -51,9 +51,7 @@ namespace UnoGame.Decks
 
         public void displayTopCard()
         {
-            int topCardIndex = CardDeck.Count - 1;
-            Console.WriteLine("The top card on the discard deck is: " + CardDeck[topCardIndex].Color + " " + CardDeck[topCardIndex].Type);
-
+            Console.WriteLine("The top card on the discard deck is: " + CardDeck[topCardIndex()].Color + " " + CardDeck[topCardIndex()].Type);
         }
     }
 }

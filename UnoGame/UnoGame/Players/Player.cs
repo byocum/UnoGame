@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using UnoGame.Cards;
 using UnoGame.Decks;
 using UnoGame.Functions;
@@ -56,6 +53,7 @@ namespace UnoGame.Players
             {
                 Console.WriteLine(cardToBePlayed.lookAtCard() + " is not playable.");
             }
+
         }
 
         private void playCard(BasicCard cardToBePlayed)
@@ -131,6 +129,11 @@ namespace UnoGame.Players
         public void lookAtHand()
         {
             hand.lookAtDeck();
+        }
+
+        public bool isCardInHand(int index)
+        {
+            return hand.isCardInDeck(index);
         }
 
         public void sayUno()

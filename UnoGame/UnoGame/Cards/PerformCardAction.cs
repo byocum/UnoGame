@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UnoGame.Decks;
+﻿using UnoGame.Decks;
 using UnoGame.Intermediaries;
-using UnoGame.Enums;
 using UnoGame.Players;
 
 namespace UnoGame.Cards
@@ -42,7 +38,7 @@ namespace UnoGame.Cards
         {
             int nextPlayerIndex = turn.getNextTurnIndex();
             Player nextPlayer = turn.Players[nextPlayerIndex];
-            int cardDrawnIndex = drawDeck.CardDeck.Count - 1;
+            int cardDrawnIndex = drawDeck.topCardIndex();
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
             drawDeck.removeCard(cardDrawnIndex, discardDeck);

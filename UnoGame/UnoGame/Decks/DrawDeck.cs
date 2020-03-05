@@ -61,7 +61,7 @@ namespace UnoGame.Decks
                 errorNoCardsInDeck();
                 refreshDeck(discardDeck);
                 cardsLeftInDeck = CardDeck.Count;
-                CardDeck.RemoveAt(cardsLeftInDeck - 1);
+                CardDeck.RemoveAt(topCardIndex());
             }
 
             return cardsLeftInDeck;
@@ -72,7 +72,7 @@ namespace UnoGame.Decks
             Console.WriteLine("Refreshing the Draw Deck...");
             int cardsLeftInDeck = CardDeck.Count;
 
-            int discardDeckTopCardIndex = discardDeck.CardDeck.Count -1;
+            int discardDeckTopCardIndex = discardDeck.topCardIndex();
             BasicCard discardDeckTopCard = discardDeck.CardDeck[discardDeckTopCardIndex];
             discardDeck.removeCard(discardDeckTopCardIndex);
 

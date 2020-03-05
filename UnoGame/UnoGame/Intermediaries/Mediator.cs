@@ -66,7 +66,8 @@ namespace UnoGame.Intermediaries
             {
                 for(int player = 0; player < turn.Players.Count; player++)
                 {
-                    int drawDeckTopCardIndex = drawDeck.CardDeck.Count - 1;
+                    int drawDeckTopCardIndex = drawDeck.topCardIndex();
+
                     BasicCard cardDealing = drawDeck.CardDeck[drawDeckTopCardIndex];
 
                     drawDeck.removeCard(drawDeckTopCardIndex, discardDeck);
@@ -77,11 +78,11 @@ namespace UnoGame.Intermediaries
 
         private void moveCardFromDrawDeckToDiscardDeck()
         {
-            int topCardDrawDeckIndex = drawDeck.CardDeck.Count - 1;
-            BasicCard topCardDrawDeck = drawDeck.CardDeck[topCardDrawDeckIndex];
+            int drawDeckTopCardIndex = drawDeck.topCardIndex();
+            BasicCard drawDeckTopCard = drawDeck.CardDeck[drawDeckTopCardIndex];
 
-            drawDeck.removeCard(topCardDrawDeckIndex, discardDeck);
-            discardDeck.addCard(topCardDrawDeck);
+            drawDeck.removeCard(drawDeckTopCardIndex, discardDeck);
+            discardDeck.addCard(drawDeckTopCard);
         }
 
         public void startGame()
@@ -90,12 +91,12 @@ namespace UnoGame.Intermediaries
             Console.WriteLine("Putting the top card on the draw pile on the discard deck...");
             moveCardFromDrawDeckToDiscardDeck();
 
-            int topCardOnDiscardDeckIndex = discardDeck.CardDeck.Count - 1;
-            BasicCard discardDeckTopCard = discardDeck.CardDeck[topCardOnDiscardDeckIndex];
+            int discardDeckTopCardIndex = discardDeck.topCardIndex();
+            BasicCard discardDeckTopCard = discardDeck.CardDeck[discardDeckTopCardIndex];
 
             while (discardDeckTopCard.Type == CardType.WildDrawFour)
             {
-                discardDeck.removeCard(discardDeck.CardDeck.Count - 1);
+                discardDeck.removeCard(discardDeckTopCardIndex);
                 drawDeck.addCardRandomlyToDeck(discardDeckTopCard);
                 moveCardFromDrawDeckToDiscardDeck();
             }
@@ -147,7 +148,7 @@ namespace UnoGame.Intermediaries
             bool isPlayerActionEnum = Enum.TryParse<PlayerAction>(playerAction[0], out PlayerAction action);
             bool playerActionCompleted = false;
 
-            if (isInt && cardIndex < currentPlayer.numCardsInHand() && cardIndex >= 0)
+            if (isInt && currentPlayer.isCardInHand(cardIndex))
             {
                 currentPlayer.playCard(cardIndex);
                 playerActionCompleted = true;
@@ -164,15 +165,24 @@ namespace UnoGame.Intermediaries
                         playerActionCompleted = true;
                         break;
                     case PlayerAction.Uno:
-                        if(playerAction.Length > 1)
-                        {
-                            currentPlayer.sayUno();
+                        if (playerAction.Length > 1)
+                        {   
                             isInt = int.TryParse(playerAction[1], out cardIndex);
-                            currentPlayer.playCard(cardIndex);
+
+                            if (isInt && currentPlayer.isCardInHand(cardIndex))
+                            {
+                                currentPlayer.playCard(cardIndex);
+                                currentPlayer.sayUno();
+                            }
+                            else
+                            {
+                                UnoErrorMessage();
+                            }
+
                         }
                         else
                         {
-                            Console.WriteLine("The action 'Uno' needs the number of the card you want to play after it.");
+                            UnoErrorMessage();
                         }
                         
                         break;
@@ -208,6 +218,11 @@ namespace UnoGame.Intermediaries
                 Console.WriteLine(PlayerAction.Confront.ToString() + " " +  possibleAction);
             }
         }
+
+        private void UnoErrorMessage() 
+        {
+            Console.WriteLine("The action 'Uno' needs the number of the card you want to play after it.");
+        }
         private void actionErrorMessage(string[] playerAction)
         {
             Console.WriteLine(playerAction[0] + " is not a possible action.  Possible actions are: ");
@@ -222,7 +237,7 @@ namespace UnoGame.Intermediaries
         private void playerActionDrawCard()
         {
             Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-            int cardDrawnIndex = drawDeck.CardDeck.Count - 1;
+            int cardDrawnIndex = drawDeck.topCardIndex();
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
             drawDeck.removeCard(cardDrawnIndex, discardDeck);
@@ -235,7 +250,7 @@ namespace UnoGame.Intermediaries
         private void playerActionDrawCard(int playerIndex)
         {
             Player playerToDraw = turn.Players[playerIndex];
-            int cardDrawnIndex = drawDeck.CardDeck.Count - 1;
+            int cardDrawnIndex = drawDeck.topCardIndex();
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
             drawDeck.removeCard(cardDrawnIndex, discardDeck);

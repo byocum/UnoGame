@@ -25,6 +25,11 @@ namespace UnoGame.Decks
             set { cardFactory = value; }
         }
 
+        public int topCardIndex()
+        {
+            return cardDeck.Count - 1;
+        }
+
         public void addCard(BasicCard card)
         {
             CardDeck.Add(card);
@@ -39,7 +44,7 @@ namespace UnoGame.Decks
         //Modern version of Fishers and Yates' alogrithm
         public void shuffle()
         {
-            for(int i = 0; i < cardDeck.Count - 1; i++)
+            for(int i = 0; i < topCardIndex(); i++)
             {
                 BasicCard card = cardDeck[i];
                 int index = random.Next(0, i + 1);
@@ -59,13 +64,24 @@ namespace UnoGame.Decks
             {
                 Console.WriteLine(i + " " + CardDeck[i].Color + " " + CardDeck[i].Type);
             }
-
         }
 
         public void addCardRandomlyToDeck(BasicCard card)
         {
-            int index = random.Next(0, CardDeck.Count - 1);
+            int index = random.Next(0, topCardIndex());
             CardDeck.Insert(index, card);
+        }
+
+        public bool isCardInDeck(int cardIndex)
+        {
+            bool isInDeck = false;
+
+            if(cardIndex <= topCardIndex() && cardIndex >= 0)
+            {
+                isInDeck = true;
+            }
+
+            return isInDeck;
         }
     }
 }
