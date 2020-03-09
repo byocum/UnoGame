@@ -39,8 +39,9 @@ namespace UnoGame.Players
             }
         }
 
-        public void playCard(int cardIndex)
+        public bool playCard(int cardIndex)
         {
+            bool isPlayComplete = false;
             BasicCard cardToBePlayed = hand.CardDeck[cardIndex];
 
             if (discardDeck.isCardPlayable(cardToBePlayed))
@@ -48,11 +49,14 @@ namespace UnoGame.Players
                 hand.removeCard(cardIndex);
                 discardDeck.addCard(cardToBePlayed);
                 cardToBePlayed.playCard();
+                isPlayComplete = true;
             }
             else
             {
                 Console.WriteLine(cardToBePlayed.lookAtCard() + " is not playable.");
             }
+
+            return isPlayComplete;
 
         }
 
