@@ -23,6 +23,7 @@ namespace UnoGame.Factories
             {
                 case CardType.DrawTwo:
                     card = new Card(color, type, this.performCardAction);
+                    card = new NextTurn(card);
                     card = new Draw(card);
                     card = new Draw(card);
                     break;
@@ -63,6 +64,7 @@ namespace UnoGame.Factories
             {
                 case CardType.WildDrawFour:
                     card = new Card(CardType.WildDrawFour, this.performCardAction);
+                    card = new NextTurn(card);
                     card = new Draw(card);
                     card = new Draw(card);
                     card = new Draw(card);
