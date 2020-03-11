@@ -79,13 +79,10 @@ namespace UnoGame.Players
 
             if (discardDeck.isCardPlayable(cardDrawn))
             {
-                string playCardDrawn;
-
                 Console.WriteLine("The card you drew is playable.");
                 Console.WriteLine("Would you like to play this card?");
-                Console.WriteLine("Enter y for yes or another character for no");
-                playCardDrawn = Console.ReadLine().Trim().ToLower();
-                if (playCardDrawn[0] == 'y')
+      
+                if (playerEnterYesOrNo())
                 {
                     playCard(cardDrawn);
                     playedCard = true;
@@ -104,6 +101,29 @@ namespace UnoGame.Players
             return playedCard;
         }
 
+        private bool playerEnterYesOrNo()
+        {
+            string playCardDrawn;
+            bool isYes = false;
+
+            Console.WriteLine("Enter y for yes or another character for no");
+            playCardDrawn = Console.ReadLine().Trim().ToLower();
+            if (string.IsNullOrEmpty(playCardDrawn))
+            {
+                isYes = false;
+            }
+            else if(playCardDrawn[0] == 'y')
+            {
+                isYes = true;
+            }
+            else
+            {
+                isYes = false;
+            }
+
+            return isYes;
+        }
+
         public void putCardInHand(BasicCard cardDrawn)
         {
             addCardToHand(cardDrawn);
@@ -113,7 +133,6 @@ namespace UnoGame.Players
         {
             string playerAction;
             string[] playerActionParts;
-            Console.WriteLine("What would you like to do?");
             playerAction = playerEntryTitleCase();
             playerActionParts = playerAction.Split(' ');
 
@@ -140,17 +159,24 @@ namespace UnoGame.Players
             return hand.isCardInDeck(index);
         }
 
-        public void sayUno()
+        public bool sayUno()
         {
-            if(hand.CardDeck.Count == 1)
+            bool didSayUno = false;
+
+            if(hand.CardDeck.Count == 2 || hand.CardDeck.Count == 1)
             {
                 saidUno = true;
+                Console.WriteLine("You say Uno.");
+                didSayUno = true;
+
             }
             else
             {
-                Console.WriteLine("You can only say Uno if you have only one card in your hand.");
+                Console.WriteLine("You can only say Uno if you have one or two cards in your hand and play one card.");
                 Console.WriteLine("You currently have " + hand.CardDeck.Count + " cards in your hand.");
             }
+
+            return didSayUno;
         }
 
         public void resetSaidUnoField()

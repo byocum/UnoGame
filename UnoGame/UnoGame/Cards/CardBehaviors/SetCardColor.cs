@@ -41,6 +41,10 @@ namespace UnoGame.Cards.CardBehaviors
                 else
                 {
                     Console.WriteLine(playerInput + " is not a color option. Color options are: ");
+                    foreach(CardColor color in Enum.GetValues(typeof(CardColor)))
+                    {
+                        Console.WriteLine(color);
+                    }
 
                 }
 
