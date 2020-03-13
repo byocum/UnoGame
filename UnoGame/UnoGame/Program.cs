@@ -12,7 +12,7 @@ namespace UnoGame
         {
             Mediator mediator = new Mediator();
             mediator.setupGame();
-            mediator.startGame();
+            mediator.playGame();
         }
     }
 }

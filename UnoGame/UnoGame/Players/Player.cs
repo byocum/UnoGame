@@ -21,6 +21,11 @@ namespace UnoGame.Players
         {
             get { return saidUno; }
         }
+
+        public PlayerHand Hand
+        {
+            get { return hand; }
+        }
         public Player(string name, DiscardDeck discardDeck)
         {
             this.name = Function.titleCase(name);
@@ -39,28 +44,28 @@ namespace UnoGame.Players
             }
         }
 
-        public bool playCard(int cardIndex)
-        {
-            bool isPlayComplete = false;
-            BasicCard cardToBePlayed = hand.CardDeck[cardIndex];
+        //public bool playCard(int cardIndex)
+        //{
+        //    bool isPlayComplete = false;
+        //    BasicCard cardToBePlayed = hand.CardDeck[cardIndex];
 
-            if (discardDeck.isCardPlayable(cardToBePlayed))
-            {
-                hand.removeCard(cardIndex);
-                discardDeck.addCard(cardToBePlayed);
-                cardToBePlayed.playCard();
-                isPlayComplete = true;
-            }
-            else
-            {
-                Console.WriteLine(cardToBePlayed.lookAtCard() + " is not playable.");
-            }
+        //    if (discardDeck.isCardPlayable(cardToBePlayed))
+        //    {
+        //        hand.removeCard(cardIndex);
+        //        discardDeck.addCard(cardToBePlayed);
+        //        cardToBePlayed.playCard();
+        //        isPlayComplete = true;
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine(cardToBePlayed.lookAtCard() + " is not playable.");
+        //    }
 
-            return isPlayComplete;
+        //    return isPlayComplete;
 
-        }
+        //}
 
-        private void playCard(BasicCard cardToBePlayed)
+        public void playCard(BasicCard cardToBePlayed)
         {
             discardDeck.addCard(cardToBePlayed);
             cardToBePlayed.playCard();
@@ -71,63 +76,63 @@ namespace UnoGame.Players
             return hand.CardDeck.Count;
         }
 
-        public bool playDrawnCard(BasicCard cardDrawn)
-        {
-            bool playedCard = false;
+        //public bool playDrawnCard(BasicCard cardDrawn)
+        //{
+        //    bool playedCard = false;
 
-            Console.WriteLine("You drew a " + cardDrawn.lookAtCard() + ".");
+        //    Console.WriteLine("You drew a " + cardDrawn.lookAtCard() + ".");
 
-            if (discardDeck.isCardPlayable(cardDrawn))
-            {
-                Console.WriteLine("The card you drew is playable.");
-                Console.WriteLine("Would you like to play this card?");
+        //    if (discardDeck.isCardPlayable(cardDrawn))
+        //    {
+        //        Console.WriteLine("The card you drew is playable.");
+        //        Console.WriteLine("Would you like to play this card?");
       
-                if (playerEnterYesOrNo())
-                {
-                    playCard(cardDrawn);
-                    playedCard = true;
-                }
-                else
-                {
-                    putCardInHand(cardDrawn);
-                }
+        //        if (playerEnterYesOrNo())
+        //        {
+        //            playCard(cardDrawn);
+        //            playedCard = true;
+        //        }
+        //        else
+        //        {
+        //            putCardInHand(cardDrawn);
+        //        }
 
-            }
-            else
-            {
-                putCardInHand(cardDrawn);
-            }
+        //    }
+        //    else
+        //    {
+        //        putCardInHand(cardDrawn);
+        //    }
             
-            return playedCard;
-        }
+        //    return playedCard;
+        //}
 
-        private bool playerEnterYesOrNo()
-        {
-            string playCardDrawn;
-            bool isYes = false;
+        //private bool playerEnterYesOrNo()
+        //{
+        //    string playCardDrawn;
+        //    bool isYes = false;
 
-            Console.WriteLine("Enter y for yes or another character for no");
-            playCardDrawn = Console.ReadLine().Trim().ToLower();
-            if (string.IsNullOrEmpty(playCardDrawn))
-            {
-                isYes = false;
-            }
-            else if(playCardDrawn[0] == 'y')
-            {
-                isYes = true;
-            }
-            else
-            {
-                isYes = false;
-            }
+        //    Console.WriteLine("Enter y for yes or another character for no");
+        //    playCardDrawn = Console.ReadLine().Trim().ToLower();
+        //    if (string.IsNullOrEmpty(playCardDrawn))
+        //    {
+        //        isYes = false;
+        //    }
+        //    else if(playCardDrawn[0] == 'y')
+        //    {
+        //        isYes = true;
+        //    }
+        //    else
+        //    {
+        //        isYes = false;
+        //    }
 
-            return isYes;
-        }
+        //    return isYes;
+        //}
 
-        public void putCardInHand(BasicCard cardDrawn)
-        {
-            addCardToHand(cardDrawn);
-        }
+        //public void putCardInHand(BasicCard cardDrawn)
+        //{
+        //    addCardToHand(cardDrawn);
+        //}
 
         public string[] pickAction()
         {

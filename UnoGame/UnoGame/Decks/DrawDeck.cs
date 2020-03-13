@@ -40,34 +40,8 @@ namespace UnoGame.Decks
             }
         }
 
-        public int removeCard(int cardIndex, DiscardDeck discardDeck)
-        {
-            int cardsLeftInDeck = CardDeck.Count;
-
-            if (cardsLeftInDeck > 1)
-            {
-                CardDeck.RemoveAt(cardIndex);
-                cardsLeftInDeck--;
-            }
-            else if (cardsLeftInDeck == 1)
-            {
-                CardDeck.RemoveAt(cardIndex);
-                refreshDeck(discardDeck);
-                cardsLeftInDeck = CardDeck.Count;
-
-            }
-            else
-            {
-                errorNoCardsInDeck();
-                refreshDeck(discardDeck);
-                cardsLeftInDeck = CardDeck.Count;
-                CardDeck.RemoveAt(topCardIndex());
-            }
-
-            return cardsLeftInDeck;
-        }
-
-        private int refreshDeck(DiscardDeck discardDeck)
+        //ToDo refresh deck for draw deck should be implemented at the appropriate time in the mediator
+        public int refreshDeck(DiscardDeck discardDeck)
         {
             Console.WriteLine("Refreshing the Draw Deck...");
             int cardsLeftInDeck = CardDeck.Count;

@@ -30,31 +30,31 @@ namespace UnoGame.Intermediaries
             turnDirection = TurnDirection.Ascending;
         }
 
-        public void determinePlayers(DiscardDeck discardDeck)
-        {
-            string playerName;
-            string addAnotherPlayer = "y";
-            int count = 1;
+        //public void determinePlayers(DiscardDeck discardDeck)
+        //{
+        //    string playerName;
+        //    string addAnotherPlayer = "y";
+        //    int count = 1;
 
-            while (addAnotherPlayer[0] == 'y')
-            {
-                Console.WriteLine("Please enter a name for the player:");
-                playerName = Console.ReadLine();
-                addPlayer(playerName, discardDeck);
+        //    while (addAnotherPlayer[0] == 'y')
+        //    {
+        //        Console.WriteLine("Please enter a name for the player:");
+        //        playerName = Console.ReadLine();
+        //        addPlayer(playerName, discardDeck);
 
-                if (count > 1)
-                {
-                    Console.WriteLine("Would you like to add another player? Enter y for yes another character for no.");
-                    addAnotherPlayer = Console.ReadLine().Trim().ToLower();
-                    if (addAnotherPlayer.Length == 0)
-                    {
-                        addAnotherPlayer = "n";
-                    }
-                }
+        //        if (count > 1)
+        //        {
+        //            Console.WriteLine("Would you like to add another player? Enter y for yes another character for no.");
+        //            addAnotherPlayer = Console.ReadLine().Trim().ToLower();
+        //            if (addAnotherPlayer.Length == 0)
+        //            {
+        //                addAnotherPlayer = "n";
+        //            }
+        //        }
 
-                count++;
-            }
-        }
+        //        count++;
+        //    }
+        //}
 
         public void addPlayer(string name, DiscardDeck discardDeck)
         {

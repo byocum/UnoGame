@@ -5,6 +5,7 @@ using UnoGame.Factories;
 using UnoGame.Cards;
 using UnoGame.Enums;
 using UnoGame.Players;
+using UnoGame.PlayerActions;
 
 namespace UnoGame.Intermediaries
 {
@@ -15,6 +16,9 @@ namespace UnoGame.Intermediaries
         private DiscardDeck discardDeck;
         private PerformCardAction performCardAction;
         private CardFactory cardFactory;
+        private PerformMediatorActions performMediatorActions;
+        private PerformPlayerActions performPlayerActions;
+        private PlayerActionFactory playerActionFactory;
 
         public Mediator()
         {
@@ -23,112 +27,112 @@ namespace UnoGame.Intermediaries
             discardDeck = new DiscardDeck();            
             performCardAction = new PerformCardAction(drawDeck, discardDeck, turn);
             cardFactory = new CardFactory(performCardAction);
+            performMediatorActions = new PerformMediatorActions(drawDeck, discardDeck, turn);
+            playerActionFactory = new PlayerActionFactory(drawDeck, discardDeck, turn);
+            performPlayerActions = new PerformPlayerActions(playerActionFactory, turn);
+
         }
 
         public void setupGame()
-        {            
-            gameRules();
+        {
+            performMediatorActions.showRules();
             drawDeck.createCardsForDeck(cardFactory); 
             drawDeck.shuffle();
-            turn.determinePlayers(discardDeck);
-            dealCards();
+            performMediatorActions.determinePlayers();
+            performMediatorActions.deal();
         }
 
-        private void dealCards()
-        {
-            Console.WriteLine("Dealing Cards...");
+        //private void dealCards()
+        //{
+        //    Console.WriteLine("Dealing Cards...");
 
-            dealEachPlayerSevenCards();
-        }
+        //    dealEachPlayerSevenCards();
+        //}
 
-        private void dealEachPlayerSevenCards()
-        {
-            for (int numCardsEachPersonHas = 0; numCardsEachPersonHas < 7; numCardsEachPersonHas++)
-            {
-                dealEachPlayerOneCard();
-            }
-        }
+        //private void dealEachPlayerSevenCards()
+        //{
+        //    for (int numCardsEachPersonHas = 0; numCardsEachPersonHas < 7; numCardsEachPersonHas++)
+        //    {
+        //        dealEachPlayerOneCard();
+        //    }
+        //}
 
-        private void dealEachPlayerOneCard()
-        {
-            for (int player = 0; player < turn.Players.Count; player++)
-            {
-                dealCard(player);
-            }
+        //private void dealEachPlayerOneCard()
+        //{
+        //    for (int player = 0; player < turn.Players.Count; player++)
+        //    {
+        //        dealCard(player);
+        //    }
 
-        }
+        //}
 
-        private void dealCard(int playerIndex)
-        {
-            int drawDeckTopCardIndex = drawDeck.topCardIndex();
+        //private void dealCard(int playerIndex)
+        //{
+        //    int drawDeckTopCardIndex = drawDeck.topCardIndex();
 
-            BasicCard cardDealing = drawDeck.CardDeck[drawDeckTopCardIndex];
+        //    BasicCard cardDealing = drawDeck.CardDeck[drawDeckTopCardIndex];
 
-            drawDeck.removeCard(drawDeckTopCardIndex, discardDeck);
-            turn.Players[playerIndex].addCardToHand(cardDealing);
+        //    drawDeck.removeCard(drawDeckTopCardIndex, discardDeck);
+        //    turn.Players[playerIndex].addCardToHand(cardDealing);
 
-        }
-        private void moveCardFromDrawDeckToDiscardDeck()
-        {
-            int drawDeckTopCardIndex = drawDeck.topCardIndex();
-            BasicCard drawDeckTopCard = drawDeck.CardDeck[drawDeckTopCardIndex];
+        //}
+        //private void moveCardFromDrawDeckToDiscardDeck()
+        //{
+        //    int drawDeckTopCardIndex = drawDeck.topCardIndex();
+        //    BasicCard drawDeckTopCard = drawDeck.CardDeck[drawDeckTopCardIndex];
 
-            drawDeck.removeCard(drawDeckTopCardIndex, discardDeck);
-            discardDeck.addCard(drawDeckTopCard);
-        }
+        //    drawDeck.removeCard(drawDeckTopCardIndex);
+        //    discardDeck.addCard(drawDeckTopCard);
+        //}
 
-        public void startGame()
-        {    
-            Console.WriteLine("Starting Game...");
+        //private void addValidInitialCardToDiscardDeck()
+        //{
+        //    Console.WriteLine("Putting the draw deck top card on the discard deck...");
+        //    moveCardFromDrawDeckToDiscardDeck();
 
-            addValidInitialCardToDiscardDeck();
+        //    makeFirstCardOnDiscardDeckValid();
 
-            playGame();
-        }
+        //    discardDeck.displayTopCard();
 
-        private void addValidInitialCardToDiscardDeck()
-        {
-            Console.WriteLine("Putting the draw deck top card on the discard deck...");
-            moveCardFromDrawDeckToDiscardDeck();
+        //    playDiscardDeckTopCard();
+        //}
 
-            makeFirstCardOnDiscardDeckValid();
+        //private void makeFirstCardOnDiscardDeckValid()
+        //{
 
-            discardDeck.displayTopCard();
+        //    int discardDeckTopCardIndex = discardDeck.topCardIndex();
+        //    BasicCard discardDeckTopCard = discardDeck.CardDeck[discardDeckTopCardIndex];
 
-            playDiscardDeckTopCard();
-        }
+        //    while (discardDeckTopCard.Type == CardType.WildDrawFour)
+        //    {
+        //        discardDeck.removeCard(discardDeckTopCardIndex);
+        //        drawDeck.addCardRandomlyToDeck(discardDeckTopCard);
+        //        moveCardFromDrawDeckToDiscardDeck();
+        //    }
+        //}
 
-        private void makeFirstCardOnDiscardDeckValid()
-        {
+            //ToDo: playcard will have to be initalized in start game and used. console writelines can be used in start game also. or it can
+            //stay here and mediator play card can be used. or not see what is best
+        //private void playDiscardDeckTopCard()
+        //{
+        //    BasicCard discardDeckTopCard = discardDeck.CardDeck[discardDeck.topCardIndex()];
 
-            int discardDeckTopCardIndex = discardDeck.topCardIndex();
-            BasicCard discardDeckTopCard = discardDeck.CardDeck[discardDeckTopCardIndex];
+        //    if (discardDeckTopCard.CardWithNoActions == false)
+        //    {
+        //        Console.WriteLine("This card plays when it is turned up at the beginning of the game.");
+        //        Console.WriteLine("Playing card...");
 
-            while (discardDeckTopCard.Type == CardType.WildDrawFour)
-            {
-                discardDeck.removeCard(discardDeckTopCardIndex);
-                drawDeck.addCardRandomlyToDeck(discardDeckTopCard);
-                moveCardFromDrawDeckToDiscardDeck();
-            }
-        }
-
-        private void playDiscardDeckTopCard()
-        {
-            BasicCard discardDeckTopCard = discardDeck.CardDeck[discardDeck.topCardIndex()];
-
-            if (discardDeckTopCard.CardWithNoActions == false)
-            {
-                Console.WriteLine("This card plays when it is turned up at the beginning of the game.");
-                Console.WriteLine("Playing card...");
-
-                discardDeckTopCard.playCard();
-            }
-
-        }
+        //        discardDeckTopCard.playCard();
+        //    }
+        //}
 
         public void playGame()
         {
             Player currentPlayer;
+
+            Console.WriteLine("Starting Game...");
+
+            performMediatorActions.discardDeckAddFirstCard();
 
             do
             {
@@ -166,252 +170,246 @@ namespace UnoGame.Intermediaries
         }
         private void playerTakesTheirTurn(Player currentPlayer)
         {
-            bool isPlayerActionCompleted = false;
+            bool readyforNextPlayersTurn = false;
 
             do
             {
-                messageAskingPlayerForAction();
+                Console.WriteLine("What would you like to do?");
                 string[] action = currentPlayer.pickAction();
-                isPlayerActionCompleted = performPlayerAction(action);
+                readyforNextPlayersTurn = performPlayerActions.performPlayerAction(action);
 
-            } while (isPlayerActionCompleted == false);
-
-        }
-
-        private void messageAskingPlayerForAction()
-        {
-            Console.WriteLine("What would you like to do?");
-        }
-
-        private bool performPlayerAction(string[] playerAction)
-        {
-            Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-            int cardPlayedIndex;
-            bool isPlayerInputEnum = Enum.TryParse<PlayerAction>(playerAction[0], out PlayerAction action);
-            bool playerActionCompleted = false;
-
-            if (isPlayerInputACardInHand(playerAction[0]))
-            {
-                cardPlayedIndex = Convert.ToInt32(playerAction[0]);
-                playerActionCompleted = currentPlayer.playCard(cardPlayedIndex);
-
-            }else if (isPlayerInputEnum)
-            {
-                playerActionCompleted = performSelectedPlayerAction(action, playerAction);
-            }
-            else
-            {
-                actionErrorMessage();
-
-            }
-
-            return playerActionCompleted;
-        }
-
-        private bool isPlayerInputACardInHand(string playerAction)
-        {
-            bool isCardInHand = false;
-            Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-            bool isInt = int.TryParse(playerAction, out int cardPlayedIndex);
-
-            if (isInt && currentPlayer.isCardInHand(cardPlayedIndex))
-            {
-                isCardInHand = true;
-            }
-
-            return isCardInHand;
-        }
-
-        private bool performSelectedPlayerAction(PlayerAction action, string[] playerAction)
-        {
-            bool playerActionCompleted = false;
-
-            switch (action)
-            {
-                case PlayerAction.Rules:
-                    gameRules();
-                    break;
-                case PlayerAction.Draw:
-                    playerActionDrawCard();
-                    playerActionCompleted = true;
-                    break;
-                case PlayerAction.Uno:
-                    playerActionCompleted = playerActionSayUno();
-                    break;
-                case PlayerAction.Confront:
-                    playerActionCompleted = confrontOtherPlayer(playerAction);
-                    break;
-                default:
-                    actionErrorMessage();
-                    break;
-            }
-
-            return playerActionCompleted;
-        }
-        private bool playerActionSayUno()
-        {                    
-            
-            bool isPlayComplete = false;
-            string[] playerAction;
-            Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-
-            if(currentPlayer.SaidUno == false)
-            {
-                if (currentPlayer.sayUno())
-                {
-                    do
-                    {
-                        Console.WriteLine("Please pick a card to play or draw a card.");
-                        playerAction = currentPlayer.pickAction();
-                        isPlayComplete = playerPlayOrDrawACardAfterSayingUno(playerAction);
-                    } while (isPlayComplete == false);
-
-                }
-            }
-            else 
-            {
-                Console.WriteLine("You already said Uno.");
-            }
-
-            return isPlayComplete;
-        }
-
-        private bool playerPlayOrDrawACardAfterSayingUno(string[] playerAction)
-        {
-            int cardPlayedIndex;
-            bool playerActionCompleted = false;
-            Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-            bool isPlayerInputEnum = Enum.TryParse<PlayerAction>(playerAction[0], out PlayerAction action);
-
-            if (isPlayerInputACardInHand(playerAction[0]))
-            {
-                cardPlayedIndex = Convert.ToInt32(playerAction[0]);
-                playerActionCompleted = currentPlayer.playCard(cardPlayedIndex);
-
-            }
-            else if (isPlayerInputEnum)
-            {
-                playerActionCompleted = playerActionAfterSayingUno(action);
-            }
-
-            return playerActionCompleted;
+            } while (readyforNextPlayersTurn == false);
 
         }
 
-        private bool playerActionAfterSayingUno(PlayerAction playerAction)
-        {
-            bool playerActionCompleted = false;
-            Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+        //private bool performPlayerAction(string[] playerAction)
+        //{
+        //    Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+        //    int cardPlayedIndex;
+        //    bool isPlayerInputEnum = Enum.TryParse<PlayerActionEnum>(playerAction[0], out PlayerActionEnum action);
+        //    bool playerActionCompleted = false;
 
-            if (playerAction == PlayerAction.Draw)
-            {
-                playerActionDrawCard();
-                currentPlayer.resetSaidUnoField();
-                playerActionCompleted = true;
-            }
+        //    if (isPlayerInputACardInHand(playerAction[0]))
+        //    {
+        //        cardPlayedIndex = Convert.ToInt32(playerAction[0]);
+        //        playerActionCompleted = currentPlayer.playCard(cardPlayedIndex);
 
-            return playerActionCompleted;
-        }
+        //    }else if (isPlayerInputEnum)
+        //    {
+        //        playerActionCompleted = performSelectedPlayerAction(action, playerAction);
+        //    }
+        //    else
+        //    {
+        //        actionErrorMessage();
 
-        private bool confrontOtherPlayer(string[] playerAction)
-        {
-            bool playerActionCompleted = false;
+        //    }
 
-            if (playerAction.Length > 1)
-            {
-                string playerActionSecondPart = playerAction[1];
+        //    return playerActionCompleted;
+        //}
 
-                bool enumConverted = Enum.TryParse<PlayerAction>(playerActionSecondPart, out PlayerAction action);
-                if (enumConverted)
-                {
-                    if (action == PlayerAction.Uno)
-                    {
-                        didPlayerSayUno();
-                        playerActionCompleted = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine(playerActionSecondPart + " is not a valid confront action.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("The action 'Confront' needs a second word. Possible Confront actions are:");
-                    possibleConfrontActions();
-                }
-            }
+        //private bool isPlayerInputACardInHand(string playerAction)
+        //{
+        //    bool isCardInHand = false;
+        //    Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+        //    bool isInt = int.TryParse(playerAction, out int cardPlayedIndex);
 
-            return playerActionCompleted;
-        }
+        //    if (isInt && currentPlayer.isCardInHand(cardPlayedIndex))
+        //    {
+        //        isCardInHand = true;
+        //    }
 
-        private void didPlayerSayUno()
-        {
-            int currentPlayerIndex = turn.CurrentPlayerIndex;
-            Player currentPlayer = turn.Players[currentPlayerIndex];
-            int playerPickedIndex;
+        //    return isCardInHand;
+        //}
 
-            playerPickedIndex = turn.pickAPlayer();
-            Player playerPicked = turn.Players[playerPickedIndex];
+        //private bool performSelectedPlayerAction(PlayerActionEnum action, string[] playerAction)
+        //{
+        //    bool playerActionCompleted = false;
 
-            if (playerPicked.numCardsInHand() == 1 && playerPicked.SaidUno == false)
-            {
-                penaltyForNotSayingUno(playerPickedIndex);
-            }
-            else
-            {
-                Console.WriteLine(playerPicked.Name + " Said Uno or did not have only one card in their hand.");
-            }
-        }
+        //    switch (action)
+        //    {
+        //        case PlayerActionEnum.Rules:
+        //            gameRules();
+        //            break;
+        //        case PlayerActionEnum.Draw:
+        //            playerActionDrawCard();
+        //            playerActionCompleted = true;
+        //            break;
+        //        case PlayerActionEnum.Uno:
+        //            playerActionCompleted = playerActionSayUno();
+        //            break;
+        //        case PlayerActionEnum.Confront:
+        //            playerActionCompleted = confrontOtherPlayer(playerAction);
+        //            break;
+        //        default:
+        //            actionErrorMessage();
+        //            break;
+        //    }
 
-        private void penaltyForNotSayingUno(int indexOfPlayerPicked)
-        {
-            playerActionDrawCard(indexOfPlayerPicked);
-            playerActionDrawCard(indexOfPlayerPicked);
+        //    return playerActionCompleted;
+        //}
+        //private bool playerActionSayUno()
+        //{                    
 
-            Console.WriteLine(turn.Players[indexOfPlayerPicked].Name + " drew two cards for having only one card in their hand and not saying uno.");
-        }
+        //    bool isPlayComplete = false;
+        //    string[] playerAction;
+        //    Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
 
-        private void playerActionDrawCard()
-        {
-            Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-            int cardDrawnIndex = drawDeck.topCardIndex();
-            BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
+        //    if(currentPlayer.SaidUno == false)
+        //    {
+        //        if (currentPlayer.sayUno())
+        //        {
+        //            do
+        //            {
+        //                Console.WriteLine("Please pick a card to play or draw a card.");
+        //                playerAction = currentPlayer.pickAction();
+        //                isPlayComplete = playerPlayOrDrawACardAfterSayingUno(playerAction);
+        //            } while (isPlayComplete == false);
 
-            drawDeck.removeCard(cardDrawnIndex, discardDeck);
-            if (!currentPlayer.playDrawnCard(cardDrawn))
-            {
-                turn.goToNextTurn();
-            }
-        }
+        //        }
+        //    }
+        //    else 
+        //    {
+        //        Console.WriteLine("You already said Uno.");
+        //    }
 
-        private void playerActionDrawCard(int playerIndex)
-        {
-            Player playerToDraw = turn.Players[playerIndex];
-            int cardDrawnIndex = drawDeck.topCardIndex();
-            BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
+        //    return isPlayComplete;
+        //}
 
-            drawDeck.removeCard(cardDrawnIndex, discardDeck);
-            playerToDraw.putCardInHand(cardDrawn);
-        }        
-        
-        private void possibleConfrontActions()
-        {
-            foreach (string possibleAction in Enum.GetNames(typeof(PlayerActionConfront)))
-            {
-                Console.WriteLine(PlayerAction.Confront.ToString() + " " +  possibleAction);
-            }
-        }
+        //private bool playerPlayOrDrawACardAfterSayingUno(string[] playerAction)
+        //{
+        //    int cardPlayedIndex;
+        //    bool playerActionCompleted = false;
+        //    Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+        //    bool isPlayerInputEnum = Enum.TryParse<PlayerActionEnum>(playerAction[0], out PlayerActionEnum action);
 
-        private void actionErrorMessage()
-        {
-            Console.WriteLine("That is not a possible action.  Possible actions are: ");
-            foreach (string possibleAction in Enum.GetNames(typeof(PlayerAction)))
-            {
-                Console.WriteLine(possibleAction);
-            }
+        //    if (isPlayerInputACardInHand(playerAction[0]))
+        //    {
+        //        cardPlayedIndex = Convert.ToInt32(playerAction[0]);
+        //        playerActionCompleted = currentPlayer.playCard(cardPlayedIndex);
 
-            Console.WriteLine("or the number of the card you would like to play.");
-        }
+        //    }
+        //    else if (isPlayerInputEnum)
+        //    {
+        //        playerActionCompleted = playerActionAfterSayingUno(action);
+        //    }
+
+        //    return playerActionCompleted;
+        //}
+
+        //private bool playerActionAfterSayingUno(PlayerActionEnum playerAction)
+        //{
+        //    bool playerActionCompleted = false;
+        //    Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+
+        //    if (playerAction == PlayerActionEnum.Draw)
+        //    {
+        //        playerActionDrawCard();
+        //        currentPlayer.resetSaidUnoField();
+        //        playerActionCompleted = true;
+        //    }
+
+        //    return playerActionCompleted;
+        //}
+
+        //private bool confrontOtherPlayer(string[] playerAction)
+        //{
+        //    bool playerActionCompleted = false;
+
+        //    if (playerAction.Length > 1)
+        //    {
+        //        string playerActionSecondPart = playerAction[1];
+
+        //        bool enumConverted = Enum.TryParse<PlayerActionEnum>(playerActionSecondPart, out PlayerActionEnum action);
+        //        if (enumConverted)
+        //        {
+        //            if (action == PlayerActionEnum.Uno)
+        //            {
+        //                didPlayerSayUno();
+        //                playerActionCompleted = true;
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine(playerActionSecondPart + " is not a valid confront action.");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("The action 'Confront' needs a second word. Possible Confront actions are:");
+        //            possibleConfrontActions();
+        //        }
+        //    }
+
+        //    return playerActionCompleted;
+        //}
+
+        //private void didPlayerSayUno()
+        //{
+        //    int currentPlayerIndex = turn.CurrentPlayerIndex;
+        //    Player currentPlayer = turn.Players[currentPlayerIndex];
+        //    int playerPickedIndex;
+
+        //    playerPickedIndex = turn.pickAPlayer();
+        //    Player playerPicked = turn.Players[playerPickedIndex];
+
+        //    if (playerPicked.numCardsInHand() == 1 && playerPicked.SaidUno == false)
+        //    {
+        //        penaltyForNotSayingUno(playerPickedIndex);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine(playerPicked.Name + " Said Uno or did not have only one card in their hand.");
+        //    }
+        //}
+
+        //private void penaltyForNotSayingUno(int indexOfPlayerPicked)
+        //{
+        //    playerActionDrawCard(indexOfPlayerPicked);
+        //    playerActionDrawCard(indexOfPlayerPicked);
+
+        //    Console.WriteLine(turn.Players[indexOfPlayerPicked].Name + " drew two cards for having only one card in their hand and not saying uno.");
+        //}
+
+        //private void playerActionDrawCard()
+        //{
+        //    Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
+        //    int cardDrawnIndex = drawDeck.topCardIndex();
+        //    BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
+
+        //    drawDeck.removeCard(cardDrawnIndex, discardDeck);
+        //    if (!currentPlayer.playDrawnCard(cardDrawn))
+        //    {
+        //        turn.goToNextTurn();
+        //    }
+        //}
+
+        //private void playerActionDrawCard(int playerIndex)
+        //{
+        //    Player playerToDraw = turn.Players[playerIndex];
+        //    int cardDrawnIndex = drawDeck.topCardIndex();
+        //    BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
+
+        //    drawDeck.removeCard(cardDrawnIndex, discardDeck);
+        //    playerToDraw.putCardInHand(cardDrawn);
+        //}        
+
+        //private void possibleConfrontActions()
+        //{
+        //    foreach (string possibleAction in Enum.GetNames(typeof(PlayerActionConfront)))
+        //    {
+        //        Console.WriteLine(PlayerActionEnum.Confront.ToString() + " " +  possibleAction);
+        //    }
+        //}
+
+        //private void actionErrorMessage()
+        //{
+        //    Console.WriteLine("That is not a possible action.  Possible actions are: ");
+        //    foreach (string possibleAction in Enum.GetNames(typeof(PlayerActionEnum)))
+        //    {
+        //        Console.WriteLine(possibleAction);
+        //    }
+
+        //    Console.WriteLine("or the number of the card you would like to play.");
+        //}
 
         private bool isWinner()
         {
@@ -428,45 +426,44 @@ namespace UnoGame.Intermediaries
             }
 
             return isWinner;
-
         }
 
-        public void gameRules()
-        {
-            string welcome = "Welcome to the game of UNO.           \n\n";
-            Console.WriteLine(welcome.PadLeft(Console.WindowWidth - welcome.Length));
+        //public void gameRules()
+        //{
+        //    string welcome = "Welcome to the game of UNO.           \n\n";
+        //    Console.WriteLine(welcome.PadLeft(Console.WindowWidth - welcome.Length));
 
-            Console.WriteLine("PLAYING A CARD \n");
-            Console.WriteLine("When playing a card type in the number to the left of the card.");
-            Console.Write("For Example: If the card displays as: \"3 Green Draw 2\" type in \"3\".\n");
+        //    Console.WriteLine("PLAYING A CARD \n");
+        //    Console.WriteLine("When playing a card type in the number to the left of the card.");
+        //    Console.Write("For Example: If the card displays as: \"3 Green Draw 2\" type in \"3\".\n");
 
-            //ToDo: Write functionality for declaring uno. Then rewrite the directions.
-            Console.WriteLine("SAY UNO\n");
-            Console.WriteLine("In order to say UNO when playing your second to last card, type \"Uno\"");
-            Console.WriteLine("You will then be asked what card you want to play. See rules for playing a card.");
+        //    //ToDo: Write functionality for declaring uno. Then rewrite the directions.
+        //    Console.WriteLine("SAY UNO\n");
+        //    Console.WriteLine("In order to say UNO when playing your second to last card, type \"Uno\"");
+        //    Console.WriteLine("You will then be asked what card you want to play. See rules for playing a card.");
 
-            Console.WriteLine("\nPress any key to continue.");
-            Console.ReadLine();
+        //    Console.WriteLine("\nPress any key to continue.");
+        //    Console.ReadLine();
 
-            Console.WriteLine("CALL A PLAYER OUT FOR NOT SAYING UNO\n");
-            Console.WriteLine("If you want to call a player out for not saying Uno when they are playing");
-            Console.WriteLine("their second to last card type \"Uno\".  You will then be asked which player you want to pick. ");
-            Console.WriteLine("Type the number next to the players name to select a player.");
+        //    Console.WriteLine("CALL A PLAYER OUT FOR NOT SAYING UNO\n");
+        //    Console.WriteLine("If you want to call a player out for not saying Uno when they are playing");
+        //    Console.WriteLine("their second to last card type \"Uno\".  You will then be asked which player you want to pick. ");
+        //    Console.WriteLine("Type the number next to the players name to select a player.");
 
-            Console.WriteLine("If a player is called out for not saying Uno when they play their second to last");
-            Console.WriteLine("card they have to draw 2 cards.\n");
+        //    Console.WriteLine("If a player is called out for not saying Uno when they play their second to last");
+        //    Console.WriteLine("card they have to draw 2 cards.\n");
 
-            Console.WriteLine("DRAW A CARD\n");
-            Console.WriteLine("Type \"Draw\" to draw a card.You may draw a card on your turn whether or");
-            Console.WriteLine("not you have a playable card. Once you have drawn a card, you will have the");
-            Console.WriteLine("option to play the card you drew if it is a playable card. However, you will");
-            Console.WriteLine("not have the option to play a card in your hand.\n");
+        //    Console.WriteLine("DRAW A CARD\n");
+        //    Console.WriteLine("Type \"Draw\" to draw a card.You may draw a card on your turn whether or");
+        //    Console.WriteLine("not you have a playable card. Once you have drawn a card, you will have the");
+        //    Console.WriteLine("option to play the card you drew if it is a playable card. However, you will");
+        //    Console.WriteLine("not have the option to play a card in your hand.\n");
 
-            Console.WriteLine("SEE GAME RULES\n");
-            Console.WriteLine("If you want to see these instructions again during the game type \"Rules\".");
+        //    Console.WriteLine("SEE GAME RULES\n");
+        //    Console.WriteLine("If you want to see these instructions again during the game type \"Rules\".");
 
-            Console.WriteLine("\nPress any key to enter players and start the game.");
-            Console.ReadLine();
-        }
+        //    Console.WriteLine("\nPress any key to enter players and start the game.");
+        //    Console.ReadLine();
+        //}
     }
 }

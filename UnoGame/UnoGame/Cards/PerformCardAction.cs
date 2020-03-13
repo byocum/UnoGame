@@ -41,7 +41,7 @@ namespace UnoGame.Cards
             int cardDrawnIndex = drawDeck.topCardIndex();
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
-            drawDeck.removeCard(cardDrawnIndex, discardDeck);
+            drawDeck.removeCard(cardDrawnIndex);
             nextPlayer.addCardToHand(cardDrawn);
         }
 

@@ -35,6 +35,24 @@ namespace UnoGame.Decks
             CardDeck.Add(card);
         }
 
+        public virtual int removeCard(int cardIndex)
+        {
+            int cardsLeftInDeck = CardDeck.Count;
+
+            if (cardsLeftInDeck >= 1)
+            {
+                CardDeck.RemoveAt(cardIndex);
+                cardsLeftInDeck--;
+            }
+            else
+            {
+                errorNoCardsInDeck();
+                cardsLeftInDeck = CardDeck.Count;
+            }
+
+            return cardsLeftInDeck;
+        }
+
         protected virtual void errorNoCardsInDeck()
         {
             Console.WriteLine("The card cannot be removed because the deck does not have any cards.");
