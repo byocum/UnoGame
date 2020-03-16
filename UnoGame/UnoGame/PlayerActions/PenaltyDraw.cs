@@ -17,20 +17,20 @@ namespace UnoGame.PlayerActions
             TurnOrder = turn;
         }
 
-        public override bool performAction(int playerIndex)
+        public override bool PerformAction(int playerIndex)
         {
-            playerActionDrawCard(playerIndex);
+            PlayerActionDrawCard(playerIndex);
             return true;
         }
 
-        private void playerActionDrawCard(int playerIndex)
+        private void PlayerActionDrawCard(int playerIndex)
         {
             Player playerToDraw = TurnOrder.Players[playerIndex];
             int cardDrawnIndex = DrawDeck.topCardIndex();
             BasicCard cardDrawn = DrawDeck.CardDeck[cardDrawnIndex];
 
             DrawDeck.removeCard(cardDrawnIndex);
-            playerToDraw.addCardToHand(cardDrawn);
+            playerToDraw.AddCardToHand(cardDrawn);
         }
     }
 }

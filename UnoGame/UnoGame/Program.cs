@@ -8,11 +8,11 @@ namespace UnoGame
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Mediator mediator = new Mediator();
-            mediator.setupGame();
-            mediator.playGame();
+            mediator.SetupGame();
+            mediator.PlayGame();
         }
     }
 }

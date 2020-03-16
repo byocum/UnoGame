@@ -9,8 +9,8 @@ namespace UnoGame.PlayerActions
 {
     public class PerformPlayerActions
     {
-        private Turn turn;
-        PlayerActionFactory playerActionFactory;
+        private readonly Turn turn;
+        private readonly PlayerActionFactory playerActionFactory;
 
         public PerformPlayerActions(PlayerActionFactory playerActionFactory, Turn turn )
         {
@@ -18,35 +18,40 @@ namespace UnoGame.PlayerActions
             this.playerActionFactory = playerActionFactory; 
         }
 
-        public bool performPlayerAction(string[] playerInput)
+        public bool PerformPlayerAction(string[] playerInput)
         {            
-            bool playerActionCompleted = false;
+            bool playerActionCompleted;
             Player currentPlayer = turn.Players[turn.CurrentPlayerIndex];
-            bool isPlayerActionConfrontEnum = false;
-            PlayerActionConfront confrontAction;
             bool isPlayerInputInt = int.TryParse(playerInput[0], out int cardToPlayIndex);
             bool isPlayerActionEnum = Enum.TryParse<PlayerActionEnum>(playerInput[0], out PlayerActionEnum action);
 
             if (isPlayerInputInt)
             {
                 PlayerAction playCard = playerActionFactory.createPlayCardAction(currentPlayer.Hand);
-                playerActionCompleted = playCard.performAction(cardToPlayIndex);
+                playerActionCompleted = playCard.PerformAction(cardToPlayIndex);
             }
-            else if(playerInput.Length > 1 && isPlayerActionEnum && isPlayerActionConfrontEnum)
+            else if(playerInput.Length > 1 && isPlayerActionEnum)
             {
-                isPlayerActionConfrontEnum = Enum.TryParse<PlayerActionConfront>(playerInput[1], out confrontAction);
-                PlayerAction playerAction = playerActionFactory.createPlayerAction(action, confrontAction);
-                playerActionCompleted = playerAction.performAction();
+                bool isPlayerActionConfrontEnum = Enum.TryParse<PlayerActionConfront>(playerInput[1], out PlayerActionConfront confrontAction);
+                if (isPlayerActionConfrontEnum)
+                {
+                    PlayerAction playerAction = playerActionFactory.createPlayerAction(action, confrontAction);
+                    playerActionCompleted = playerAction.PerformAction();
+                }
+                else
+                {
+                    playerActionCompleted = false;
+                } 
             }
             else if (isPlayerActionEnum)
             {
                 PlayerAction playerAction = playerActionFactory.createPlayerAction(action, PlayerActionConfront.NoAction);
-                playerActionCompleted = playerAction.performAction();
+                playerActionCompleted = playerAction.PerformAction();
             }
             else
             {
                 PlayerAction playerAction = playerActionFactory.createPlayerAction(PlayerActionEnum.NoAction, PlayerActionConfront.NoAction);
-                playerActionCompleted = playerAction.performAction();
+                playerActionCompleted = playerAction.PerformAction();
             }
 
             return playerActionCompleted;

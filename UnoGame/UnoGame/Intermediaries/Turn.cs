@@ -9,8 +9,8 @@ namespace UnoGame.Intermediaries
 {
     public class Turn
     {
-        List<Player> players;
-        int currentPlayerIndex;
+        private readonly List<Player> players;
+        private int currentPlayerIndex;
         TurnDirection turnDirection;
 
         public List<Player> Players
@@ -30,7 +30,7 @@ namespace UnoGame.Intermediaries
             turnDirection = TurnDirection.Ascending;
         }
 
-        public void addPlayer(string name, Deck discardDeck)
+        public void AddPlayer(string name, Deck discardDeck)
         {
             name = Function.titleCase(name);
 
@@ -38,7 +38,7 @@ namespace UnoGame.Intermediaries
             players.Add(player);
         }
 
-        public void listOtherPlayers()
+        public void ListOtherPlayers()
         {
             for (int i = 0; i < Players.Count; i++)
             {
@@ -49,7 +49,7 @@ namespace UnoGame.Intermediaries
             }
         }
 
-        public int pickAPlayer()
+        public int PickAPlayer()
         {
             Player currentPlayer = Players[CurrentPlayerIndex];
 
@@ -59,9 +59,9 @@ namespace UnoGame.Intermediaries
             do
             {
                 Console.WriteLine("Pick the number of one of the following players: ");
-                listOtherPlayers();
+                ListOtherPlayers();
 
-                string response = currentPlayer.playerEntryTitleCase();
+                string response = currentPlayer.PlayerEntryTitleCase();
                 bool isNumber = int.TryParse(response, out playerPickedIndex);
 
                 if (isNumber && playerPickedIndex >= 0 && playerPickedIndex < Players.Count && playerPickedIndex != CurrentPlayerIndex)
@@ -78,7 +78,7 @@ namespace UnoGame.Intermediaries
             return playerPickedIndex;
         }
 
-        public void reverseTurnDirection()
+        public void ReverseTurnDirection()
         {
             if(turnDirection == TurnDirection.Ascending)
             {
@@ -90,30 +90,30 @@ namespace UnoGame.Intermediaries
             }
         }
 
-        public void goToNextTurn()
+        public void GoToNextTurn()
         {
             if (turnDirection == TurnDirection.Ascending)
             {
-                currentPlayerIndex = getNextTurnAscendingIndex();
+                currentPlayerIndex = GetNextTurnAscendingIndex();
             }
             else
             {
-                currentPlayerIndex = getNextTurnDescendingIndex();
+                currentPlayerIndex = GetNextTurnDescendingIndex();
             }
         }
-        public int getNextTurnIndex()
+        public int GetNextTurnIndex()
         {
             if (turnDirection == TurnDirection.Ascending)
             {
-                return getNextTurnAscendingIndex();
+                return GetNextTurnAscendingIndex();
             }
             else
             {
-                return getNextTurnDescendingIndex();
+                return GetNextTurnDescendingIndex();
             }
         }
 
-        private int getNextTurnAscendingIndex()
+        private int GetNextTurnAscendingIndex()
         {
             int turnOfLastPlayer = players.Count - 1;
 
@@ -127,7 +127,7 @@ namespace UnoGame.Intermediaries
             }
         }
 
-        private int getNextTurnDescendingIndex()
+        private int GetNextTurnDescendingIndex()
         {
             int turnOfLastPlayer = players.Count - 1;
 

@@ -13,43 +13,43 @@ namespace UnoGame.PlayerActions
             DiscardDeck = discardDeck;
             TurnOrder = turn;
         }
-        public override bool performAction()
+        public override bool PerformAction()
         {
-            dealCards();
+            DealCards();
             return true;
         }
-        private void dealCards()
+        private void DealCards()
         {
             Console.WriteLine("Dealing Cards...");
 
-            dealEachPlayerSevenCards();
+            DealEachPlayerSevenCards();
         }
 
-        private void dealEachPlayerSevenCards()
+        private void DealEachPlayerSevenCards()
         {
             for (int numCardsEachPersonHas = 0; numCardsEachPersonHas < 7; numCardsEachPersonHas++)
             {
-                dealEachPlayerOneCard();
+                DealEachPlayerOneCard();
             }
         }
 
-        private void dealEachPlayerOneCard()
+        private void DealEachPlayerOneCard()
         {
             for (int player = 0; player < TurnOrder.Players.Count; player++)
             {
-                dealCard(player);
+                DealCard(player);
             }
 
         }
 
-        private void dealCard(int playerIndex)
+        private void DealCard(int playerIndex)
         {
             int drawDeckTopCardIndex = DrawDeck.topCardIndex();
 
             BasicCard cardDealing = DrawDeck.CardDeck[drawDeckTopCardIndex];
 
             DrawDeck.removeCard(drawDeckTopCardIndex);
-            TurnOrder.Players[playerIndex].addCardToHand(cardDealing);
+            TurnOrder.Players[playerIndex].AddCardToHand(cardDealing);
         }
     }
 }

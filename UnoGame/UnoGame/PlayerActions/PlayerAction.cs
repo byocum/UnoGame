@@ -29,19 +29,19 @@ namespace UnoGame.PlayerActions
             set { turnOrder = value; }
         }
         
-        public virtual bool performAction()
+        public virtual bool PerformAction()
         {
             return false;
         }
-        public virtual bool performAction(int index)
+        public virtual bool PerformAction(int index)
         {
             return false;
         }
 
-        protected bool playerEnterYesOrNo()
+        protected bool PlayerEnterYesOrNo()
         {
             string playCardDrawn;
-            bool isYes = false;
+            bool isYes;
 
             Console.WriteLine("Enter y for yes or another character for no");
             playCardDrawn = Console.ReadLine().Trim().ToLower();
@@ -61,12 +61,12 @@ namespace UnoGame.PlayerActions
             return isYes;
         }
 
-        protected bool isPlayerInputACardInDeck(int cardIndex, Deck deckToPlayFrom)
+        protected bool IsPlayerInputACardInDeck(int cardIndex)
         {
             bool isCardInDeck = false;
             Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
 
-            if (currentPlayer.isCardInHand(cardIndex))
+            if (currentPlayer.IsCardInHand(cardIndex))
             {
                 isCardInDeck = true;
             }

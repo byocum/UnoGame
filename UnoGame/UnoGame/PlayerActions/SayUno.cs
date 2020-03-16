@@ -9,19 +9,19 @@ namespace UnoGame.PlayerActions
 {
     public class SayUno:PlayerAction
     {
-        private PlayerAction playCard;
-        private PlayerAction draw;
+        private readonly PlayerAction playCard;
+        private readonly PlayerAction draw;
         public SayUno(Turn turn, PlayerAction playCard, PlayerAction draw)
         {
             TurnOrder = turn;
             this.playCard = playCard;
             this.draw = draw;
         }
-        public override bool performAction()
+        public override bool PerformAction()
         {
-            return playerSaysUno();
+            return PlayerSaysUno();
         }
-        private bool playerSaysUno()
+        private bool PlayerSaysUno()
         {
 
             bool readyForNextPlayersTurn = false;
@@ -30,13 +30,13 @@ namespace UnoGame.PlayerActions
 
             if (currentPlayer.SaidUno == false)
             {
-                if (currentPlayer.sayUno())
+                if (currentPlayer.SayUno())
                 {
                     do
                     {
                         Console.WriteLine("Please pick a card to play or draw a card.");
-                        playerAction = currentPlayer.pickAction();
-                        readyForNextPlayersTurn = playerPlayOrDrawACardAfterSayingUno(playerAction);
+                        playerAction = currentPlayer.PickAction();
+                        readyForNextPlayersTurn = PlayerPlayOrDrawACardAfterSayingUno(playerAction);
                     } while (readyForNextPlayersTurn == false);
 
                 }
@@ -49,7 +49,7 @@ namespace UnoGame.PlayerActions
             return readyForNextPlayersTurn;
         }
 
-        private bool playerPlayOrDrawACardAfterSayingUno(string[] playerAction)
+        private bool PlayerPlayOrDrawACardAfterSayingUno(string[] playerAction)
         {
             bool readyForNextPlayersTurn = false;
             bool isPlayerInputInt = int.TryParse(playerAction[0], out int cardToPlayIndex);
@@ -57,13 +57,13 @@ namespace UnoGame.PlayerActions
 
             if (isPlayerInputInt)
             {
-                readyForNextPlayersTurn = playCard.performAction(cardToPlayIndex);
+                readyForNextPlayersTurn = playCard.PerformAction(cardToPlayIndex);
             }
             else if (isPlayerActionEnum)
             {
                 if(action == PlayerActionEnum.Draw)
                 {
-                    readyForNextPlayersTurn = draw.performAction(TurnOrder.CurrentPlayerIndex);
+                    readyForNextPlayersTurn = draw.PerformAction(TurnOrder.CurrentPlayerIndex);
                 }
             }
 

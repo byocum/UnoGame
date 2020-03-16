@@ -15,26 +15,25 @@ namespace UnoGame.PlayerActions
             TurnOrder = turn;
         }
 
-        public override bool performAction()
+        public override bool PerformAction()
         {
-            drawAndPlayCard();
+            DrawAndPlayCard();
             return true;
         }
 
-        private void drawAndPlayCard()
+        private void DrawAndPlayCard()
         {
-            Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
             int cardDrawnIndex = DrawDeck.topCardIndex();
             BasicCard cardDrawn = DrawDeck.CardDeck[cardDrawnIndex];
 
             DrawDeck.removeCard(cardDrawnIndex);
-            if (!playDrawnCard(cardDrawn))
+            if (!PlayDrawnCard(cardDrawn))
             {
-                TurnOrder.goToNextTurn();
+                TurnOrder.GoToNextTurn();
             }
         }
 
-        private bool playDrawnCard(BasicCard cardDrawn)
+        private bool PlayDrawnCard(BasicCard cardDrawn)
         {
             bool playedCard = false;
             Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
@@ -46,20 +45,20 @@ namespace UnoGame.PlayerActions
                 Console.WriteLine("The card you drew is playable.");
                 Console.WriteLine("Would you like to play this card?");
 
-                if (playerEnterYesOrNo())
+                if (PlayerEnterYesOrNo())
                 {
-                    currentPlayer.playCard(cardDrawn);
+                    currentPlayer.PlayCard(cardDrawn);
                     playedCard = true;
                 }
                 else
                 {
-                    currentPlayer.addCardToHand(cardDrawn);
+                    currentPlayer.AddCardToHand(cardDrawn);
                 }
 
             }
             else
             {
-                currentPlayer.addCardToHand(cardDrawn);
+                currentPlayer.AddCardToHand(cardDrawn);
             }
 
             return playedCard;

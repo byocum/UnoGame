@@ -12,9 +12,9 @@ namespace UnoGame.PlayerActions
 {
     public class PerformMediatorActions
     {
-        private Turn turn;
-        private Deck drawDeck;
-        private Deck discardDeck;
+        private readonly Turn turn;
+        private readonly Deck drawDeck;
+        private readonly Deck discardDeck;
 
         public PerformMediatorActions(Deck drawDeck, Deck discardDeck, Turn turn)
         {
@@ -23,39 +23,34 @@ namespace UnoGame.PlayerActions
             this.discardDeck = discardDeck;
         }
 
-        //public void playCard(int cardIndex, Deck deckToPlayFrom)
-        //{
-        //    PlayerAction playCard = new PlayCard(deckToPlayFrom, discardDeck);
-        //    playCard.performAction(cardIndex);
-        //}
-        public void showRules()
+        public void ShowRules()
         {
             PlayerAction showRules = new Rules();
-            showRules.performAction();
+            showRules.PerformAction();
         }
 
-        public void determinePlayers()
+        public void DeterminePlayers()
         {
             PlayerAction determinePlayers = new DeterminePlayers(turn, discardDeck);
-            determinePlayers.performAction();
+            determinePlayers.PerformAction();
         }
 
-        public void deal()
+        public void Deal()
         {
             PlayerAction deal = new Deal(drawDeck, discardDeck, turn);
-            deal.performAction();
+            deal.PerformAction();
         }
 
-        public void penaltyDraw(int playerThatGetsPenaltyIndex)
+        public void PenaltyDraw(int playerThatGetsPenaltyIndex)
         {
             PlayerAction penaltydraw = new PenaltyDraw(drawDeck, discardDeck, turn);
-            penaltydraw.performAction(playerThatGetsPenaltyIndex);
+            penaltydraw.PerformAction(playerThatGetsPenaltyIndex);
         }
 
-        public void discardDeckAddFirstCard()
+        public void DiscardDeckAddFirstCard()
         {
             PlayerAction discardDeckAddFirstCard = new DiscardDeckAddFirstCard(drawDeck, discardDeck);
-            discardDeckAddFirstCard.performAction();
+            discardDeckAddFirstCard.PerformAction();
         }
     }
 }

@@ -10,20 +10,20 @@ namespace UnoGame.PlayerActions
 {
     public class PlayCard : PlayerAction
     {
-        Deck deckToPlayFrom;
+        private readonly Deck deckToPlayFrom;
         public PlayCard(Deck deckToPlayFrom, Deck discardDeck, Turn turn)
         {
             this.deckToPlayFrom = deckToPlayFrom;
             DiscardDeck = discardDeck;
             TurnOrder = turn;
         }
-        public override bool performAction(int index)
+        public override bool PerformAction(int index)
         {
             bool actionCompleted = false;
 
-            if (isPlayerInputACardInDeck(index, deckToPlayFrom))
+            if (IsPlayerInputACardInDeck(index))
             {
-                actionCompleted = playCard(index);
+                actionCompleted = Play(index);
 
             }
             else
@@ -34,7 +34,7 @@ namespace UnoGame.PlayerActions
             return actionCompleted;
         }
 
-        public bool playCard(int cardIndex)
+        public bool Play(int cardIndex)
         {
             bool isPlayComplete = false;
             BasicCard cardToBePlayed = deckToPlayFrom.CardDeck[cardIndex];

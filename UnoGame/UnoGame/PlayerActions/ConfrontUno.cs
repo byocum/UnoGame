@@ -10,34 +10,32 @@ namespace UnoGame.PlayerActions
 {
     public class ConfrontUno:PlayerAction
     {
-        PlayerAction penaltyDraw;
+        private readonly PlayerAction penaltyDraw;
         public ConfrontUno(Turn turn, PlayerAction penaltyDraw)
         {
             TurnOrder = turn;
             this.penaltyDraw = penaltyDraw;
         }
 
-        public override bool performAction()
+        public override bool PerformAction()
         {
             bool isNextPlayersTurn = false;
 
-            didPlayerSayUno();
+            DidPlayerSayUno();
 
             return isNextPlayersTurn;
         }
 
-        private void didPlayerSayUno()
+        private void DidPlayerSayUno()
         {
-            int currentPlayerIndex = TurnOrder.CurrentPlayerIndex;
-            Player currentPlayer = TurnOrder.Players[currentPlayerIndex];
             int playerPickedIndex;
 
-            playerPickedIndex = TurnOrder.pickAPlayer();
+            playerPickedIndex = TurnOrder.PickAPlayer();
             Player playerPicked = TurnOrder.Players[playerPickedIndex];
 
-            if (playerPicked.numCardsInHand() == 1 && playerPicked.SaidUno == false)
+            if (playerPicked.NumCardsInHand() == 1 && playerPicked.SaidUno == false)
             {
-                penaltyForNotSayingUno(playerPickedIndex);
+                PenaltyForNotSayingUno(playerPickedIndex);
             }
             else
             {
@@ -45,10 +43,10 @@ namespace UnoGame.PlayerActions
             }
         }
 
-        private void penaltyForNotSayingUno(int indexOfPlayerPicked)
+        private void PenaltyForNotSayingUno(int indexOfPlayerPicked)
         {
-            penaltyDraw.performAction(indexOfPlayerPicked);
-            penaltyDraw.performAction(indexOfPlayerPicked);
+            penaltyDraw.PerformAction(indexOfPlayerPicked);
+            penaltyDraw.PerformAction(indexOfPlayerPicked);
 
             Console.WriteLine(TurnOrder.Players[indexOfPlayerPicked].Name + " drew two cards for having only one card in their hand and not saying uno.");
         }

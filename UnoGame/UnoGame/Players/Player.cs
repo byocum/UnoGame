@@ -7,9 +7,9 @@ namespace UnoGame.Players
 {
     public class Player
     {
-        private string name;
-        private Deck hand;
-        private Deck discardDeck;
+        private readonly string name;
+        private readonly Deck hand;
+        private readonly Deck discardDeck;
         private bool saidUno;
 
         public string Name
@@ -34,32 +34,32 @@ namespace UnoGame.Players
             this.saidUno = false;
         }
 
-        public void addCardToHand(BasicCard card)
+        public void AddCardToHand(BasicCard card)
         {
             hand.addCard(card);
 
             if(hand.CardDeck.Count > 1)
             {
-                resetSaidUnoField();
+                ResetSaidUnoField();
             }
         }
 
-        public void playCard(BasicCard cardToBePlayed)
+        public void PlayCard(BasicCard cardToBePlayed)
         {
             discardDeck.addCard(cardToBePlayed);
             cardToBePlayed.playCard();
         }
 
-        public int numCardsInHand()
+        public int NumCardsInHand()
         {
             return hand.CardDeck.Count;
         }
 
-        public string[] pickAction()
+        public string[] PickAction()
         {
             string playerAction;
             string[] playerActionParts;
-            playerAction = playerEntryTitleCase();
+            playerAction = PlayerEntryTitleCase();
             playerActionParts = playerAction.Split(' ');
 
             Console.WriteLine();
@@ -67,7 +67,7 @@ namespace UnoGame.Players
             return playerActionParts;
         }
 
-        public string playerEntryTitleCase()
+        public string PlayerEntryTitleCase()
         {
             string playerAction;
             playerAction = Console.ReadLine().Trim().ToLower();
@@ -75,17 +75,17 @@ namespace UnoGame.Players
             return playerAction;
         }
 
-        public void lookAtHand()
+        public void LookAtHand()
         {
             hand.lookAtDeck();
         }
 
-        public bool isCardInHand(int index)
+        public bool IsCardInHand(int index)
         {
             return hand.isCardInDeck(index);
         }
 
-        public bool sayUno()
+        public bool SayUno()
         {
             bool didSayUno = false;
 
@@ -105,7 +105,7 @@ namespace UnoGame.Players
             return didSayUno;
         }
 
-        public void resetSaidUnoField()
+        public void ResetSaidUnoField()
         {
             saidUno = false;
         }

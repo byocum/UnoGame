@@ -13,13 +13,13 @@ namespace UnoGame.PlayerActions
             TurnOrder = turn;
             DiscardDeck = discardDeck;
         }
-        public override bool performAction()
+        public override bool PerformAction()
         {
-            determinePlayers();
+            CreatePlayers();
             return true;
         }
 
-        private void determinePlayers()
+        private void CreatePlayers()
         {
             string playerName;
             bool addAnotherPlayer = true;
@@ -29,12 +29,12 @@ namespace UnoGame.PlayerActions
             {
                 Console.WriteLine("Please enter a name for the player:");
                 playerName = Console.ReadLine();
-                TurnOrder.addPlayer(playerName, DiscardDeck);
+                TurnOrder.AddPlayer(playerName, DiscardDeck);
 
                 if (count > 1)
                 {
                     Console.WriteLine("Would you like to add another player?");
-                    addAnotherPlayer = playerEnterYesOrNo();
+                    addAnotherPlayer = PlayerEnterYesOrNo();
                 }
                 count++;
             }

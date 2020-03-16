@@ -11,14 +11,14 @@ namespace UnoGame.Intermediaries
 {
     public class Mediator
     {
-        private Turn turn;
-        private Deck drawDeck;
-        private Deck discardDeck;
-        private PerformCardAction performCardAction;
-        private CardFactory cardFactory;
-        private PerformMediatorActions performMediatorActions;
-        private PerformPlayerActions performPlayerActions;
-        private PlayerActionFactory playerActionFactory;
+        private readonly Turn turn;
+        private readonly Deck drawDeck;
+        private readonly Deck discardDeck;
+        private readonly PerformCardAction performCardAction;
+        private readonly CardFactory cardFactory;
+        private readonly PerformMediatorActions performMediatorActions;
+        private readonly PerformPlayerActions performPlayerActions;
+        private readonly PlayerActionFactory playerActionFactory;
 
         public Mediator()
         {
@@ -33,79 +33,78 @@ namespace UnoGame.Intermediaries
 
         }
 
-        public void setupGame()
+        public void SetupGame()
         {
-            performMediatorActions.showRules();
+            performMediatorActions.ShowRules();
             drawDeck.createCardsForDeck(cardFactory); 
             drawDeck.shuffle();
-            performMediatorActions.determinePlayers();
-            performMediatorActions.deal();
+            performMediatorActions.DeterminePlayers();
+            performMediatorActions.Deal();
         }
 
-        public void playGame()
+        public void PlayGame()
         {
             Player currentPlayer;
 
             Console.WriteLine("Starting Game...");
 
-            performMediatorActions.discardDeckAddFirstCard();
+            performMediatorActions.DiscardDeckAddFirstCard();
 
             do
             {
-                int currentPlayerIndex = turn.CurrentPlayerIndex;
                 currentPlayer = turn.Players[turn.CurrentPlayerIndex];
 
                 Console.Clear();
                 Console.WriteLine(currentPlayer.Name + "'s turn.");
-                pause();
+                Pause();
 
-                setUpPlayerToTakeTheirTurn(currentPlayer);
+                SetUpPlayerToTakeTheirTurn(currentPlayer);
 
-                playerTakesTheirTurn(currentPlayer);
+                PlayerTakesTheirTurn(currentPlayer);
 
-                pause();
+                Pause();
 
             }
-            while (isWinner() == false);
+            while (IsWinner() == false);
 
         }
 
-        private void pause()
+        private void Pause()
         {
             Console.WriteLine("Press any key to continue.");
             Console.ReadLine();
 
         }
-        private void setUpPlayerToTakeTheirTurn(Player currentPlayer)
+        private void SetUpPlayerToTakeTheirTurn(Player currentPlayer)
         {
             Console.WriteLine();
             discardDeck.displayTopCard();
             Console.WriteLine("Your hand is: ");
 
-            currentPlayer.lookAtHand();
+            currentPlayer.LookAtHand();
         }
-        private void playerTakesTheirTurn(Player currentPlayer)
+        private void PlayerTakesTheirTurn(Player currentPlayer)
         {
-            bool readyforNextPlayersTurn = false;
+            bool readyforNextPlayersTurn;
 
             do
             {
                 Console.WriteLine("What would you like to do?");
-                string[] action = currentPlayer.pickAction();
-                readyforNextPlayersTurn = performPlayerActions.performPlayerAction(action);
+                string[] action = currentPlayer.PickAction();
+                readyforNextPlayersTurn = performPlayerActions.PerformPlayerAction(action);
 
             } while (readyforNextPlayersTurn == false);
 
         }
 
-        private bool isWinner()
+        private bool IsWinner()
         {
             List<Player> players = turn.Players;
             bool isWinner = false;
 
             for (int i = 0; i < players.Count; i++)
             {
-                if (players[i].numCardsInHand() <= 0)
+                if (players[i].NumCardsInHand() <= 0)
                 {
                     isWinner = true;
                     Console.WriteLine(players[i].Name + " won!");

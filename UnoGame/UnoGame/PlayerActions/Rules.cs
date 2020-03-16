@@ -10,7 +10,7 @@ namespace UnoGame.PlayerActions
     {
         public Rules() { }
 
-        public override bool performAction()
+        public override bool PerformAction()
         {
             string welcome = "Welcome to the game of UNO.           \n\n";
             Console.WriteLine(welcome.PadLeft(Console.WindowWidth - welcome.Length));

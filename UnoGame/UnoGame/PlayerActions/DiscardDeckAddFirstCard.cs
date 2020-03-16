@@ -15,24 +15,24 @@ namespace UnoGame.PlayerActions
             DiscardDeck = discardDeck;
         }
 
-        public override bool performAction()
+        public override bool PerformAction()
         {
-            addValidInitialCardToDiscardDeck();
+            AddValidInitialCardToDiscardDeck();
             return true;
         }
-        private void addValidInitialCardToDiscardDeck()
+        private void AddValidInitialCardToDiscardDeck()
         {
             Console.WriteLine("Putting the draw deck top card on the discard deck...");
-            moveCardFromDrawDeckToDiscardDeck();
+            MoveCardFromDrawDeckToDiscardDeck();
 
-            makeFirstCardOnDiscardDeckValid();
+            MakeFirstCardOnDiscardDeckValid();
 
             DiscardDeck.displayTopCard();
 
-            playDiscardDeckTopCard();
+            PlayDiscardDeckTopCard();
         }
 
-        private void makeFirstCardOnDiscardDeckValid()
+        private void MakeFirstCardOnDiscardDeckValid()
         {
 
             int discardDeckTopCardIndex = DiscardDeck.topCardIndex();
@@ -42,11 +42,11 @@ namespace UnoGame.PlayerActions
             {
                 DiscardDeck.removeCard(discardDeckTopCardIndex);
                 DrawDeck.addCardRandomlyToDeck(discardDeckTopCard);
-                moveCardFromDrawDeckToDiscardDeck();
+                MoveCardFromDrawDeckToDiscardDeck();
             }
         }
 
-        private void moveCardFromDrawDeckToDiscardDeck()
+        private void MoveCardFromDrawDeckToDiscardDeck()
         {
             int drawDeckTopCardIndex = DrawDeck.topCardIndex();
             BasicCard drawDeckTopCard = DrawDeck.CardDeck[drawDeckTopCardIndex];
@@ -55,7 +55,7 @@ namespace UnoGame.PlayerActions
             DiscardDeck.addCard(drawDeckTopCard);
         }
 
-        private void playDiscardDeckTopCard()
+        private void PlayDiscardDeckTopCard()
         {
             BasicCard discardDeckTopCard = DiscardDeck.CardDeck[DiscardDeck.topCardIndex()];
 

@@ -24,30 +24,30 @@ namespace UnoGame.Cards
             }
             else
             {
-                turn.reverseTurnDirection();
+                turn.ReverseTurnDirection();
             }  
         }
 
         public void ReverseTurnDirectionTwoPlayers()
         {
-                turn.reverseTurnDirection();
-                turn.goToNextTurn();
+                turn.ReverseTurnDirection();
+                turn.GoToNextTurn();
         }
 
         public void DrawCard()
         {
-            int nextPlayerIndex = turn.getNextTurnIndex();
+            int nextPlayerIndex = turn.GetNextTurnIndex();
             Player nextPlayer = turn.Players[nextPlayerIndex];
             int cardDrawnIndex = drawDeck.topCardIndex();
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
             drawDeck.removeCard(cardDrawnIndex);
-            nextPlayer.addCardToHand(cardDrawn);
+            nextPlayer.AddCardToHand(cardDrawn);
         }
 
         public void NextTurn()
         {
-            turn.goToNextTurn();
+            turn.GoToNextTurn();
         }
     }
 }
