@@ -9,7 +9,7 @@ namespace UnoGame.PlayerActions
 {
     public class DiscardDeckAddFirstCard:PlayerAction
     {
-        public DiscardDeckAddFirstCard(DrawDeck drawDeck, DiscardDeck discardDeck)
+        public DiscardDeckAddFirstCard(Deck drawDeck, Deck discardDeck)
         {
             DrawDeck = drawDeck;
             DiscardDeck = discardDeck;

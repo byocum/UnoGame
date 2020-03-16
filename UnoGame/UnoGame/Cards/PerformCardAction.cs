@@ -6,10 +6,10 @@ namespace UnoGame.Cards
 {
     public class PerformCardAction
     {
-        DrawDeck drawDeck;
-        DiscardDeck discardDeck;
+        Deck drawDeck;
+        Deck discardDeck;
         Turn turn;
-        public PerformCardAction(DrawDeck drawDeck, DiscardDeck discardDeck, Turn turn)
+        public PerformCardAction(Deck drawDeck, Deck discardDeck, Turn turn)
         {
             this.drawDeck = drawDeck;
             this.discardDeck = discardDeck;

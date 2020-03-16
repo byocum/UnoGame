@@ -13,10 +13,10 @@ namespace UnoGame.PlayerActions
     public class PerformMediatorActions
     {
         private Turn turn;
-        private DrawDeck drawDeck;
-        private DiscardDeck discardDeck;
+        private Deck drawDeck;
+        private Deck discardDeck;
 
-        public PerformMediatorActions(DrawDeck drawDeck, DiscardDeck discardDeck, Turn turn)
+        public PerformMediatorActions(Deck drawDeck, Deck discardDeck, Turn turn)
         {
             this.turn = turn;
             this.drawDeck = drawDeck;

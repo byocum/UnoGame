@@ -7,17 +7,17 @@ namespace UnoGame.PlayerActions
 {
     public abstract class PlayerAction
     {
-        private DrawDeck drawDeck;
-        private DiscardDeck discardDeck;
+        private Deck drawDeck;
+        private Deck discardDeck;
         private Turn turnOrder;
 
-        protected DrawDeck DrawDeck
+        protected Deck DrawDeck
         {
             get { return drawDeck; }
             set { drawDeck = value; }
         }
 
-        protected DiscardDeck DiscardDeck
+        protected Deck DiscardDeck
         {
             get { return discardDeck; }
             set { discardDeck = value; }

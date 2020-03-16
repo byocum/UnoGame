@@ -10,7 +10,7 @@ namespace UnoGame.PlayerActions
 {
     public class PenaltyDraw:PlayerAction
     {
-        public PenaltyDraw(DrawDeck drawDeck, DiscardDeck discardDeck, Turn turn)
+        public PenaltyDraw(Deck drawDeck, Deck discardDeck, Turn turn)
         {
             DrawDeck = drawDeck;
             DiscardDeck = discardDeck;

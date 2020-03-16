@@ -8,22 +8,22 @@ namespace UnoGame.PlayerActions
 {
     class Draw : PlayerAction
     {
-        public Draw(DrawDeck drawDeck, DiscardDeck discardDeck, Turn turn)
+        public Draw(Deck drawDeck, Deck discardDeck, Turn turn)
         {
             DrawDeck = drawDeck;
             DiscardDeck = discardDeck;
             TurnOrder = turn;
         }
 
-        public override bool performAction(int playerIndex)
+        public override bool performAction()
         {
-            drawAndPlayCard(playerIndex);
+            drawAndPlayCard();
             return true;
         }
 
-        private void drawAndPlayCard(int playerIndex)
+        private void drawAndPlayCard()
         {
-            Player currentPlayer = TurnOrder.Players[playerIndex];
+            Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
             int cardDrawnIndex = DrawDeck.topCardIndex();
             BasicCard cardDrawn = DrawDeck.CardDeck[cardDrawnIndex];
 

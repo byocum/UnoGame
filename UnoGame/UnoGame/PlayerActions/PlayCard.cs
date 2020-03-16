@@ -11,7 +11,7 @@ namespace UnoGame.PlayerActions
     public class PlayCard : PlayerAction
     {
         Deck deckToPlayFrom;
-        public PlayCard(Deck deckToPlayFrom, DiscardDeck discardDeck, Turn turn)
+        public PlayCard(Deck deckToPlayFrom, Deck discardDeck, Turn turn)
         {
             this.deckToPlayFrom = deckToPlayFrom;
             DiscardDeck = discardDeck;

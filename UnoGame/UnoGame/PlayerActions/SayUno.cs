@@ -25,7 +25,6 @@ namespace UnoGame.PlayerActions
         {
 
             bool readyForNextPlayersTurn = false;
-            bool playerActionComplete = false;
             string[] playerAction;
             Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
 
@@ -37,8 +36,8 @@ namespace UnoGame.PlayerActions
                     {
                         Console.WriteLine("Please pick a card to play or draw a card.");
                         playerAction = currentPlayer.pickAction();
-                        playerActionComplete = playerPlayOrDrawACardAfterSayingUno(playerAction);
-                    } while (playerActionComplete == false);
+                        readyForNextPlayersTurn = playerPlayOrDrawACardAfterSayingUno(playerAction);
+                    } while (readyForNextPlayersTurn == false);
 
                 }
             }
@@ -58,13 +57,13 @@ namespace UnoGame.PlayerActions
 
             if (isPlayerInputInt)
             {
-                playCard.performAction(cardToPlayIndex);
+                readyForNextPlayersTurn = playCard.performAction(cardToPlayIndex);
             }
             else if (isPlayerActionEnum)
             {
                 if(action == PlayerActionEnum.Draw)
                 {
-                    draw.performAction(TurnOrder.CurrentPlayerIndex);
+                    readyForNextPlayersTurn = draw.performAction(TurnOrder.CurrentPlayerIndex);
                 }
             }
 

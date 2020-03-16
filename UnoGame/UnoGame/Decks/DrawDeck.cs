@@ -13,7 +13,7 @@ namespace UnoGame.Decks
             this.CardDeck = new List<BasicCard>();
         }
 
-        public void createCardsForDeck(ICardFactory cardFactory)
+        public override void createCardsForDeck(ICardFactory cardFactory)
         {
             this.CardFactory = cardFactory;
 
@@ -40,8 +40,7 @@ namespace UnoGame.Decks
             }
         }
 
-        //ToDo refresh deck for draw deck should be implemented at the appropriate time in the mediator
-        public int refreshDeck(DiscardDeck discardDeck)
+        public override int refreshDeck(Deck discardDeck)
         {
             Console.WriteLine("Refreshing the Draw Deck...");
             int cardsLeftInDeck = CardDeck.Count;
@@ -57,6 +56,11 @@ namespace UnoGame.Decks
             discardDeck.CardDeck.Add(discardDeckTopCard);
 
             return cardsLeftInDeck;
+        }
+
+        public override void displayTopCard()
+        {
+            Console.WriteLine("The top card on the draw deck is: " + CardDeck[topCardIndex()].Color + " " + CardDeck[topCardIndex()].Type);
         }
     }
 }

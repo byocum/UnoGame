@@ -33,15 +33,6 @@
         Decending = 1
     }
 
-    //public enum MediatorActionEnum
-    //{
-    //    Rules = 0,
-    //    DeterminePlayers = 1,
-    //    Deal = 2,
-    //    PenaltyDraw = 3,
-
-    //}
-
     public enum PlayerActionEnum
     {
         NoAction = 0,

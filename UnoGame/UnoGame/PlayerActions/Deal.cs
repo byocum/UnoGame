@@ -7,7 +7,7 @@ namespace UnoGame.PlayerActions
 {
     public class Deal : PlayerAction
     {
-        public Deal(DrawDeck drawDeck, DiscardDeck discardDeck, Turn turn)
+        public Deal(Deck drawDeck, Deck discardDeck, Turn turn)
         {
             DrawDeck = drawDeck;
             DiscardDeck = discardDeck;

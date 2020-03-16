@@ -8,7 +8,7 @@ namespace UnoGame.PlayerActions
 {
     public class DeterminePlayers:PlayerAction
     {
-        public DeterminePlayers(Turn turn, DiscardDeck discardDeck)
+        public DeterminePlayers(Turn turn, Deck discardDeck)
         {
             TurnOrder = turn;
             DiscardDeck = discardDeck;

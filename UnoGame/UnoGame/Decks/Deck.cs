@@ -58,6 +58,8 @@ namespace UnoGame.Decks
             Console.WriteLine("The card cannot be removed because the deck does not have any cards.");
         }
 
+        public abstract void displayTopCard();
+
 
         //Modern version of Fishers and Yates' alogrithm
         public void shuffle()
@@ -101,5 +103,15 @@ namespace UnoGame.Decks
 
             return isInDeck;
         }
+
+        public virtual bool isCardPlayable(BasicCard cardToPlay)
+        {
+            Console.WriteLine("A card cannot be played on this deck.");
+            return false;
+        }
+
+        public abstract int refreshDeck(Deck discardDeck);
+
+        public abstract void createCardsForDeck(ICardFactory cardFactory);
     }
 }

@@ -8,11 +8,11 @@ namespace UnoGame.Factories
 {
     public class PlayerActionFactory:IActionFactory
     {
-        private DrawDeck drawDeck;
-        private DiscardDeck discardDeck;
+        private Deck drawDeck;
+        private Deck discardDeck;
         private Turn turnOrder;
 
-        public PlayerActionFactory(DrawDeck drawDeck, DiscardDeck discardDeck, Turn turnOrder)
+        public PlayerActionFactory(Deck drawDeck, Deck discardDeck, Turn turnOrder)
         {
             this.drawDeck = drawDeck;
             this.discardDeck = discardDeck;
@@ -69,8 +69,7 @@ namespace UnoGame.Factories
         }
 
         private void actionErrorMessage()
-        {//ToDo: Fix this the list is going to break in the new structure.  Maybe is needs to be changed into player actions
-            //and mediator actions...although rules can be both.
+        {
             Console.WriteLine("That is not a possible action.  Possible actions are: ");
             foreach (string possibleAction in Enum.GetNames(typeof(PlayerActionEnum)))
             {
