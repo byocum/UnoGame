@@ -16,9 +16,9 @@ namespace UnoGame.Intermediaries
         private readonly Deck discardDeck;
         private readonly PerformCardAction performCardAction;
         private readonly CardFactory cardFactory;
-        private readonly PerformMediatorActions performMediatorActions;
-        private readonly PerformPlayerActions performPlayerActions;
-        private readonly PlayerActionFactory playerActionFactory;
+        private readonly ActionFactory actionFactory;
+        private readonly PerformAction performAction;
+        private readonly InterperatePlayerInput interperatePlayerInput;
 
         public Mediator()
         {
@@ -27,19 +27,18 @@ namespace UnoGame.Intermediaries
             discardDeck = new DiscardDeck();            
             performCardAction = new PerformCardAction(drawDeck, discardDeck, turn);
             cardFactory = new CardFactory(performCardAction);
-            performMediatorActions = new PerformMediatorActions(drawDeck, discardDeck, turn);
-            playerActionFactory = new PlayerActionFactory(drawDeck, discardDeck, turn);
-            performPlayerActions = new PerformPlayerActions(playerActionFactory, turn);
-
+            actionFactory = new ActionFactory(drawDeck, discardDeck, turn);
+            performAction = new PerformAction(actionFactory);
+            interperatePlayerInput = new InterperatePlayerInput(performAction, turn);
         }
 
         public void SetupGame()
         {
-            performMediatorActions.ShowRules();
+            performAction.Rules();
             drawDeck.createCardsForDeck(cardFactory); 
             drawDeck.shuffle();
-            performMediatorActions.DeterminePlayers();
-            performMediatorActions.Deal();
+            performAction.DeterminePlayers();
+            performAction.Deal();
         }
 
         public void PlayGame()
@@ -48,7 +47,7 @@ namespace UnoGame.Intermediaries
 
             Console.WriteLine("Starting Game...");
 
-            performMediatorActions.DiscardDeckAddFirstCard();
+            performAction.DiscardDeckAddFirstCard();
 
             do
             {
@@ -56,25 +55,19 @@ namespace UnoGame.Intermediaries
 
                 Console.Clear();
                 Console.WriteLine(currentPlayer.Name + "'s turn.");
-                Pause();
+                performAction.Pause();
 
                 SetUpPlayerToTakeTheirTurn(currentPlayer);
 
                 PlayerTakesTheirTurn(currentPlayer);
 
-                Pause();
+                performAction.Pause();
 
             }
             while (IsWinner() == false);
 
         }
 
-        private void Pause()
-        {
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadLine();
-
-        }
         private void SetUpPlayerToTakeTheirTurn(Player currentPlayer)
         {
             Console.WriteLine();
@@ -91,7 +84,7 @@ namespace UnoGame.Intermediaries
             {
                 Console.WriteLine("What would you like to do?");
                 string[] action = currentPlayer.PickAction();
-                readyforNextPlayersTurn = performPlayerActions.PerformPlayerAction(action);
+                readyforNextPlayersTurn = interperatePlayerInput.PerformPlayerAction(action);
 
             } while (readyforNextPlayersTurn == false);
 

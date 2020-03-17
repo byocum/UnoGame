@@ -11,10 +11,12 @@ namespace UnoGame.PlayerActions
     public class ConfrontUno:PlayerAction
     {
         private readonly PlayerAction penaltyDraw;
-        public ConfrontUno(Turn turn, PlayerAction penaltyDraw)
+        private readonly Player playerPicked;
+        public ConfrontUno(Turn turn, PlayerAction penaltyDraw, Player playerPicked)
         {
             TurnOrder = turn;
             this.penaltyDraw = penaltyDraw;
+            this.playerPicked = playerPicked;
         }
 
         public override bool PerformAction()
@@ -28,14 +30,9 @@ namespace UnoGame.PlayerActions
 
         private void DidPlayerSayUno()
         {
-            int playerPickedIndex;
-
-            playerPickedIndex = TurnOrder.PickAPlayer();
-            Player playerPicked = TurnOrder.Players[playerPickedIndex];
-
             if (playerPicked.NumCardsInHand() == 1 && playerPicked.SaidUno == false)
             {
-                PenaltyForNotSayingUno(playerPickedIndex);
+                PenaltyForNotSayingUno();
             }
             else
             {
@@ -43,12 +40,12 @@ namespace UnoGame.PlayerActions
             }
         }
 
-        private void PenaltyForNotSayingUno(int indexOfPlayerPicked)
+        private void PenaltyForNotSayingUno()
         {
-            penaltyDraw.PerformAction(indexOfPlayerPicked);
-            penaltyDraw.PerformAction(indexOfPlayerPicked);
+            penaltyDraw.PerformAction();
+            penaltyDraw.PerformAction();
 
-            Console.WriteLine(TurnOrder.Players[indexOfPlayerPicked].Name + " drew two cards for having only one card in their hand and not saying uno.");
+            Console.WriteLine(playerPicked.Name + " drew two cards for having only one card in their hand and not saying uno.");
         }
     }
 }

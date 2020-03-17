@@ -10,27 +10,26 @@ namespace UnoGame.PlayerActions
 {
     public class PenaltyDraw:PlayerAction
     {
-        public PenaltyDraw(Deck drawDeck, Deck discardDeck, Turn turn)
+        private Player playerDrawingCard;
+        public PenaltyDraw(Deck drawDeck, Player playerDrawingCard)
         {
             DrawDeck = drawDeck;
-            DiscardDeck = discardDeck;
-            TurnOrder = turn;
+            this.playerDrawingCard = playerDrawingCard;
         }
 
-        public override bool PerformAction(int playerIndex)
+        public override bool PerformAction()
         {
-            PlayerActionDrawCard(playerIndex);
+            PlayerActionDrawCard();
             return true;
         }
 
-        private void PlayerActionDrawCard(int playerIndex)
+        private void PlayerActionDrawCard()
         {
-            Player playerToDraw = TurnOrder.Players[playerIndex];
             int cardDrawnIndex = DrawDeck.topCardIndex();
             BasicCard cardDrawn = DrawDeck.CardDeck[cardDrawnIndex];
 
             DrawDeck.removeCard(cardDrawnIndex);
-            playerToDraw.AddCardToHand(cardDrawn);
+            playerDrawingCard.AddCardToHand(cardDrawn);
         }
     }
 }

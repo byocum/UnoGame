@@ -60,18 +60,5 @@ namespace UnoGame.PlayerActions
 
             return isYes;
         }
-
-        protected bool IsPlayerInputACardInDeck(int cardIndex)
-        {
-            bool isCardInDeck = false;
-            Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
-
-            if (currentPlayer.IsCardInHand(cardIndex))
-            {
-                isCardInDeck = true;
-            }
-
-            return isCardInDeck;
-        }
     }
 }

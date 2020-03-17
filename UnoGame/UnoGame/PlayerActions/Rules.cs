@@ -8,7 +8,11 @@ namespace UnoGame.PlayerActions
 {
     public class Rules:PlayerAction
     {
-        public Rules() { }
+        private PlayerAction pause;
+        public Rules(PlayerAction pause) 
+        {
+            this.pause = pause;
+        }
 
         public override bool PerformAction()
         {
@@ -19,13 +23,11 @@ namespace UnoGame.PlayerActions
             Console.WriteLine("When playing a card type in the number to the left of the card.");
             Console.Write("For Example: If the card displays as: \"3 Green Draw 2\" type in \"3\".\n");
 
-            //ToDo: Write functionality for declaring uno. Then rewrite the directions.
             Console.WriteLine("SAY UNO\n");
             Console.WriteLine("In order to say UNO when playing your second to last card, type \"Uno\"");
             Console.WriteLine("You will then be asked what card you want to play. See rules for playing a card.");
 
-            Console.WriteLine("\nPress any key to continue.");
-            Console.ReadLine();
+            pause.PerformAction();
 
             Console.WriteLine("CALL A PLAYER OUT FOR NOT SAYING UNO\n");
             Console.WriteLine("If you want to call a player out for not saying Uno when they are playing");
@@ -44,8 +46,7 @@ namespace UnoGame.PlayerActions
             Console.WriteLine("SEE GAME RULES\n");
             Console.WriteLine("If you want to see these instructions again during the game type \"Rules\".");
 
-            Console.WriteLine("\nPress any key to enter players and start the game.");
-            Console.ReadLine();
+            pause.PerformAction();
 
             return true;
         }
