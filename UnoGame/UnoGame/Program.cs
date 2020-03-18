@@ -1,8 +1,4 @@
-﻿using System;
-using UnoGame.Cards;
-using UnoGame.Decks;
-using UnoGame.Factories;
-using UnoGame.Intermediaries;
+﻿using UnoGame.Intermediaries;
 
 namespace UnoGame
 {
