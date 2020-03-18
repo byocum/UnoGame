@@ -3,9 +3,9 @@ using UnoGame.Intermediaries;
 using UnoGame.Decks;
 using UnoGame.Cards;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class Deal : PlayerAction
+    public class Deal : GameAction
     {
         public Deal(Deck drawDeck, Deck discardDeck, Turn turn)
         {

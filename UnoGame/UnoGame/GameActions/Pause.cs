@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class Pause:PlayerAction
+    public class Pause:GameAction
     {
         public Pause() { }
 

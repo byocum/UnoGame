@@ -4,9 +4,9 @@ using UnoGame.Decks;
 using UnoGame.Intermediaries;
 using UnoGame.Players;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    class Draw : PlayerAction
+    class Draw : GameAction
     {
         public Draw(Deck drawDeck, Deck discardDeck, Turn turn)
         {

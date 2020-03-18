@@ -5,9 +5,9 @@ using UnoGame.Cards;
 using UnoGame.Decks;
 using UnoGame.Enums;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class DiscardDeckAddFirstCard:PlayerAction
+    public class DiscardDeckAddFirstCard:GameAction
     {
         public DiscardDeckAddFirstCard(Deck drawDeck, Deck discardDeck)
         {

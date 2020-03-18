@@ -1,6 +1,6 @@
 ﻿using UnoGame.Decks;
 using UnoGame.Intermediaries;
-using UnoGame.PlayerActions;
+using UnoGame.GameActions;
 using UnoGame.Players;
 
 namespace UnoGame.Factories
@@ -18,88 +18,88 @@ namespace UnoGame.Factories
             this.turn = turn;
         }
 
-        public PlayerAction ConfrontUno(Player playerPicked)
+        public GameAction ConfrontUno(Player playerPicked)
         {
-            PlayerAction penaltyDraw = PenaltyDraw(playerPicked);
-            PlayerAction confrontUno = new ConfrontUno(turn, penaltyDraw, playerPicked);
+            GameAction penaltyDraw = PenaltyDraw(playerPicked);
+            GameAction confrontUno = new ConfrontUno(turn, penaltyDraw, playerPicked);
 
             return confrontUno;
         }
 
-        public PlayerAction PenaltyDraw(Player playerDrawingCard)
+        public GameAction PenaltyDraw(Player playerDrawingCard)
         {
-            PlayerAction penaltyDraw = new PenaltyDraw(drawDeck, playerDrawingCard);
+            GameAction penaltyDraw = new PenaltyDraw(drawDeck, playerDrawingCard);
 
             return penaltyDraw;
         }
 
-        public PlayerAction Deal()
+        public GameAction Deal()
         {
-            PlayerAction deal = new Deal(drawDeck, discardDeck, turn);
+            GameAction deal = new Deal(drawDeck, discardDeck, turn);
 
             return deal;
         }
 
-        public PlayerAction DeterminePlayers()
+        public GameAction DeterminePlayers()
         {
-            PlayerAction determinePlayers = new DeterminePlayers(turn, discardDeck);
+            GameAction determinePlayers = new DeterminePlayers(turn, discardDeck);
 
             return determinePlayers;
         }
 
-        public PlayerAction DiscardDeckAddFirstCard()
+        public GameAction DiscardDeckAddFirstCard()
         {
-            PlayerAction discardDeckAddFirstCard = new DiscardDeckAddFirstCard(drawDeck, discardDeck);
+            GameAction discardDeckAddFirstCard = new DiscardDeckAddFirstCard(drawDeck, discardDeck);
 
             return discardDeckAddFirstCard;
         }
 
-        public PlayerAction Draw()
+        public GameAction Draw()
         {
-            PlayerAction draw = new Draw(drawDeck, discardDeck, turn);
+            GameAction draw = new Draw(drawDeck, discardDeck, turn);
 
             return draw;
         }
 
-        public PlayerAction NoAction()
+        public GameAction NoAction()
         {
-            PlayerAction noAction = new NoAction();
+            GameAction noAction = new NoAction();
 
             return noAction;
         }
 
-        public PlayerAction Pause()
+        public GameAction Pause()
         {
-            PlayerAction pause = new Pause();
+            GameAction pause = new Pause();
 
             return pause;
         }
 
-        public PlayerAction PlayCard(int cardToPlayIndex)
+        public GameAction PlayCard(int cardToPlayIndex)
         {
-            PlayerAction playCard = new PlayerPlayingCard(cardToPlayIndex, discardDeck, turn);
+            GameAction playCard = new PlayerPlayingCard(cardToPlayIndex, discardDeck, turn);
 
             return playCard;
         }
 
-        public PlayerAction Rules()
+        public GameAction Rules()
         {
-            PlayerAction pause = Pause();
-            PlayerAction rules = new Rules(pause);
+            GameAction pause = Pause();
+            GameAction rules = new Rules(pause);
 
             return rules;
         }
 
-        public PlayerAction SayUno()
+        public GameAction SayUno()
         {
-            PlayerAction sayUno = new SayUno(turn);
+            GameAction sayUno = new SayUno(turn);
 
             return sayUno;
         } 
         
-        public PlayerAction Sort()
+        public GameAction Sort()
         {
-            PlayerAction sortHand = new SortHand(turn);
+            GameAction sortHand = new SortHand(turn);
 
             return sortHand;
         }

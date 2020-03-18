@@ -6,13 +6,13 @@ using UnoGame.Intermediaries;
 using UnoGame.Enums;
 using UnoGame.Players;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class ConfrontUno:PlayerAction
+    public class ConfrontUno:GameAction
     {
-        private readonly PlayerAction penaltyDraw;
+        private readonly GameAction penaltyDraw;
         private readonly Player playerPicked;
-        public ConfrontUno(Turn turn, PlayerAction penaltyDraw, Player playerPicked)
+        public ConfrontUno(Turn turn, GameAction penaltyDraw, Player playerPicked)
         {
             TurnOrder = turn;
             this.penaltyDraw = penaltyDraw;

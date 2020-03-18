@@ -3,7 +3,7 @@ using UnoGame.Intermediaries;
 using UnoGame.Players;
 using UnoGame.Enums;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.Intermediaries
 {
     class InterperatePlayerInput
     {

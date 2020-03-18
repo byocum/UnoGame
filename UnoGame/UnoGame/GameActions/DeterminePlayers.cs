@@ -4,9 +4,9 @@ using System.Text;
 using UnoGame.Decks;
 using UnoGame.Intermediaries;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class DeterminePlayers:PlayerAction
+    public class DeterminePlayers:GameAction
     {
         public DeterminePlayers(Turn turn, Deck discardDeck)
         {

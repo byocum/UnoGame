@@ -6,9 +6,9 @@ using UnoGame.Intermediaries;
 using UnoGame.Players;
 using UnoGame.Cards;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class PlayerPlayingCard : PlayerAction
+    public class PlayerPlayingCard : GameAction
     {
         private readonly int cardToPlayIndex;
 

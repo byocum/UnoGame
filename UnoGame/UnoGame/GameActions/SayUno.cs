@@ -5,9 +5,9 @@ using UnoGame.Intermediaries;
 using UnoGame.Enums;
 using UnoGame.Factories;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class SayUno:PlayerAction
+    public class SayUno:GameAction
     {
         public SayUno(Turn turn)
         {

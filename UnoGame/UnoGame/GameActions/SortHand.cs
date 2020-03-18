@@ -4,9 +4,9 @@ using System.Text;
 using UnoGame.Intermediaries;
 using UnoGame.Players;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class SortHand:PlayerAction
+    public class SortHand:GameAction
     {
         public SortHand(Turn turnOrder)
         {

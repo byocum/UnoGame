@@ -5,7 +5,7 @@ using UnoGame.Factories;
 using UnoGame.Cards;
 using UnoGame.Enums;
 using UnoGame.Players;
-using UnoGame.PlayerActions;
+using UnoGame.GameActions;
 
 namespace UnoGame.Intermediaries
 {

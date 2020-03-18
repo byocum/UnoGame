@@ -6,9 +6,9 @@ using UnoGame.Intermediaries;
 using UnoGame.Players;
 using UnoGame.Cards;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class PenaltyDraw:PlayerAction
+    public class PenaltyDraw:GameAction
     {
         private Player playerDrawingCard;
         public PenaltyDraw(Deck drawDeck, Player playerDrawingCard)

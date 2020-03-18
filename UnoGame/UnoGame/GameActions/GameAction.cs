@@ -3,9 +3,9 @@ using UnoGame.Decks;
 using UnoGame.Intermediaries;
 using UnoGame.Players;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public abstract class PlayerAction
+    public abstract class GameAction
     {
         private Deck drawDeck;
         private Deck discardDeck;

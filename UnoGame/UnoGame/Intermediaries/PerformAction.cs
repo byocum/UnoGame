@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using UnoGame.Factories;
-using UnoGame.PlayerActions;
+using UnoGame.GameActions;
 using UnoGame.Players;
 using UnoGame.Decks;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.Intermediaries
 {
     public class PerformAction
     {
@@ -19,73 +19,73 @@ namespace UnoGame.PlayerActions
 
         public bool ConfrontUno(Player playerPicked)
         {
-            PlayerAction confrontUno = actionFactory.ConfrontUno(playerPicked);
+            GameAction confrontUno = actionFactory.ConfrontUno(playerPicked);
             return confrontUno.PerformAction();
         }
 
         public bool Deal()
         {
-            PlayerAction deal = actionFactory.Deal();
+            GameAction deal = actionFactory.Deal();
             return deal.PerformAction();
         }
 
         public bool DeterminePlayers()
         {
-            PlayerAction determinePlayers = actionFactory.DeterminePlayers();
+            GameAction determinePlayers = actionFactory.DeterminePlayers();
             return determinePlayers.PerformAction();
         }
 
         public bool DiscardDeckAddFirstCard()
         {
-            PlayerAction discardDeckAddFirstCard = actionFactory.DiscardDeckAddFirstCard();
+            GameAction discardDeckAddFirstCard = actionFactory.DiscardDeckAddFirstCard();
             return discardDeckAddFirstCard.PerformAction();
         }
 
         public bool Draw()
         {
-            PlayerAction draw = actionFactory.Draw();
+            GameAction draw = actionFactory.Draw();
             return draw.PerformAction();
         }
 
         public bool NoAction()
         {
-            PlayerAction noAction = actionFactory.NoAction();
+            GameAction noAction = actionFactory.NoAction();
             return noAction.PerformAction();
         }
 
         public bool Pause()
         {
-            PlayerAction pause = actionFactory.Pause();
+            GameAction pause = actionFactory.Pause();
             return pause.PerformAction();
         }
 
         public bool PenaltyDraw(Player playerPicked)
         {
-            PlayerAction penaltyDraw = actionFactory.PenaltyDraw(playerPicked);
+            GameAction penaltyDraw = actionFactory.PenaltyDraw(playerPicked);
             return penaltyDraw.PerformAction();
         }
 
         public bool PlayCard(int cardToPlayIndex)
         {
-            PlayerAction playCard = actionFactory.PlayCard(cardToPlayIndex);
+            GameAction playCard = actionFactory.PlayCard(cardToPlayIndex);
             return playCard.PerformAction();
         }
 
         public bool Rules()
         {
-            PlayerAction rules = actionFactory.Rules();
+            GameAction rules = actionFactory.Rules();
             return rules.PerformAction();
         }
 
         public bool SayUno()
         {
-            PlayerAction sayUno = actionFactory.SayUno();
+            GameAction sayUno = actionFactory.SayUno();
             return sayUno.PerformAction();
         }
 
         public bool Sort()
         {
-            PlayerAction sort = actionFactory.Sort();
+            GameAction sort = actionFactory.Sort();
             return sort.PerformAction();
         }
     }

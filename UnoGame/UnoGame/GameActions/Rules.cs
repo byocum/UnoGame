@@ -4,12 +4,12 @@ using System.Text;
 using UnoGame.Decks;
 using UnoGame.Intermediaries;
 
-namespace UnoGame.PlayerActions
+namespace UnoGame.GameActions
 {
-    public class Rules:PlayerAction
+    public class Rules:GameAction
     {
-        private PlayerAction pause;
-        public Rules(PlayerAction pause) 
+        private readonly GameAction pause;
+        public Rules(GameAction pause) 
         {
             this.pause = pause;
         }
