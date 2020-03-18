@@ -39,7 +39,8 @@
         Rules = 1,
         Draw = 2,
         Uno = 3,
-        Confront = 4
+        Confront = 4,
+        Sort = 5
     }
 
     public enum PlayerActionConfront

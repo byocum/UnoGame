@@ -95,6 +95,13 @@ namespace UnoGame.Factories
             PlayerAction sayUno = new SayUno(turn);
 
             return sayUno;
-        }      
+        } 
+        
+        public PlayerAction Sort()
+        {
+            PlayerAction sortHand = new SortHand(turn);
+
+            return sortHand;
+        }
     }
 }

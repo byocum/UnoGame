@@ -23,19 +23,24 @@ namespace UnoGame.PlayerActions
             Console.WriteLine("When playing a card type in the number to the left of the card.");
             Console.Write("For Example: If the card displays as: \"3 Green Draw 2\" type in \"3\".\n");
 
+            Console.WriteLine("SORT CARDS IN YOUR HAND \n");
+            Console.WriteLine("To sort the cards in your hand type \"Sort\"");
+            Console.WriteLine("This will sort your cards by color first then by number and display your sorted hand.");
+
             Console.WriteLine("SAY UNO\n");
             Console.WriteLine("In order to say UNO when playing your second to last card, type \"Uno\"");
             Console.WriteLine("You will then be asked what card you want to play. See rules for playing a card.");
 
             pause.PerformAction();
 
-            Console.WriteLine("CALL A PLAYER OUT FOR NOT SAYING UNO\n");
-            Console.WriteLine("If you want to call a player out for not saying Uno when they are playing");
-            Console.WriteLine("their second to last card type \"Uno\".  You will then be asked which player you want to pick. ");
+            Console.WriteLine("CONFRONT A PLAYER FOR NOT SAYING UNO\n");
+            Console.WriteLine("If you want to confront a player for not saying Uno when they are playing");
+            Console.WriteLine("their second to last card type \"Confront Uno\".");
+            Console.WriteLine("You will then be asked which player you want to pick.");
             Console.WriteLine("Type the number next to the players name to select a player.");
 
-            Console.WriteLine("If a player is called out for not saying Uno when they play their second to last");
-            Console.WriteLine("card they have to draw 2 cards.\n");
+            Console.WriteLine("If a player did not say Uno when they play their second to last");
+            Console.WriteLine("card and another player confronts them about it, they have to draw 2 cards.\n");
 
             Console.WriteLine("DRAW A CARD\n");
             Console.WriteLine("Type \"Draw\" to draw a card.You may draw a card on your turn whether or");

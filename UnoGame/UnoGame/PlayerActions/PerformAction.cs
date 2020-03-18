@@ -82,5 +82,11 @@ namespace UnoGame.PlayerActions
             PlayerAction sayUno = actionFactory.SayUno();
             return sayUno.PerformAction();
         }
+
+        public bool Sort()
+        {
+            PlayerAction sort = actionFactory.Sort();
+            return sort.PerformAction();
+        }
     }
 }

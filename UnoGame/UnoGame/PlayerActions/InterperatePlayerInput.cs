@@ -81,6 +81,9 @@ namespace UnoGame.PlayerActions
                         PickCardAfterSayingUno();
                     }
                     break;
+                case PlayerActionEnum.Sort:
+                    playerActionCompleted = performAction.Sort();
+                    break;
                 default:
                     ActionErrorMessage();
                     playerActionCompleted = performAction.NoAction();
