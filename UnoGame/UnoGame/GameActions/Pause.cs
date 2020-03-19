@@ -8,7 +8,7 @@ namespace UnoGame.GameActions
 
         public override bool PerformAction()
         {
-            Console.WriteLine("Press any key to continue.");
+            Console.WriteLine("Press enter to continue.");
             Console.ReadLine();
             return false;
         }

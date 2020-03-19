@@ -47,6 +47,8 @@ namespace UnoGame.Intermediaries
 
             performAction.DiscardDeckAddFirstCard();
 
+            performAction.Pause();
+
             do
             {
                 currentPlayer = turn.Players[turn.CurrentPlayerIndex];

@@ -41,21 +41,36 @@ namespace UnoGame.GameActions
         {
             string playCardDrawn;
             bool isYes;
+            bool isNo;
 
-            Console.WriteLine("Enter y for yes or another character for no");
-            playCardDrawn = Console.ReadLine().Trim().ToLower();
-            if (string.IsNullOrEmpty(playCardDrawn))
+            do
             {
-                isYes = false;
-            }
-            else if (playCardDrawn[0] == 'y')
-            {
-                isYes = true;
-            }
-            else
-            {
-                isYes = false;
-            }
+                Console.WriteLine("Enter \"y\" for yes or \"n\" for no.");
+                playCardDrawn = Console.ReadLine().Trim().ToLower();
+
+                if (string.IsNullOrEmpty(playCardDrawn))
+                {
+                    isYes = false;
+                    isNo = false;
+                }
+                else if (playCardDrawn[0] == 'y')
+                {
+                    isYes = true;
+                    isNo = false;
+                }
+                else if (playCardDrawn[0] == 'n')
+                {
+                    isYes = false;
+                    isNo = true;
+                }
+                else
+                {
+                    isYes = false;
+                    isNo = false;
+                }
+
+            } while (isYes == false && isNo == false);
+          
 
             return isYes;
         }
