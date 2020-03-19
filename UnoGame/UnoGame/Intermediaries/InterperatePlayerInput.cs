@@ -18,11 +18,12 @@ namespace UnoGame.Intermediaries
         public bool PerformPlayerAction(string[] playerInput)
         {
             bool playerActionCompleted;
-            bool isPlayerInputInt = int.TryParse(playerInput[0], out int cardToPlayIndex);
+            bool isPlayerInputInt = int.TryParse(playerInput[0], out int cardInputNum);
             bool isPlayerActionEnum = Enum.TryParse<PlayerActionEnum>(playerInput[0], out PlayerActionEnum action);
 
             if (isPlayerInputInt)
             {
+                int cardToPlayIndex = cardInputNum - 1;
                 playerActionCompleted = performAction.PlayCard(cardToPlayIndex);
             }
             else if (isPlayerActionEnum && action == PlayerActionEnum.Confront)

@@ -40,11 +40,12 @@ namespace UnoGame.Intermediaries
 
         public void ListOtherPlayers()
         {
-            for (int i = 0; i < Players.Count; i++)
+            for (int index = 0; index < Players.Count; index++)
             {
-                if(i != currentPlayerIndex)
+                if(index != currentPlayerIndex)
                 {
-                    Console.WriteLine(i + " " + Players[i].Name);
+                    int displayNumber = index + 1;
+                    Console.WriteLine(displayNumber + " " + Players[index].Name);
                 }   
             }
         }
@@ -62,7 +63,9 @@ namespace UnoGame.Intermediaries
                 ListOtherPlayers();
 
                 string response = currentPlayer.PlayerEntryTitleCase();
-                bool isNumber = int.TryParse(response, out playerPickedIndex);
+                bool isNumber = int.TryParse(response, out int playerPickedNumber);
+
+                playerPickedIndex = playerPickedNumber - 1;
 
                 if (isNumber && playerPickedIndex >= 0 && playerPickedIndex < Players.Count && playerPickedIndex != CurrentPlayerIndex)
                 {

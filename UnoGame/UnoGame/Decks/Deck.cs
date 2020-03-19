@@ -78,9 +78,11 @@ namespace UnoGame.Decks
 
         public void lookAtDeck()
         {
-            for(int i = 0; i < CardDeck.Count; i++)
+            for(int index = 0; index < CardDeck.Count; index++)
             {
-                Console.WriteLine(i + " " + CardDeck[i].Color + " " + CardDeck[i].Type);
+                int displayNumber = index + 1;
+
+                Console.WriteLine(displayNumber + " " + CardDeck[index].Color + " " + CardDeck[index].Type);
             }
         }
 
