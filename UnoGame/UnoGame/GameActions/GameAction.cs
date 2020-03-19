@@ -32,10 +32,6 @@ namespace UnoGame.GameActions
         {
             return false;
         }
-        public virtual bool PerformAction(int index)
-        {
-            return false;
-        }
 
         protected bool PlayerEnterYesOrNo()
         {
