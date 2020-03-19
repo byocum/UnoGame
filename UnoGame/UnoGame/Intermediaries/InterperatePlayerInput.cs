@@ -26,12 +26,12 @@ namespace UnoGame.Intermediaries
                 int cardToPlayIndex = cardInputNum - 1;
                 playerActionCompleted = performAction.PlayCard(cardToPlayIndex);
             }
-            else if (isPlayerActionEnum && action == PlayerActionEnum.Confront)
+            else if (isPlayerActionEnum && action == PlayerActionEnum.Call)
             {
                 if (playerInput.Length > 1)
                 {
-                    bool isPlayerActionConfrontEnum = Enum.TryParse<PlayerActionConfront>(playerInput[1], out PlayerActionConfront confrontAction);
-                    if (isPlayerActionConfrontEnum && confrontAction == PlayerActionConfront.Uno)
+                    bool isPlayerActionConfrontEnum = Enum.TryParse<PlayerActionCall>(playerInput[1], out PlayerActionCall confrontAction);
+                    if (isPlayerActionConfrontEnum && confrontAction == PlayerActionCall.Uno)
                     {
                         int playerPickedIndex = turn.PickAPlayer();
                         Player playerPicked = turn.Players[playerPickedIndex];
@@ -111,9 +111,9 @@ namespace UnoGame.Intermediaries
         {
             Console.WriteLine("The word Confront needs to be followed by a confront action. Possible confront actions are: ");
 
-            foreach (string possibleAction in Enum.GetNames(typeof(PlayerActionConfront)))
+            foreach (string possibleAction in Enum.GetNames(typeof(PlayerActionCall)))
             {
-                if (possibleAction != PlayerActionConfront.NoAction.ToString())
+                if (possibleAction != PlayerActionCall.NoAction.ToString())
                     Console.WriteLine(possibleAction);
             }
         }

@@ -39,12 +39,12 @@
         Rules = 1,
         Draw = 2,
         Uno = 3,
-        Confront = 4,
+        Call = 4,
         Sort = 5,
         Hands = 6
     }
 
-    public enum PlayerActionConfront
+    public enum PlayerActionCall
     {
         NoAction = 0,
         Uno = 1

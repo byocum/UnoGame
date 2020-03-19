@@ -30,23 +30,23 @@ namespace UnoGame.GameActions
 
             pause.PerformAction();
 
-            Console.WriteLine("CONFRONT A PLAYER FOR NOT SAYING UNO\n");
-            Console.WriteLine("If you want to confront a player for not saying Uno when they are playing");
-            Console.WriteLine("their second to last card type \"Confront Uno\".");
+            Console.WriteLine("SHOW HOW MANY CARDS ARE IN EACH PLAYER'S HAND");
+            Console.WriteLine("To see how many cards are in each players hand type \"Hands\".");
+
+            Console.WriteLine("CALL OUT A PLAYER FOR NOT SAYING UNO\n");
+            Console.WriteLine("If you want to call out a player for not saying Uno when they are playing");
+            Console.WriteLine("their second to last card type \"Call Uno\".");
             Console.WriteLine("You will then be asked which player you want to pick.");
             Console.WriteLine("Type the number next to the players name to select a player.");
 
             Console.WriteLine("If a player did not say Uno when they play their second to last");
-            Console.WriteLine("card and another player confronts them about it, they have to draw 2 cards.\n");
+            Console.WriteLine("card and another player calls them out, they have to draw 2 cards.\n");
 
             Console.WriteLine("DRAW A CARD\n");
             Console.WriteLine("Type \"Draw\" to draw a card.You may draw a card on your turn whether or");
             Console.WriteLine("not you have a playable card. Once you have drawn a card, you will have the");
             Console.WriteLine("option to play the card you drew if it is a playable card. However, you will");
             Console.WriteLine("not have the option to play a card in your hand.\n");
-
-            Console.WriteLine("SHOW HOW MANY CARDS ARE IN EACH PLAYER'S HAND");
-            Console.WriteLine("To see how many cards are in each players hand type \"Hands\".");
 
             Console.WriteLine("SEE GAME RULES\n");
             Console.WriteLine("If you want to see these instructions again during the game type \"Rules\".");
