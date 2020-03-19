@@ -25,8 +25,25 @@ namespace UnoGame.GameActions
 
             while (addAnotherPlayer == true)
             {
-                Console.WriteLine("Please enter a name for the player:");
-                playerName = Console.ReadLine();
+                bool isValidPlayerName;
+
+                do
+                {
+                    Console.WriteLine("Please enter a name for the player:");
+                    playerName = Console.ReadLine().Trim().ToLower();
+                    if (string.IsNullOrEmpty(playerName) || playerName.Length > 20)
+                    {
+                        Console.WriteLine("That is not a valid player name.");
+                        Console.WriteLine("The player's name must be over 0 characters and under 21 charaters.");
+                        isValidPlayerName = false;
+                    }
+                    else
+                    {
+                        isValidPlayerName = true;
+                    }
+                   
+                } while (isValidPlayerName == false);
+                
                 TurnOrder.AddPlayer(playerName, DiscardDeck);
 
                 if (count > 1)

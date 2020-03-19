@@ -18,26 +18,26 @@ namespace UnoGame.GameActions
 
             Console.WriteLine("PLAYING A CARD \n");
             Console.WriteLine("When playing a card type in the number to the left of the card.");
-            Console.Write("For Example: If the card displays as: \"3 Green Draw 2\" type in \"3\".\n");
+            Console.WriteLine("For Example: If the card displays as: \"3 Green Draw 2\" type in \"3\". \n");
 
             Console.WriteLine("SORT CARDS IN YOUR HAND \n");
             Console.WriteLine("To sort the cards in your hand type \"Sort\"");
-            Console.WriteLine("This will sort your cards by color first then by number and display your sorted hand.");
+            Console.WriteLine("This will sort your cards by color first then by number and display your sorted hand. \n");
 
             Console.WriteLine("SAY UNO\n");
             Console.WriteLine("In order to say UNO when playing your second to last card, type \"Uno\"");
-            Console.WriteLine("You will then be asked what card you want to play. See rules for playing a card.");
+            Console.WriteLine("You will then be asked what card you want to play. See rules for playing a card. \n");
 
             pause.PerformAction();
 
-            Console.WriteLine("SHOW HOW MANY CARDS ARE IN EACH PLAYER'S HAND");
-            Console.WriteLine("To see how many cards are in each players hand type \"Hands\".");
+            Console.WriteLine("SHOW HOW MANY CARDS ARE IN EACH PLAYER'S HAND\n");
+            Console.WriteLine("To see how many cards are in each players hand type \"Hands\". \n");
 
             Console.WriteLine("CALL OUT A PLAYER FOR NOT SAYING UNO\n");
             Console.WriteLine("If you want to call out a player for not saying Uno when they are playing");
             Console.WriteLine("their second to last card type \"Call Uno\".");
             Console.WriteLine("You will then be asked which player you want to pick.");
-            Console.WriteLine("Type the number next to the players name to select a player.");
+            Console.WriteLine("Type the number next to the players name to select a player. \n");
 
             Console.WriteLine("If a player did not say Uno when they play their second to last");
             Console.WriteLine("card and another player calls them out, they have to draw 2 cards.\n");
@@ -49,7 +49,7 @@ namespace UnoGame.GameActions
             Console.WriteLine("not have the option to play a card in your hand.\n");
 
             Console.WriteLine("SEE GAME RULES\n");
-            Console.WriteLine("If you want to see these instructions again during the game type \"Rules\".");
+            Console.WriteLine("If you want to see these instructions again during the game type \"Rules\". \n");
 
             pause.PerformAction();
 
