@@ -45,6 +45,9 @@ namespace UnoGame.GameActions
             Console.WriteLine("option to play the card you drew if it is a playable card. However, you will");
             Console.WriteLine("not have the option to play a card in your hand.\n");
 
+            Console.WriteLine("SHOW HOW MANY CARDS ARE IN EACH PLAYER'S HAND");
+            Console.WriteLine("To see how many cards are in each players hand type \"Hands\".");
+
             Console.WriteLine("SEE GAME RULES\n");
             Console.WriteLine("If you want to see these instructions again during the game type \"Rules\".");
 

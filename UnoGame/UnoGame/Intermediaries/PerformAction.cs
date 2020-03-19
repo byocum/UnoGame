@@ -84,5 +84,11 @@ namespace UnoGame.Intermediaries
             GameAction sort = actionFactory.Sort();
             return sort.PerformAction();
         }
+
+        public bool Hands()
+        {
+            GameAction hands = actionFactory.Hands();
+            return hands.PerformAction();
+        }
     }
 }

@@ -103,5 +103,12 @@ namespace UnoGame.Factories
 
             return sortHand;
         }
+
+        public GameAction Hands()
+        {
+            GameAction hands = new NumCardsInHands(turn);
+
+            return hands;
+        }
     }
 }

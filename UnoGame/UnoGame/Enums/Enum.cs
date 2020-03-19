@@ -40,7 +40,8 @@
         Draw = 2,
         Uno = 3,
         Confront = 4,
-        Sort = 5
+        Sort = 5,
+        Hands = 6
     }
 
     public enum PlayerActionConfront

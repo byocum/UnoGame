@@ -84,6 +84,9 @@ namespace UnoGame.Intermediaries
                 case PlayerActionEnum.Sort:
                     playerActionCompleted = performAction.Sort();
                     break;
+                case PlayerActionEnum.Hands:
+                    playerActionCompleted = performAction.Hands();
+                    break;
                 default:
                     ActionErrorMessage();
                     playerActionCompleted = performAction.NoAction();
