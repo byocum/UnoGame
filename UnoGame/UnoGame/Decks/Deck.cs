@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnoGame.Cards;
 using UnoGame.Factories;
+using UnoGame.Enums;
 
 namespace UnoGame.Decks
 {
@@ -82,7 +83,15 @@ namespace UnoGame.Decks
             {
                 int displayNumber = index + 1;
 
-                Console.WriteLine(displayNumber + " " + CardDeck[index].Color + " " + CardDeck[index].Type);
+                if(CardDeck[index].Color == null)
+                {
+                    Console.WriteLine(displayNumber + " " + CardDeck[index].Type);
+                }
+                else
+                {
+                    Console.WriteLine(displayNumber + " " + CardDeck[index].Color + " " + CardDeck[index].Type);
+                }
+                
             }
         }
 
