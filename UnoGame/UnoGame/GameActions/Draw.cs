@@ -24,9 +24,11 @@ namespace UnoGame.GameActions
         private void DrawAndPlayCard()
         {
             int cardDrawnIndex = DrawDeck.topCardIndex();
-            BasicCard cardDrawn = DrawDeck.CardDeck[cardDrawnIndex];
 
+            DrawDeck.TimeToRefreshDeck(DiscardDeck);            
+            BasicCard cardDrawn = DrawDeck.CardDeck[cardDrawnIndex];
             DrawDeck.removeCard(cardDrawnIndex);
+
             if (!PlayDrawnCard(cardDrawn))
             {
                 TurnOrder.GoToNextTurn();

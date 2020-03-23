@@ -66,6 +66,8 @@ namespace UnoGame.Intermediaries
             }
             while (IsWinner() == false);
 
+            Environment.Exit(0);
+
         }
 
         private void SetUpPlayerToTakeTheirTurn(Player currentPlayer)

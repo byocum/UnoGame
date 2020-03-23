@@ -110,7 +110,7 @@ namespace UnoGame.Decks
             return false;
         }
 
-        public abstract int refreshDeck(Deck discardDeck);
+        public abstract void TimeToRefreshDeck(Deck discardDeck);
 
         public abstract void createCardsForDeck(ICardFactory cardFactory);
     }

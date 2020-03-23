@@ -54,10 +54,9 @@ namespace UnoGame.Decks
             Console.WriteLine("The top card on the discard deck is: " + CardDeck[topCardIndex()].Color + " " + CardDeck[topCardIndex()].Type);
         }
 
-        public override int refreshDeck(Deck discardDeck)
+        public override void TimeToRefreshDeck(Deck discardDeck)
         {
             Console.WriteLine("The discard deck cannot be refreshed.");
-            return CardDeck.Count;
         }
 
         public override void createCardsForDeck(ICardFactory cardFactory)

@@ -37,7 +37,10 @@ namespace UnoGame.Cards
         public void DrawCard()
         {
             int nextPlayerIndex = turn.GetNextTurnIndex();
-            Player nextPlayer = turn.Players[nextPlayerIndex];
+            Player nextPlayer = turn.Players[nextPlayerIndex];            
+            
+            drawDeck.TimeToRefreshDeck(discardDeck);
+
             int cardDrawnIndex = drawDeck.topCardIndex();
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 

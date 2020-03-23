@@ -134,8 +134,9 @@ namespace UnoGame.Intermediaries
         private bool PlayerPlayOrDrawACardAfterSayingUno(string[] playerAction)
         {
             bool readyForNextPlayersTurn = false;
-            bool isPlayerInputInt = int.TryParse(playerAction[0], out int cardToPlayIndex);
+            bool isPlayerInputInt = int.TryParse(playerAction[0], out int playerInputNum);
             bool isPlayerActionEnum = Enum.TryParse<PlayerActionEnum>(playerAction[0], out PlayerActionEnum action);
+            int cardToPlayIndex = playerInputNum - 1;
 
             if (isPlayerInputInt)
             {

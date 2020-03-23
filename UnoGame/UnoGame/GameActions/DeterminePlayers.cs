@@ -34,7 +34,7 @@ namespace UnoGame.GameActions
                     if (string.IsNullOrEmpty(playerName) || playerName.Length > 20)
                     {
                         Console.WriteLine("That is not a valid player name.");
-                        Console.WriteLine("The player's name must be over 0 characters and under 21 charaters.");
+                        Console.WriteLine("The player's name must be at least 1 character and no more than 20 charaters.");
                         isValidPlayerName = false;
                     }
                     else
@@ -45,12 +45,18 @@ namespace UnoGame.GameActions
                 } while (isValidPlayerName == false);
                 
                 TurnOrder.AddPlayer(playerName, DiscardDeck);
-
-                if (count > 1)
+                if(TurnOrder.Players.Count == 10)
+                {
+                    Console.WriteLine("The max number of players for the game is 10.  You now have 10 players.");
+                    Console.WriteLine("Play will start.");
+                    addAnotherPlayer = false;
+                }
+                else if (count > 1)
                 {
                     Console.WriteLine("Would you like to add another player?");
                     addAnotherPlayer = PlayerEnterYesOrNo();
                 }
+
                 count++;
             }
         }

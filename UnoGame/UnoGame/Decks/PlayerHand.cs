@@ -37,10 +37,9 @@ namespace UnoGame.Decks
             Console.WriteLine("A player's hand does not have a top card.");
         }
 
-        public override int refreshDeck(Deck discardDeck)
+        public override void TimeToRefreshDeck(Deck discardDeck)
         {
             Console.WriteLine("A player's hand cannot be refreshed.");
-            return CardDeck.Count;
         }
 
         public override void createCardsForDeck(ICardFactory cardFactory)

@@ -20,7 +20,9 @@ namespace UnoGame.GameActions
         }
 
         private void PlayerActionDrawCard()
-        {
+        {            
+            DrawDeck.TimeToRefreshDeck(DiscardDeck);
+
             int cardDrawnIndex = DrawDeck.topCardIndex();
             BasicCard cardDrawn = DrawDeck.CardDeck[cardDrawnIndex];
 
