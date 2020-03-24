@@ -2,15 +2,21 @@
 using UnoGame.Cards;
 using UnoGame.Decks;
 using UnoGame.Enums;
+using UnoGame.Players;
+using UnoGame.Intermediaries;
 
 namespace UnoGame.GameActions
 {
     public class DiscardDeckAddFirstCard:GameAction
     {
-        public DiscardDeckAddFirstCard(Deck drawDeck, Deck discardDeck)
+        GameAction pause;
+
+        public DiscardDeckAddFirstCard(Deck drawDeck, Deck discardDeck, Turn turn, GameAction pause)
         {
             DrawDeck = drawDeck;
             DiscardDeck = discardDeck;
+            this.pause = pause;
+            TurnOrder = turn;
         }
 
         public override bool PerformAction()
@@ -59,10 +65,24 @@ namespace UnoGame.GameActions
 
             if (discardDeckTopCard.CardWithNoActions == false)
             {
-                Console.WriteLine("This card plays when it is turned up at the beginning of the game.");
+                Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
+
+                Console.WriteLine("This card plays at the beginning of the game.");
+                Console.WriteLine("It acts as if " + currentPlayer.Name + " is playing the card");
+                Console.WriteLine("Your hand may be shown if a \"Wild\" is the first card turned up");
+                pause.PerformAction();
                 Console.WriteLine("Playing card...");
 
-                discardDeckTopCard.playCard();
+                if(discardDeckTopCard.Type == CardType.Wild)
+                {
+                    currentPlayer.LookAtHand();
+                    discardDeckTopCard.playCard();
+                }
+                else
+                {
+                    discardDeckTopCard.playCard();
+                }
+                
             }
         }
     }

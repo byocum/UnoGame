@@ -32,8 +32,6 @@ namespace UnoGame.Intermediaries
 
         public void AddPlayer(string name, Deck discardDeck)
         {
-            name = Function.titleCase(name);
-
             Player player = new Player(name, discardDeck);
             players.Add(player);
         }

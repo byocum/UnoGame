@@ -49,7 +49,8 @@ namespace UnoGame.Factories
 
         public GameAction DiscardDeckAddFirstCard()
         {
-            GameAction discardDeckAddFirstCard = new DiscardDeckAddFirstCard(drawDeck, discardDeck);
+            GameAction pause = new Pause();
+            GameAction discardDeckAddFirstCard = new DiscardDeckAddFirstCard(drawDeck, discardDeck, turn,  pause);
 
             return discardDeckAddFirstCard;
         }

@@ -30,7 +30,7 @@ namespace UnoGame.GameActions
                 do
                 {
                     Console.WriteLine("Please enter a name for the player:");
-                    playerName = Console.ReadLine().Trim().ToLower();
+                    playerName = Console.ReadLine().Trim();
                     if (string.IsNullOrEmpty(playerName) || playerName.Length > 20)
                     {
                         Console.WriteLine("That is not a valid player name.");
