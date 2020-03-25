@@ -28,7 +28,7 @@ namespace UnoGame.Factories
 
         public GameAction PenaltyDraw(Player playerDrawingCard)
         {
-            GameAction penaltyDraw = new PenaltyDraw(drawDeck, playerDrawingCard);
+            GameAction penaltyDraw = new PenaltyDraw(drawDeck, discardDeck, playerDrawingCard);
 
             return penaltyDraw;
         }

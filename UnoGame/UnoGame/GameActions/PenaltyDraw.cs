@@ -7,9 +7,10 @@ namespace UnoGame.GameActions
     public class PenaltyDraw:GameAction
     {
         private Player playerDrawingCard;
-        public PenaltyDraw(Deck drawDeck, Player playerDrawingCard)
+        public PenaltyDraw(Deck drawDeck, Deck discardDeck, Player playerDrawingCard)
         {
             DrawDeck = drawDeck;
+            DiscardDeck = discardDeck;
             this.playerDrawingCard = playerDrawingCard;
         }
 
