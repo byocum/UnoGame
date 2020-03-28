@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnoGame.Cards;
+using UnoGame.Factories;
 
 namespace UnoGame.Decks
 {
@@ -12,7 +12,7 @@ namespace UnoGame.Decks
             this.CardDeck = new List<BasicCard>();
         }
 
-        public int removeCard(int cardIndex)
+        public override int removeCard(int cardIndex)
         {
             int cardsLeftInDeck = CardDeck.Count;
             if (cardsLeftInDeck > 0)
@@ -30,6 +30,21 @@ namespace UnoGame.Decks
         protected override void errorNoCardsInDeck()
         {
             Console.WriteLine("The card cannot be removed because their are no cards in the hand.");
+        }
+
+        public override void displayTopCard()
+        {
+            Console.WriteLine("A player's hand does not have a top card.");
+        }
+
+        public override void TimeToRefreshDeck(Deck discardDeck)
+        {
+            Console.WriteLine("A player's hand cannot be refreshed.");
+        }
+
+        public override void createCardsForDeck(ICardFactory cardFactory)
+        {
+            Console.WriteLine("Cards are put into a player's hand not created for a player's hand.");
         }
     }
 }

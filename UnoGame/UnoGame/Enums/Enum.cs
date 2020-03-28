@@ -33,16 +33,20 @@
         Decending = 1
     }
 
-    public enum PlayerAction
+    public enum PlayerActionEnum
     {
-        Rules = 0,
-        Draw = 1,
-        Uno = 2,
-        Confront = 3
+        NoAction = 0,
+        Rules = 1,
+        Draw = 2,
+        Uno = 3,
+        Call = 4,
+        Sort = 5,
+        Hands = 6
     }
 
-    public enum PlayerActionConfront
+    public enum PlayerActionCall
     {
-        Uno = 0
+        NoAction = 0,
+        Uno = 1
     }
 }

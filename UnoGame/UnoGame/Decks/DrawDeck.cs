@@ -13,7 +13,7 @@ namespace UnoGame.Decks
             this.CardDeck = new List<BasicCard>();
         }
 
-        public void createCardsForDeck(ICardFactory cardFactory)
+        public override void createCardsForDeck(ICardFactory cardFactory)
         {
             this.CardFactory = cardFactory;
 
@@ -40,37 +40,24 @@ namespace UnoGame.Decks
             }
         }
 
-        public int removeCard(int cardIndex, DiscardDeck discardDeck)
+        public override void TimeToRefreshDeck(Deck discardDeck)
         {
-            int cardsLeftInDeck = CardDeck.Count;
+            int cardsInDrawDeck = CardDeck.Count;
+            int cardsInDiscardDeck = discardDeck.CardDeck.Count;
 
-            if (cardsLeftInDeck > 1)
+            if (cardsInDiscardDeck > 1 && cardsInDrawDeck <= 0)
             {
-                CardDeck.RemoveAt(cardIndex);
-                cardsLeftInDeck--;
-            }
-            else if (cardsLeftInDeck == 1)
-            {
-                CardDeck.RemoveAt(cardIndex);
                 refreshDeck(discardDeck);
-                cardsLeftInDeck = CardDeck.Count;
-
             }
-            else
+            else if (cardsInDiscardDeck <= 1 && cardsInDrawDeck <= 0)
             {
-                errorNoCardsInDeck();
-                refreshDeck(discardDeck);
-                cardsLeftInDeck = CardDeck.Count;
-                CardDeck.RemoveAt(topCardIndex());
+                ErrorCannotRefreshDeck();
             }
-
-            return cardsLeftInDeck;
         }
 
-        private int refreshDeck(DiscardDeck discardDeck)
+        public void refreshDeck(Deck discardDeck)
         {
             Console.WriteLine("Refreshing the Draw Deck...");
-            int cardsLeftInDeck = CardDeck.Count;
 
             int discardDeckTopCardIndex = discardDeck.topCardIndex();
             BasicCard discardDeckTopCard = discardDeck.CardDeck[discardDeckTopCardIndex];
@@ -81,8 +68,19 @@ namespace UnoGame.Decks
             discardDeck.CardDeck.RemoveRange(0, discardDeck.CardDeck.Count);
 
             discardDeck.CardDeck.Add(discardDeckTopCard);
+        }
 
-            return cardsLeftInDeck;
+        private void ErrorCannotRefreshDeck()
+        {
+            Console.WriteLine("There are no cards in the discard pile to refresh the draw pile with.");
+            Console.WriteLine("Card cannot be drawn.");
+            Console.WriteLine("Game ends without a winner.");
+            Environment.Exit(0);
+        }
+
+        public override void displayTopCard()
+        {
+            Console.WriteLine("The top card on the draw deck is: " + CardDeck[topCardIndex()].Color + " " + CardDeck[topCardIndex()].Type);
         }
     }
 }

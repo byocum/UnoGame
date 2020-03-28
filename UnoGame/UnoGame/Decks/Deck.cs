@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnoGame.Cards;
 using UnoGame.Factories;
-using System.Collections.Concurrent;
+using UnoGame.Enums;
 
 namespace UnoGame.Decks
 {
@@ -35,10 +34,30 @@ namespace UnoGame.Decks
             CardDeck.Add(card);
         }
 
+        public virtual int removeCard(int cardIndex)
+        {
+            int cardsLeftInDeck = CardDeck.Count;
+
+            if (cardsLeftInDeck >= 1)
+            {
+                CardDeck.RemoveAt(cardIndex);
+                cardsLeftInDeck--;
+            }
+            else
+            {
+                errorNoCardsInDeck();
+                cardsLeftInDeck = CardDeck.Count;
+            }
+
+            return cardsLeftInDeck;
+        }
+
         protected virtual void errorNoCardsInDeck()
         {
             Console.WriteLine("The card cannot be removed because the deck does not have any cards.");
         }
+
+        public abstract void displayTopCard();
 
 
         //Modern version of Fishers and Yates' alogrithm
@@ -60,9 +79,19 @@ namespace UnoGame.Decks
 
         public void lookAtDeck()
         {
-            for(int i = 0; i < CardDeck.Count; i++)
+            for(int index = 0; index < CardDeck.Count; index++)
             {
-                Console.WriteLine(i + " " + CardDeck[i].Color + " " + CardDeck[i].Type);
+                int displayNumber = index + 1;
+
+                if(CardDeck[index].Color == null)
+                {
+                    Console.WriteLine(displayNumber + " " + CardDeck[index].Type);
+                }
+                else
+                {
+                    Console.WriteLine(displayNumber + " " + CardDeck[index].Color + " " + CardDeck[index].Type);
+                }
+                
             }
         }
 
@@ -83,5 +112,15 @@ namespace UnoGame.Decks
 
             return isInDeck;
         }
+
+        public virtual bool isCardPlayable(BasicCard cardToPlay)
+        {
+            Console.WriteLine("A card cannot be played on this deck.");
+            return false;
+        }
+
+        public abstract void TimeToRefreshDeck(Deck discardDeck);
+
+        public abstract void createCardsForDeck(ICardFactory cardFactory);
     }
 }

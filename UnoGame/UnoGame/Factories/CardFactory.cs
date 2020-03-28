@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UnoGame.Cards;
+﻿using UnoGame.Cards;
 using UnoGame.Cards.CardBehaviors;
 using UnoGame.Enums;
 
@@ -54,8 +51,6 @@ namespace UnoGame.Factories
             return card;
         }
 
-        //Makes sure card gets a color except the Wild cards.  If I allowed passing null to the above method I would be relying more on the
-        //setter to keep thier color from being set to null.
         public BasicCard CreateWildCard(CardType type)
         {
             BasicCard card;

@@ -6,10 +6,10 @@ namespace UnoGame.Cards
 {
     public class PerformCardAction
     {
-        DrawDeck drawDeck;
-        DiscardDeck discardDeck;
+        Deck drawDeck;
+        Deck discardDeck;
         Turn turn;
-        public PerformCardAction(DrawDeck drawDeck, DiscardDeck discardDeck, Turn turn)
+        public PerformCardAction(Deck drawDeck, Deck discardDeck, Turn turn)
         {
             this.drawDeck = drawDeck;
             this.discardDeck = discardDeck;
@@ -24,30 +24,33 @@ namespace UnoGame.Cards
             }
             else
             {
-                turn.reverseTurnDirection();
+                turn.ReverseTurnDirection();
             }  
         }
 
         public void ReverseTurnDirectionTwoPlayers()
         {
-                turn.reverseTurnDirection();
-                turn.goToNextTurn();
+                turn.ReverseTurnDirection();
+                turn.GoToNextTurn();
         }
 
         public void DrawCard()
         {
-            int nextPlayerIndex = turn.getNextTurnIndex();
-            Player nextPlayer = turn.Players[nextPlayerIndex];
+            int nextPlayerIndex = turn.GetNextTurnIndex();
+            Player nextPlayer = turn.Players[nextPlayerIndex];            
+            
+            drawDeck.TimeToRefreshDeck(discardDeck);
+
             int cardDrawnIndex = drawDeck.topCardIndex();
             BasicCard cardDrawn = drawDeck.CardDeck[cardDrawnIndex];
 
-            drawDeck.removeCard(cardDrawnIndex, discardDeck);
-            nextPlayer.addCardToHand(cardDrawn);
+            drawDeck.removeCard(cardDrawnIndex);
+            nextPlayer.AddCardToHand(cardDrawn);
         }
 
         public void NextTurn()
         {
-            turn.goToNextTurn();
+            turn.GoToNextTurn();
         }
     }
 }

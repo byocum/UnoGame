@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnoGame.Cards;
 using UnoGame.Enums;
+using UnoGame.Factories;
 
 namespace UnoGame.Decks
 {
@@ -13,7 +13,7 @@ namespace UnoGame.Decks
             this.CardDeck = new List<BasicCard>(); 
         }
 
-        public int removeCard(int cardIndex)
+        public override int removeCard(int cardIndex)
         {
             int cardsLeftInDeck = this.CardDeck.Count;
             if (cardsLeftInDeck > 0)
@@ -29,7 +29,7 @@ namespace UnoGame.Decks
             return cardsLeftInDeck;
         }
 
-        public bool isCardPlayable(BasicCard cardToPlay)
+        public override bool isCardPlayable(BasicCard cardToPlay)
         {
             bool isPlayable = false;
             BasicCard discardDeckTopCard = CardDeck[topCardIndex()];
@@ -49,9 +49,20 @@ namespace UnoGame.Decks
             return isPlayable;
         }
 
-        public void displayTopCard()
+        public override void displayTopCard()
         {
             Console.WriteLine("The top card on the discard deck is: " + CardDeck[topCardIndex()].Color + " " + CardDeck[topCardIndex()].Type);
         }
+
+        public override void TimeToRefreshDeck(Deck discardDeck)
+        {
+            Console.WriteLine("The discard deck cannot be refreshed.");
+        }
+
+        public override void createCardsForDeck(ICardFactory cardFactory)
+        {
+            Console.WriteLine("Cards are put into the discard deck not created for the discard deck.");
+        }
+
     }
 }
