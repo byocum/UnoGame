@@ -22,7 +22,7 @@ namespace UnoGame.Intermediaries
         {
             turn = new Turn();
             drawDeck = new DrawDeck();
-            discardDeck = new DiscardDeck();            
+            discardDeck = new DiscardDeck();
             performCardAction = new PerformCardAction(drawDeck, discardDeck, turn);
             cardFactory = new CardFactory(performCardAction);
             actionFactory = new ActionFactory(drawDeck, discardDeck, turn);
@@ -33,7 +33,7 @@ namespace UnoGame.Intermediaries
         public void SetupGame()
         {
             performAction.Rules();
-            drawDeck.createCardsForDeck(cardFactory); 
+            drawDeck.createCardsForDeck(cardFactory);
             drawDeck.shuffle();
             performAction.DeterminePlayers();
             performAction.Deal();
@@ -57,6 +57,8 @@ namespace UnoGame.Intermediaries
                 Console.WriteLine(currentPlayer.Name + "'s turn.");
                 performAction.Pause();
 
+                DisplayPlayersWhoSaidUno();
+
                 SetUpPlayerToTakeTheirTurn(currentPlayer);
 
                 PlayerTakesTheirTurn(currentPlayer);
@@ -68,6 +70,18 @@ namespace UnoGame.Intermediaries
 
             Environment.Exit(0);
 
+        }
+
+        private void DisplayPlayersWhoSaidUno()
+        {
+            foreach (Player player in turn.Players)
+            {
+                if(player.SaidUno == true)
+                {
+                    Console.WriteLine(player.Name + " said UNO!!!");
+                }
+
+            }
         }
 
         private void SetUpPlayerToTakeTheirTurn(Player currentPlayer)

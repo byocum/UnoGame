@@ -1,9 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\Moonlight\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Moonlight\\.nuget\\packages",
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "C:\\Users\\byocu\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\byocu\\.nuget\\packages"
     ]
   }
 }

@@ -9,3 +9,16 @@ C:\Users\Moonlight\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\ne
 C:\Users\Moonlight\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.AssemblyInfo.cs
 C:\Users\Moonlight\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.dll
 C:\Users\Moonlight\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.pdb
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\bin\Debug\netcoreapp3.1\UnoGame.exe
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\bin\Debug\netcoreapp3.1\UnoGame.deps.json
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\bin\Debug\netcoreapp3.1\UnoGame.runtimeconfig.json
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\bin\Debug\netcoreapp3.1\UnoGame.runtimeconfig.dev.json
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\bin\Debug\netcoreapp3.1\UnoGame.dll
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\bin\Debug\netcoreapp3.1\UnoGame.pdb
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.csprojAssemblyReference.cache
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.csproj.CoreCompileInputs.cache
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.AssemblyInfoInputs.cache
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.AssemblyInfo.cs
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.dll
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.pdb
+C:\Users\byocu\source\repos\GitHubRepos\UnoGame\UnoGame\UnoGame\obj\Debug\netcoreapp3.1\UnoGame.genruntimeconfig.cache

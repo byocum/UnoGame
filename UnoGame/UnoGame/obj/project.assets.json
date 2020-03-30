@@ -8,23 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Moonlight\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\byocu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Moonlight\\source\\repos\\GitHubRepos\\UnoGame\\UnoGame\\UnoGame\\UnoGame.csproj",
+      "projectUniqueName": "C:\\Users\\byocu\\source\\repos\\GitHubRepos\\UnoGame\\UnoGame\\UnoGame\\UnoGame.csproj",
       "projectName": "UnoGame",
-      "projectPath": "C:\\Users\\Moonlight\\source\\repos\\GitHubRepos\\UnoGame\\UnoGame\\UnoGame\\UnoGame.csproj",
-      "packagesPath": "C:\\Users\\Moonlight\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Moonlight\\source\\repos\\GitHubRepos\\UnoGame\\UnoGame\\UnoGame\\obj\\",
+      "projectPath": "C:\\Users\\byocu\\source\\repos\\GitHubRepos\\UnoGame\\UnoGame\\UnoGame\\UnoGame.csproj",
+      "packagesPath": "C:\\Users\\byocu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\byocu\\source\\repos\\GitHubRepos\\UnoGame\\UnoGame\\UnoGame\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Moonlight\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\byocu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -62,7 +58,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
