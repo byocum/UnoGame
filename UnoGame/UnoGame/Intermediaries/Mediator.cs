@@ -59,8 +59,6 @@ namespace UnoGame.Intermediaries
 
                 DisplayPlayersWhoSaidUno();
 
-                SetUpPlayerToTakeTheirTurn(currentPlayer);
-
                 PlayerTakesTheirTurn(currentPlayer);
 
                 performAction.Pause();
@@ -74,30 +72,34 @@ namespace UnoGame.Intermediaries
 
         private void DisplayPlayersWhoSaidUno()
         {
+            string currentPlayerName = turn.Players[turn.CurrentPlayerIndex].Name;
+
             foreach (Player player in turn.Players)
             {
-                if(player.SaidUno == true)
+                if (player.SaidUno == true)
                 {
-                    Console.WriteLine(player.Name + " said UNO!!!");
+                    if (player.Name == turn.Players[turn.CurrentPlayerIndex].Name)
+                    {
+                        Console.WriteLine("You said UNO!!!");
+                    }
+                    else
+                    {
+                        Console.WriteLine(player.Name + " said UNO!!!");
+                    }       
                 }
-
             }
         }
 
-        private void SetUpPlayerToTakeTheirTurn(Player currentPlayer)
-        {
-            Console.WriteLine();
-            discardDeck.displayTopCard();
-            Console.WriteLine("Your hand is: ");
-
-            currentPlayer.LookAtHand();
-        }
         private void PlayerTakesTheirTurn(Player currentPlayer)
         {
             bool readyforNextPlayersTurn;
 
             do
-            {
+            {            
+                Console.WriteLine();
+                discardDeck.displayTopCard();
+                Console.WriteLine("Your hand is: ");
+                currentPlayer.LookAtHand();
                 Console.WriteLine("What would you like to do?");
                 string[] action = currentPlayer.PickAction();
                 readyforNextPlayersTurn = interperatePlayerInput.PerformPlayerAction(action);

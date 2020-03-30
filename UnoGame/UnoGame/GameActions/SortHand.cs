@@ -14,7 +14,7 @@ namespace UnoGame.GameActions
             Player currentPlayer = TurnOrder.Players[TurnOrder.CurrentPlayerIndex];
             currentPlayer.Hand.sort();
 
-            return true;
+            return false;
         }
     }
 }
