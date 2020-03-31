@@ -57,7 +57,8 @@ namespace UnoGame.Factories
 
         public GameAction Draw()
         {
-            GameAction draw = new Draw(drawDeck, discardDeck, turn);
+            GameAction sayUno = new SayUno(turn);
+            GameAction draw = new Draw(drawDeck, discardDeck, turn, sayUno);
 
             return draw;
         }

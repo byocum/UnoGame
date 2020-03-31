@@ -1,6 +1,8 @@
 ﻿using System;
 using UnoGame.Decks;
 using UnoGame.Intermediaries;
+using UnoGame.Enums;
+using UnoGame.Cards;
 
 namespace UnoGame.GameActions
 {
@@ -41,8 +43,7 @@ namespace UnoGame.GameActions
 
             do
             {
-                Console.WriteLine("Enter \"y\" for yes or \"n\" for no.");
-                playCardDrawn = Console.ReadLine().Trim().ToLower();
+                playCardDrawn = PromptPlayerInputYesOrNo();
 
                 if (string.IsNullOrEmpty(playCardDrawn))
                 {
@@ -70,5 +71,14 @@ namespace UnoGame.GameActions
 
             return isYes;
         }
+
+        protected string PromptPlayerInputYesOrNo()
+        {
+            Console.WriteLine("Enter \"y\" for yes or \"n\" for no.");
+
+
+            return Console.ReadLine().Trim().ToLower();
+        }
+
     }
 }
